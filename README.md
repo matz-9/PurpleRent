@@ -1,5 +1,6 @@
 ## Welcome to PurpleRent
 
+Il nostro primo progetto su git.
 
 ### Importante
 
@@ -8,6 +9,5 @@
 Fili è un maledetto
 
 ```
-
 
 
