@@ -129,7 +129,7 @@ create table AutovetturaVendita(
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
-  prezzoVendita int not null,
+  prezzoVendita decimal(5,2) not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
   foreign key carGroup references CarGroup(lettera)
@@ -145,7 +145,7 @@ create table sedeAttuale(
 
 create table noleggioAutovetturaNoleggiabile(
   contratto int auto_increment primary key,
-  unique autovetturaN charachter(7) not null,
+  autovetturaN charachter(7) unique not null,
   foreign key contratto references LetteraNoleggio(numeroLettera),
   foreign key autovetturaN references AutovetturaNoleggiabile(targa)
 );
@@ -159,9 +159,9 @@ create table noleggioAutovetturaVendita(
 
 create table RiparazioniEffettuate(
   numeroRip int auto_increment primary key,
-  data date,
-  motivazione varchar(20),
-  costo decimal(4,2),
-  officina varchar(15),
+  data date not null,
+  motivazione varchar(20) not null,
+  costo decimal(4,2) not null,
+  officina varchar(15) not null,
   foreign key officina references Officina(nome)
 );
