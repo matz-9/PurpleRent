@@ -16,7 +16,11 @@ create table Dipendente(
 );
 
 create table ClienteNoleggio(
-  
+  numDocumento,
+  nome,
+  cognome,
+  età,
+  datiBancari
 );
 
 create table sedePreferita(
