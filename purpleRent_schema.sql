@@ -47,14 +47,14 @@ create table Prenotazione(
 );
 
 create table CarGroup(
-  lettera char,
+  lettera char primary key,
   prezzoGiornaliero int
 );
 
 create table LetteraNoleggio(
   numeroLettera int auto_increment primary key,
   kmPercorsi int not null,
-  tipo enum("aperta","chiusa") not null,
+  tipo enum("aperta", "chiusa") not null,
   prenotazione int auto_increment not null,
   datiBancari bigInt not null,
   foreign key prenotazione references Prenotazione(numeroPrenotazione),
@@ -107,15 +107,52 @@ create table DatiBancari(
 
 create table CasaAutomobilistica(
   nome varchar(15) primary key,
-  narzione varchar(10) not null
+  nazione varchar(10) not null
 );
 
 create table AutovetturaNoleggiabile(
-  targa,
-  immatricolazione,
-  km,
-  colore,
-  disponibile,
-  carGroup,
-  casaAuto
+  targa character(7) primary key,
+  immatricolazione date not null,
+  km int not null,
+  colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
+              'grigio', 'giallo', 'rosso', 'arancione') not null,
+  disponibile boolean not null,
+  carGroup char not null,
+  casaAuto varchar(15) not null,
+  foreign key carGroup references CarGroup(lettera)
+  foreign key casaAuto references CasaAutomobilistica(nome)
+);
+
+create table AutovetturaVendita(
+  targa character(7) primary key,
+  immatricolazione date not null,
+  km int not null,
+  colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
+              'grigio', 'giallo', 'rosso', 'arancione') not null,
+  prezzoVendita int not null, 
+  carGroup char not null,
+  casaAuto varchar(15) not null,
+  foreign key carGroup references CarGroup(lettera)
+  foreign key casaAuto references CasaAutomobilistica(nome)
+);
+
+create table sedeAttuale(
+  autovetturaN character(7) primary key,
+  sede character(5) not null,
+  foreign key autovetturaN references AutovetturaNoleggiabile(targa),
+  foreign key sede references Sede(codiceMnemonico)
+);
+
+create table noleggioAutovetturaNoleggiabile(
+  contratto int auto_increment primary key,
+  unique autovetturaN charachter(7) not null,
+  foreign key contratto references LetteraNoleggio(numeroLettera),
+  foreign key autovetturaN references AutovetturaNoleggiabile(targa)
+);
+
+create  table noleggioAutovetturaVendita(
+  contratto int auto_increment primary key,
+  unique autovetturaN charachter(7) not null,
+  foreign key contratto references LetteraNoleggio(numeroLettera),
+  foreign key autovetturaN references AutovetturaVendita(targa)
 );
