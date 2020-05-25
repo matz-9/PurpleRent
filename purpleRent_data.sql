@@ -7,8 +7,7 @@ insert into Sede(codiceMnemonico,orarioApertura,orarioChiusura,telefono,email) v
 insert into Dipendente(id,nome,cognome,anniAnzianità,sede) values
   (1755368, 'Filippo', 'Sardi',       20, '61040'),
   (1718223, 'Mattia',  'Mariano',     17, '61040'),
-  (1891110, 'Yegor',   'Kumiscavich', 35, '41261')
-);
+  (1891110, 'Yegor',   'Kumiscavich', 35, '41261');
 
 insert into ClienteNoleggio(numDocumento,nome,cognome,età,datiBancari) values
   ('AP1017Y890', 'Vittorio', 'Terzetti',     50, '1233958372'),
@@ -20,8 +19,7 @@ insert into ClienteNoleggio(numDocumento,nome,cognome,età,datiBancari) values
   ('GRT780H12L', 'Harry',    'Foreman',      43, '9243856384'),
   ('TRY79O012K', 'Guerrino', 'Di agostino',  56, '7692394913'),
   ('YR7I012KLU', 'Walter',   'Bishop',       45, '5629472036'),
-  ('RJ51230KL7', 'Eric',     'Cartman',      21, '1947294759')
-);
+  ('RJ51230KL7', 'Eric',     'Cartman',      21, '1947294759');
 
 insert into sedePreferita(cliente,sede) values
   ('AP1017Y890', '61031'),
@@ -33,8 +31,7 @@ insert into sedePreferita(cliente,sede) values
   ('GRT780H12L',  null),
   ('TRY79O012K',  null),
   ('YR7I012KLU', '61040'),
-  ('RJ51230KL7',  null)
-);
+  ('RJ51230KL7',  null);
 
 insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeDiRitiro,sedeDiRilascio,cliente,carGroup) values
   (7001, '2018-01-14 09:00', '2018-01-18 09:00', 90.00,  '61031', '61031', 'AP1017Y890', 'E'),
@@ -48,8 +45,7 @@ insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeD
   (7009, '2019-06-25 17:30', '2019-06-26 17:30', 20.00,  '61031', '61031', 'GRT780H12L', 'J'),
   (7010, '2019-04-09 17:00', '2019-04-18 17:00', 81.00,  '61040', '61031', 'TRY79O012K', 'A'),
   (7011, '2020-01-22 08:30', '2020-01-30 08:30', 96.00,  '61040', '41261', 'TRY79O012K', 'C'),
-  (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', '78OPISL348', 'L')
-);
+  (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', '78OPISL348', 'L');
 
 insert into CarGroup(lettera,prezzoGiornaliero) values
   ('A', 9 ),
@@ -65,8 +61,7 @@ insert into CarGroup(lettera,prezzoGiornaliero) values
   ('M', 40),
   ('N', 28),
   ('O', 35),
-  ('P', 32)
-);
+  ('P', 32);
 
 insert into LetteraNoleggio(numeroLettera,kmPercorsi,tipo,prenotazione,datiBancari) values
   (00001,null,'aperta',7001,'3456175110'),
@@ -80,8 +75,7 @@ insert into LetteraNoleggio(numeroLettera,kmPercorsi,tipo,prenotazione,datiBanca
   (00009,451,'chiusa',7009,'0336175845'),
   (00010,1940,'chiusa',7010,'1004135811'),
   (00011,1300,'chiusa',7011,'9903145891'),
-  (00012,510,'chiusa',7012,'8106135899')
-);
+  (00012,510,'chiusa',7012,'8106135899');
 
 insert into Feedback(noleggio,voto,recensione) values
   (00005, 5, 'ottima vettura, una utililitaria fantastica'),
@@ -91,8 +85,7 @@ insert into Feedback(noleggio,voto,recensione) values
   (00009, 3, 'Great car! The best rental experience'),
   (00010, 5, 'ottima vettura, una utililitaria davvero comoda e spaziosa'),
   (00011, 2, 'Non sono rimasto molto soddisfatto, la mia utilitaria era sporca'),
-  (00012, 5, 'ottima vettura, PurpleRent ha da sempre le lussuose più belle e veloci')
-);
+  (00012, 5, 'ottima vettura, PurpleRent ha da sempre le lussuose più belle e veloci');
 
 insert into Indirizzo(città,civico,via,cap) values
   ('Roma',               '2',   'Via Ugo Bertossi',       '00159'),
@@ -113,4 +106,4 @@ insert into Indirizzo(città,civico,via,cap) values
 insert into indirizzoSede(sede,città,civico,via) values
   ('61040', 'Roma', ''),
   ('61031', '08:30', '18:30', 3798000197, 'roma@sede2.it'),
-  ('41261', '08:30', '19:00', 0863479810, 'math@sede3.com')
+  ('41261', '08:30', '19:00', 0863479810, 'math@sede3.com');
