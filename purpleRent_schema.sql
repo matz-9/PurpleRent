@@ -228,21 +228,21 @@ create table FatturaAcquisto(
   data date not null,
   numVetture int not null,
   fornitore varchar(15) unique not null,
-  foreign key fornitore references Fornitore(nomeAziendaFornitore)
+  foreign key (fornitore) references Fornitore(nomeAziendaFornitore)
 );
 
 create table acquistoAutovetturaNoleggiabili(
   fatturaN bigInt primary key,
   unique autovetturaN character(7),
-  foreign key fatturaN references FatturaAcquisto(numeroFattura),
-  foreign key autovetturaN references AutovetturaNoleggiabile(targa)
+  foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table acquistoAutovetturaVendita(
   fatturaV bigInt primary key,
   autovetturaV character(7) unique not null,
-  foreign key fatturaV references FatturaAcquisto(numeroFattura),
-  foreign key autovetturaV references AutovetturaVendita(targa)
+  foreign key (fatturaV) references FatturaAcquisto(numeroFattura),
+  foreign key (autovetturaV) references AutovetturaVendita(targa)
 );
 
 create table fornitoreCarGroup(
