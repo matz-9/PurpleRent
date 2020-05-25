@@ -11,16 +11,16 @@ insert into Dipendente(id,nome,cognome,anniAnzianità,sede) values
 );
 
 insert into ClienteNoleggio(numDocumento,nome,cognome,età,datiBancari) values
-  ('AP1017Y890', 'Vittorio', 'Terzetti',      50', '1233958372'),
-  ('BO34590P70', 'Enzo',     'Pesce',         22', '3618304719'),
-  ('T946510KP4', 'Marco',    'Marchi',        35', '4639281049'),
-  ('456QOP760Y', 'Filippo',  'Franceschini',  23', '4730184936'),
-  ('78OPISL348', 'Guido',    'Piano',         63', '5930275641'),
-  ('56UR64FVOP', 'Davide',   'Maria',        '32', '3649264281'),
-  ('GRT780H12L', 'Harry',    'Foreman',      '43', '9243856384'),
-  ('TRY79O012K', 'Guerrino', 'Di agostino',  '56', '7692394913'),
-  ('YR7I012KLU', 'Walter',   'Bishop',       '45', '5629472036'),
-  ('RJ51230KL7', 'Eric',     'Cartman',      '21', '1947294759')
+  ('AP1017Y890', 'Vittorio', 'Terzetti',     50, '1233958372'),
+  ('BO34590P70', 'Enzo',     'Pesce',        22, '3618304719'),
+  ('T946510KP4', 'Marco',    'Marchi',       35, '4639281049'),
+  ('456QOP760Y', 'Filippo',  'Franceschini', 23, '4730184936'),
+  ('78OPISL348', 'Guido',    'Piano',        63, '5930275641'),
+  ('56UR64FVOP', 'Davide',   'Maria',        32, '3649264281'),
+  ('GRT780H12L', 'Harry',    'Foreman',      43, '9243856384'),
+  ('TRY79O012K', 'Guerrino', 'Di agostino',  56, '7692394913'),
+  ('YR7I012KLU', 'Walter',   'Bishop',       45, '5629472036'),
+  ('RJ51230KL7', 'Eric',     'Cartman',      21, '1947294759')
 );
 
 insert into sedePreferita(cliente,sede) values

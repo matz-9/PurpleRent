@@ -38,7 +38,7 @@ create table Prenotazione(
   prezzo decimal(4,2) not null,
   sedeRitiro character(5) not null,
   sedeRilascio character(5) not null,
-  cliente int not null,
+  cliente varchar(10) not null,
   carGroup char not null,
   foreign key sedeRitiro references Sede(codiceMnemonico),
   foreign key sedeRilascio references Sede(codiceMnemonico),
