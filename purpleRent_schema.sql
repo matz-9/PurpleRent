@@ -35,7 +35,7 @@ create table Prenotazione(
   numeroPrenotazione int auto_increment primary key,
   orarioInizio dateTime not null,
   orarioFine dateTime not null,
-  prezzo int not null,
+  prezzo decimal(4,2) not null,
   sedeRitiro character(5) not null,
   sedeRilascio character(5) not null,
   cliente int not null,
@@ -87,6 +87,7 @@ create table indirizzoSede(
   via varchar(30),
   unique (città, civico, via)
   foreign key sede references Sede(codiceMnemonico)
+  foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
 
 create table residenzaCliente(
@@ -101,7 +102,7 @@ create table residenzaCliente(
 
 create table DatiBancari(
   contoCorrente character(10) primary key,
-  circuito enum('visa', 'mastercard', 'american express', 'diner', 'bancoposta'),
+  circuito enum('visa', 'mastercard', 'american express', 'diner', 'bancoposta') not null,
   nomeBanca varchar(15) not null
 );
 
@@ -152,7 +153,7 @@ create table noleggioAutovetturaNoleggiabile(
 
 create table noleggioAutovetturaVendita(
   contratto int auto_increment primary key,
-  unique autovetturaN charachter(7) not null,
+  unique autovetturaN character(7) not null,
   foreign key contratto references LetteraNoleggio(numeroLettera),
   foreign key autovetturaN references AutovetturaVendita(targa)
 );
@@ -168,9 +169,49 @@ create table RiparazioniEffettuate(
 
 create table riparazioneAutovetturaN(
   riparazione int auto_increment primary key,
-  unique autovetturaN references AutovetturaNoleggiabile(targa),
+  unique autovetturaN character(7) not null,
+  foreign key references AutovetturaNoleggiabile(targa),
   foreign key riparazione references RiparazioniEffettuate(numeroRip)
-)
-create table riparazioneAutovetturaV(
+);
 
-)
+create table riparazioneAutovetturaV(
+  riparazione int auto_increment primary key,
+  unique autovetturaN character(7) not null,
+  foreign key autovetturaN references AutovetturaVendita(targa),
+  foreign key riparazione references RiparazioniEffettuate(numeroRip)
+);
+
+create table Officina(
+  nome varchar(15) primary key,
+  orarioApertura time(1) not null,
+  orarioChiusura time(1) not null,
+  numTel bigInt not null,
+  email varchar(30) not null
+);
+
+create table indirizzoOfficina(
+  officina varchar(15) primary key,
+  città varchar(20),
+  civico int,
+  via varchar(30),
+  unique (città, civico, via)
+  foreign key officina references Officina(nome)
+  foreign key (città, civico, via) references Indirizzo(città, civico, via)città,
+);
+
+  create table FatturaVendita(
+    numeroFattura bigInt primary key,
+    importo decimal(5,2) not null,
+    data date not null,
+    autovettura character(7) not null,
+    foreign key acquirente references AcquirenteVetturaUsata(nomeAzienda)
+  );
+
+  create table FatturaAcquisto(
+    nummeroFattura bigInt primary key,
+    importo decimal(5,2),
+    data date not null,
+    numVetture int not null,
+    fornitore varchar(15),
+    foreign key fornitore references Fornitore(nomeAziendaFornitore)
+  );
