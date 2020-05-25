@@ -223,7 +223,7 @@ create table FatturaVendita(
 );
 
 create table FatturaAcquisto(
-  nummeroFattura bigInt primary key,
+  numeroFattura bigInt primary key,
   importo decimal(5,2) not null,
   data date not null,
   numVetture int not null,
