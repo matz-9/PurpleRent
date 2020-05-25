@@ -233,7 +233,7 @@ create table FatturaAcquisto(
 
 create table acquistoAutovetturaNoleggiabili(
   fatturaN bigInt primary key,
-  unique autovetturaN character(7),
+  autovetturaN character(7) unique not null,
   foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
