@@ -46,6 +46,8 @@ create table Prenotazione(
   foreign key carGroup references CarGroup(lettera),
 );
 
+alter table Prenotazione auto_increment = 7001;
+
 create table CarGroup(
   lettera char primary key,
   prezzoGiornaliero int
@@ -53,7 +55,7 @@ create table CarGroup(
 
 create table LetteraNoleggio(
   numeroLettera int auto_increment primary key,
-  kmPercorsi int not null,
+  kmPercorsi int,
   tipo enum("aperta", "chiusa") not null,
   prenotazione int auto_increment not null,
   datiBancari character(10) not null,
@@ -120,7 +122,7 @@ create table AutovetturaNoleggiabile(
   disponibile boolean not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
-  foreign key carGroup references CarGroup(lettera)
+  foreign key carGroup references CarGroup(lettera),
   foreign key casaAuto references CasaAutomobilistica(nome)
 );
 
@@ -133,7 +135,7 @@ create table AutovetturaVendita(
   prezzoVendita decimal(5,2) not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
-  foreign key carGroup references CarGroup(lettera)
+  foreign key carGroup references CarGroup(lettera),
   foreign key casaAuto references CasaAutomobilistica(nome)
 );
 
