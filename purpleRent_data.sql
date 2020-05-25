@@ -36,41 +36,81 @@ insert into sedePreferita(cliente,sede) values
   ('RJ51230KL7',  null)
 );
 
-insert into Prenotazione(orarioInizio,orarioFine,prezzo,sedeDiRitiro,sedeDiRilascio,cliente,carGroup) values
-  ('2018-01-14 09:00', '2018-01-18 09:00', , '61031', '61031', 'AP1017Y890', 'E'),
-  ('2018-08-22 10:17', '2018-08-23 10:17', '', '41261', '41261', 'AP1017Y890', 'A'),
-  ('2018-04-02 15:30', '2018-04-03 15:30', '', '61040', '41261', 'TRY79O012K', 'D'),
-  ('2019-02-18 11:00', '2019-02-19 11:00', '', '61040', '41261', '56UR64FVOP', 'C'),
-  ('2019-04-22 15:00', '2019-04-22 19:00', '', '61031', '61031', '456QOP760Y', 'A'),
-  ('2019-03-03 10:05', '2019-03-06 16:30', '', '41261', '41261', '456QOP760Y', 'G'),
-  ('2019-05-05 11:15', '2019-05-06 10:30', '', '41261', '61031', '456QOP760Y', 'L'),
-  ('2019-05-05 11:15', '2019-05-06 10:30', '', '41261', '61031', '456QOP760Y', 'L'),
-  ('2019-06-25 13:30', '2019-06-26 17:30', '', '61031', '61031', 'GRT780H12L', 'J'),
-  ('2019-04-09 14:22', '2019-04-12 17:00', '', '61040', '61031', 'TRY79O012K', 'A'),
-  ('2020-01-22 08:30', '2020-01-23 19:00', '', '61040', '41261', 'TRY79O012K', 'C'),
-  ('2020-04-05 09:11', '2020-04-05 19:00', '', '41261', '41261', '78OPISL348', 'L')
+insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeDiRitiro,sedeDiRilascio,cliente,carGroup) values
+  (7001, '2018-01-14 09:00', '2018-01-18 09:00', 90.00,  '61031', '61031', 'AP1017Y890', 'E'),
+  (7002, '2018-08-22 10:17', '2018-08-23 10:17', 9.00,   '41261', '41261', 'AP1017Y890', 'A'),
+  (7003, '2018-04-02 15:30', '2018-04-03 15:30', 14.00,  '61040', '41261', 'TRY79O012K', 'D'),
+  (7004, '2019-02-18 11:00', '2019-02-20 11:00', 24.00,  '61040', '41261', '56UR64FVOP', 'C'),
+  (7005, '2019-04-22 15:00', '2019-04-24 15:00', 18.00,  '61031', '61031', '456QOP760Y', 'A'),
+  (7006, '2019-03-03 10:05', '2019-03-06 10:05', 54.00,  '41261', '41261', '456QOP760Y', 'G'),
+  (7007, '2019-05-05 11:15', '2019-05-06 11:15', 55.00,  '41261', '61031', '456QOP760Y', 'L'),
+  (7008, '2019-04-05 12:15', '2019-04-07 12:15', 110.00, '41261', '61031', '456QOP760Y', 'L'),
+  (7009, '2019-06-25 17:30', '2019-06-26 17:30', 20.00,  '61031', '61031', 'GRT780H12L', 'J'),
+  (7010, '2019-04-09 17:00', '2019-04-18 17:00', 81.00,  '61040', '61031', 'TRY79O012K', 'A'),
+  (7011, '2020-01-22 08:30', '2020-01-30 08:30', 96.00,  '61040', '41261', 'TRY79O012K', 'C'),
+  (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', '78OPISL348', 'L')
 );
 
 insert into CarGroup(lettera,prezzoGiornaliero) values
-  ('A', 9 ),('C', 12 ),('D', 14 ),('E', 15 ),('G', 18 ),
-  ('J', 20 ),('I', 22 ),('H', 45 ),('L', 55 ),('K', 25 ),
-  ('M', 40 ),('N', 28 ),('O', 35 ),('P', 32 );
-
-
-insert into LetteraNoleggio(kmPercorsi,tipo,prenotazione,datiBancari) values
-  (null,'aperta',7001,'3456175110'),
-  (null,'aperta',7002,'2121175432'),
-  (null,'aperta',7003,'1996174444'),
-  (null,'aperta',7004,'1331661919'),
-  (720,'chiusa',7005,'1203125891'),
-  (1410,'chiusa',7006,'1506175891'),
-  (2101,'chiusa',7007,'1506779391'),
-  (250,'chiusa',7008,'1506175891'),
-  (451,'chiusa',7009,'0336175845'),
-  (1940,'chiusa',7010,'1004135811'),
-  (1300,'chiusa',7011,'9903145891'),
-  (510,'chiusa',7012,'8106135899')
+  ('A', 9 ),
+  ('C', 12),
+  ('D', 14),
+  ('E', 15),
+  ('G', 18),
+  ('J', 20),
+  ('I', 22),
+  ('H', 45),
+  ('L', 55),
+  ('K', 25),
+  ('M', 40),
+  ('N', 28),
+  ('O', 35),
+  ('P', 32)
 );
 
-insert into Feedback(noleggio,voto,recensione)
-  (),
+insert into LetteraNoleggio(numeroLettera,kmPercorsi,tipo,prenotazione,datiBancari) values
+  (00001,null,'aperta',7001,'3456175110'),
+  (00002,null,'aperta',7002,'2121175432'),
+  (00003,null,'aperta',7003,'1996174444'),
+  (00004,null,'aperta',7004,'1331661919'),
+  (00005,720,'chiusa',7005,'1203125891'),
+  (00006,1410,'chiusa',7006,'1506175891'),
+  (00007,2101,'chiusa',7007,'1506779391'),
+  (00008,250,'chiusa',7008,'1506175891'),
+  (00009,451,'chiusa',7009,'0336175845'),
+  (00010,1940,'chiusa',7010,'1004135811'),
+  (00011,1300,'chiusa',7011,'9903145891'),
+  (00012,510,'chiusa',7012,'8106135899')
+);
+
+insert into Feedback(noleggio,voto,recensione) values
+  (00005, 5, 'ottima vettura, una utililitaria fantastica'),
+  (00006, 3, 'buona vettura, una monovolume devvero comoda'),
+  (00007, 5, 'ottima vettura lussuosa, la PurpleRent è un azienda perfetta!'),
+  (00008, 4, 'viaggio liscio, auto lussuosa e comoda, superaccessoriata, tornerò sicuro per un altro noleggio!'),
+  (00009, 3, 'Great car! The best rental experience'),
+  (00010, 5, 'ottima vettura, una utililitaria davvero comoda e spaziosa'),
+  (00011, 2, 'Non sono rimasto molto soddisfatto, la mia utilitaria era sporca'),
+  (00012, 5, 'ottima vettura, PurpleRent ha da sempre le lussuose più belle e veloci')
+);
+
+insert into Indirizzo(città,civico,via,cap) values
+  ('Roma',               '2',   'Via Ugo Bertossi',       '00159'),
+  ('Milano',             '5',   'Via Alessandro Manzoni', '35126'),
+  ('Roma',               '15',  'Via Regina Margherita',  '00198'),
+  ('Canistro Inferiore', '2',   'Via Largo Liri',         '67050'),
+  ('Roma',               '6',   'Via Mar Rosso',          '00121'),
+  ('Napoli',             '73',  'Via Napoli',             '00184'),
+  ('Firenze',            '6',   'Via Maremma Bucaiola',   '20199'),
+  ('Pisa',               '2',   'Via della Torre',        '45009'),
+  ('Roma',               '1',   'Via Tiburtina',          '00133'),
+  ('Genova',             '14',  'Via degli Abeti',        '04310'),
+  ('Bari',               '9',   'Via Cristian Cocco',     '11159'),
+  ('Milano',             '17',  'Via piazza del Duomo',   '05409'),
+  ('Roma',               '113', 'Via Salaria',            '10231'),
+  ('Rieti',              '36',  'Via Virgola Mobile',     '01274');
+
+insert into indirizzoSede(sede,città,civico,via) values
+  ('61040', 'Roma', ''),
+  ('61031', '08:30', '18:30', 3798000197, 'roma@sede2.it'),
+  ('41261', '08:30', '19:00', 0863479810, 'math@sede3.com')
