@@ -199,19 +199,63 @@ create table indirizzoOfficina(
   foreign key (città, civico, via) references Indirizzo(città, civico, via)città,
 );
 
-  create table FatturaVendita(
-    numeroFattura bigInt primary key,
-    importo decimal(5,2) not null,
-    data date not null,
-    autovettura character(7) not null,
-    foreign key acquirente references AcquirenteVetturaUsata(nomeAzienda)
-  );
+create table FatturaVendita(
+  numeroFattura bigInt primary key,
+  importo decimal(5,2) not null,
+  data date not null,
+  autovettura character(7) not null,
+  unique acquirente varchar(15),
+  foreign key autovettura references AutovetturaVendita(targa),
+  foreign key acquirente references AcquirenteVetturaUsata(nomeAzienda)
+);
 
-  create table FatturaAcquisto(
-    nummeroFattura bigInt primary key,
-    importo decimal(5,2),
-    data date not null,
-    numVetture int not null,
-    fornitore varchar(15),
-    foreign key fornitore references Fornitore(nomeAziendaFornitore)
-  );
+create table FatturaAcquisto(
+  nummeroFattura bigInt primary key,
+  importo decimal(5,2) not null,
+  data date not null,
+  numVetture int not null,
+  unique fornitore varchar(15),
+  foreign key fornitore references Fornitore(nomeAziendaFornitore)
+);
+
+create table acquistoAutovetturaNoleggiabili(
+  fatturaN bigInt primary key,
+  unique autovetturaN character(7),
+  foreign key fatturaN references FatturaAcquisto(numeroFattura),
+  foreign key autovetturaN references AutovetturaNoleggiabile(targa)
+);
+
+create table acquistoAutovetturaVendita(
+  fatturaV bigInt primary key,
+  unique autovetturaV character(7),
+  foreign key fatturaV references FatturaAcquisto(numeroFattura),
+  foreign key autovetturaV references AutovetturaVendita(targa)
+);
+
+create table Fornitore(
+  nomeAziendaFornitore varchar(15) primary key,
+  partitaIva character(11) not null,
+  telefono bigInt not null,
+  datiBancari character(10),
+  foreign key datiBancari references DatiBancari(contoCorrente)
+);
+
+create table fornitoreCarGroup(
+
+);
+
+create table fornitoreCasa(
+
+);
+
+create table AcquirenteVetturaUsata(
+
+);
+
+create table indirizzoFornitore(
+
+);
+
+create table indirizzoAcquirente(
+
+);

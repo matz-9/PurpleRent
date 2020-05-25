@@ -33,6 +33,9 @@ insert into sedePreferita(cliente,sede) values
   ('RJ51230KL7',  null);
 
 insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeDiRitiro,sedeDiRilascio,cliente,carGroup) values
-  ('','2018-01-14 08:20','2018-01-18 09:00','')
+  ('','2018-01-14 08:20','2018-01-18 09:00','','61031','61031','AP1017Y890','B'),
+  ('','2018-08-22 13:50','2018-08-23 10:17','41261','41261','AP1017Y890','A'),
+  ('','2018-04-02 15:30','2018-04-03 10:20','61040','41261','TRY79O012K','D'),
+  ('','2019-02-18 11:00','2019-02-19 13:20','61040','41261',,'D'),
 
  aaaa-mm-gg hh:mm:ss
