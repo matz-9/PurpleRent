@@ -194,9 +194,9 @@ create table indirizzoOfficina(
   città varchar(20),
   civico int,
   via varchar(30),
-  unique (città, civico, via)
-  foreign key officina references Officina(nome)
-  foreign key (città, civico, via) references Indirizzo(città, civico, via)città,
+  unique (città, civico, via),
+  foreign key officina references Officina(nome),
+  foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
 
 create table FatturaVendita(
@@ -236,26 +236,48 @@ create table Fornitore(
   nomeAziendaFornitore varchar(15) primary key,
   partitaIva character(11) not null,
   telefono bigInt not null,
-  datiBancari character(10),
+  unique datiBancari character(10) not null,
   foreign key datiBancari references DatiBancari(contoCorrente)
 );
 
 create table fornitoreCarGroup(
-
+  fornitore varchar(15) primary key,
+  unique carGroup char not null,
+  foreign key fornitore references Fornitore(nomeAziendaFornitore),
+  foreign key carGroup references CarGroup(lettera)
 );
 
 create table fornitoreCasa(
-
+  fornitore varchar(15) primary key,
+  casa varchar(15) unique,
+  foreign key fornitore references Fornitore(nomeAziendaFornitore),
+  foreign key casa references CasaAutomobilistica(nome)
 );
 
 create table AcquirenteVetturaUsata(
-
+  nomeAzienda varchar(15) primary key,
+  partitaIva character(11) not null,
+  telefono bigInt not null,
+  unique datiBancari character(10) not null,
+  foreign key datiBancari references DatiBancari(contoCorrente)
 );
 
 create table indirizzoFornitore(
-
+  fornitore varchar(15) primary key,
+  città varchar(20),
+  civico int,
+  via varchar(30),
+  unique (città, civico, via),
+  foreign key fornitore references Fornitore(nomeAziendaFornitore),
+  foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
 
 create table indirizzoAcquirente(
-
+  acquirente varchar(15) primary key,
+  città varchar(20),
+  civico int,
+  via varchar(30),
+  unique (città, civico, via),
+  foreign key acquirente references AcquirenteVetturaUsata(nomeAzienda),
+  foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
