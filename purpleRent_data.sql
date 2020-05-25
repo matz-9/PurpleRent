@@ -1,8 +1,7 @@
 insert into Sede(codiceMnemonico,orarioApertura,orarioChiusura,telefono,email) values
-  ('61040', '08:30', '19:00', 3791062597, 'pippolos@sede1.it'),
-  ('61031', '08:30', '18:30', 3798000197, 'roma@sede2.it'),
-  ('41261', '08:30', '19:00', 0863479810, 'math@sede3.com')
-);
+  ('61040', '08:30', '19:00', 3791062597, 'pippolos@purplerent.it'),
+  ('61031', '08:30', '18:30', 3798000197, 'roma@purplerent.it'),
+  ('41261', '08:30', '19:00', 0863479810, 'math@purplrent.it');
 
 insert into Dipendente(id,nome,cognome,anniAnzianità,sede) values
   (1755368, 'Filippo', 'Sardi',       20, '61040'),
