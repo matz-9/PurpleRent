@@ -44,7 +44,7 @@ create table ClienteNoleggio(
 );
 
 create table sedePreferita(
-  cliente int primary key,
+  cliente varchar(10) primary key,
   sede character(5),
   foreign key (cliente) references ClienteNoleggio(numDocumento),
   foreign key (sede) references Sede(codiceMnemonico)
@@ -100,7 +100,7 @@ create table residenzaCliente(
   via varchar(30) not null,
   unique (città,civico,via),
   foreign key (cliente) references ClienteNoleggio(numDocumento),
-  foreign key (città,civico,via) references Indirizzo(città,civico,via),
+  foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
 
 create table CasaAutomobilistica(
