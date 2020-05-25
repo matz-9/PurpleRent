@@ -135,18 +135,30 @@ insert into sedeAttuale (autovetturaN, sede) values
 
 insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
 
-insert into
+insert into noleggioAutovetturaVendita(contratto,autovetturaN) values
 
-insert into
+insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
 
-insert into
+insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
 
-insert into
+insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
 
-insert into
+insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
 
-insert into
+insert into indirizzoOfficina(officina,città,civico,via) values
 
-insert into
+insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
 
-insert into
+insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
+
+insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values
+
+insert into acquistoAutovetturaVendita(fatturaV,autovetturaV) values
+
+insert into fornitoreCarGroup(fornitore,carGroup) values
+
+insert into fornitoreCasa(fornitore,casa) values
+
+insert into indirizzoFornitore(fornitore,città,civico,via) values
+
+insert into indirizzoAcquirente(acquirente,città,civico,via) values
