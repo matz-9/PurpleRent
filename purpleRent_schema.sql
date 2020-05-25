@@ -78,8 +78,8 @@ create table LetteraNoleggio(
 create table Feedback(
   noleggio int auto_increment primary key,
   recensione text,
-  foreign key (noleggio) references LetteraNoleggio(numeroLettera)
   voto integer not null,
+  foreign key (noleggio) references LetteraNoleggio(numeroLettera),
   check (voto>=0 AND voto<=5)
 );
 
