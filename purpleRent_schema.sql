@@ -30,7 +30,7 @@ create table Indirizzo(
 
 create table DatiBancari(
   contoCorrente character(10) primary key,
-  circuito enum('visa', 'mastercard', 'american express', 'diner', 'bancoposta') not null,
+  circuito enum('visa', 'mastercard', 'american express', 'diner') not null,
   nomeBanca varchar(15) not null
 );
 
