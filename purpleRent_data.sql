@@ -131,9 +131,9 @@ insert into AcquirenteVetturaUsata (nomeAzienda,partitaIva,telefono,datiBancari)
 
 insert into Fornitore (nomeAziendaFornitore,partitaIva,telefono,datiBancari) values
 
-insert into
+insert into sedeAttuale (autovetturaN, sede) values
 
-insert into
+insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
 
 insert into
 

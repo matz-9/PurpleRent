@@ -166,9 +166,9 @@ create table noleggioAutovetturaNoleggiabile(
 
 create table noleggioAutovetturaVendita(
   contratto int auto_increment primary key,
-  autovetturaN character(7) not null unique,
+  autovetturaV character(7) not null unique,
   foreign key (contratto) references LetteraNoleggio(numeroLettera),
-  foreign key (autovetturaN) references AutovetturaVendita(targa)
+  foreign key (autovetturaV) references AutovetturaVendita(targa)
 );
 
 create table Officina(
