@@ -20,7 +20,7 @@ create table ClienteNoleggio(
   nome varchar(12) not null,
   cognome varchar(12) not null,
   età int not null,
-  datiBancari bigInt not null,
+  datiBancari character(10) not null,
   foreign key datiBancari references DatiBancari(contoCorrente)
 );
 
@@ -56,7 +56,7 @@ create table LetteraNoleggio(
   kmPercorsi int not null,
   tipo enum("aperta", "chiusa") not null,
   prenotazione int auto_increment not null,
-  datiBancari bigInt not null,
+  datiBancari character(10) not null,
   foreign key prenotazione references Prenotazione(numeroPrenotazione),
   foreign key datiBancari references DatiBancari(contoCorrente)
 );
@@ -100,7 +100,7 @@ create table residenzaCliente(
 );
 
 create table DatiBancari(
-  contoCorrente bigInt primary key,
+  contoCorrente character(10) primary key,
   circuito enum('visa', 'mastercard', 'american express', 'diner', 'bancoposta'),
   nomeBanca varchar(15) not null
 );
@@ -165,3 +165,12 @@ create table RiparazioniEffettuate(
   officina varchar(15) not null,
   foreign key officina references Officina(nome)
 );
+
+create table riparazioneAutovetturaN(
+  riparazione int auto_increment primary key,
+  unique autovetturaN references AutovetturaNoleggiabile(targa),
+  foreign key riparazione references RiparazioniEffettuate(numeroRip)
+)
+create table riparazioneAutovetturaV(
+
+)
