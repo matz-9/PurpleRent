@@ -12,7 +12,7 @@ create table Dipendente(
   cognome varchar(12) not null,
   anniAnzianità int,
   sede character(5) not null,
-  foreign key sede references Sede(codiceMnemonico)
+  foreign key (sede) references Sede(codiceMnemonico)
 );
 
 create table ClienteNoleggio(
@@ -21,7 +21,7 @@ create table ClienteNoleggio(
   cognome varchar(12) not null,
   età int not null,
   datiBancari character(10) not null,
-  foreign key datiBancari references DatiBancari(contoCorrente)
+  foreign key (datiBancari) references DatiBancari(contoCorrente)
 );
 
 create table sedePreferita(
@@ -71,8 +71,9 @@ create table Feedback(
 );
 
 --vincolo di dominio riferito al voto nel feedBack
-create domain votoInt as
-  integer check (value >= 0 and value <= 5);
+create domain votoInt as integer
+  default null
+   check (value >= 0 and value <= 5);
 
 create table Indirizzo(
   città varchar(20),
@@ -84,11 +85,11 @@ create table Indirizzo(
 
 create table indirizzoSede(
   sede character(5) primary key,
-  città varchar(20),
-  civico int,
-  via varchar(30),
-  unique (città, civico, via)
-  foreign key sede references Sede(codiceMnemonico)
+  città varchar(20) not null,
+  civico int not null,
+  via varchar(30) not null,
+  unique (città, civico, via),
+  foreign key (sede) references Sede(codiceMnemonico),
   foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
 
