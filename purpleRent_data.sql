@@ -154,7 +154,7 @@ insert into AutovetturaNoleggiabile(targa,km,colore,disponibile,carGroup,casaAut
   ('FW830IO', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
   ('FB392TT', 120000, 'grigio',    false, 'A',  'Fiat'),
   ('FF483AB', 90000,  'blu',       true,  'H',  'BMW');
-ok
+
 insert into AutovetturaVendita(targa,km,colore,prezzoVendita,carGroup,casaAuto) values
   ('ER245GG', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
   ('EP443PM', 150000, 'grigio',    41000, 'J',  'Audi'),
