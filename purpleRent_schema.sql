@@ -213,7 +213,7 @@ create table indirizzoOfficina(
 );
 
 create table FatturaVendita(
-  numeroFattura bigInt primary key,
+  numeroFattura character(7) primary key,
   importo decimal(5,2) not null,
   data date not null,
   autovettura character(7) not null,
@@ -223,7 +223,7 @@ create table FatturaVendita(
 );
 
 create table FatturaAcquisto(
-  numeroFattura bigInt primary key,
+  numeroFattura character(7) primary key,
   importo decimal(6,2) not null,
   data date not null,
   numVetture int not null,
@@ -232,14 +232,14 @@ create table FatturaAcquisto(
 );
 
 create table acquistoAutovetturaNoleggiabili(
-  fatturaN bigInt primary key,
+  fatturaN character(7) primary key,
   autovetturaN character(7) unique not null,
   foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table acquistoAutovetturaVendita(
-  fatturaV bigInt primary key,
+  fatturaV character(7) primary key,
   autovetturaV character(7) unique not null,
   foreign key (fatturaV) references FatturaAcquisto(numeroFattura),
   foreign key (autovetturaV) references AutovetturaVendita(targa)

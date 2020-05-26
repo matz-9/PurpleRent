@@ -149,17 +149,17 @@ insert into CasaAutomobilistica(nome,nazione) values
   ('Renault', 'Francia'),
   ('AlfaRomeo', 'Italia');
 
-insert into AutovetturaNoleggiabile(targa,immatricolazione,km,colore,disponibile,carGroup,casaAuto) values
-  ('FR249GG', '2018-12-09', 30000,  'rosso',     false, 'E',  'Audi'),
-  ('FP445PM', '2018-01-11', 10000,  'grigio',    true,  'A',  'Renault'),
-  ('FZ142PG', '2018-02-04', 7000,   'arancione', true,  'L', 'Mercedes'),
-  ('FA101MM', '2018-01-20', 120000, 'nero',      true,  'A',  'BMW'),
-  ('FC552KM', '2018-03-10', 100000, 'blu',       false, 'C',  'Renault'),
-  ('FK597FM', '2019-07-30', 89000,  'bianco',    true,  'G',  'Peugeot'),
-  ('FQ647JK', '2019-08-19', 50000,  'rosso',     true,  'L',  'Audi'),
-  ('FW830IO', '2018-09-22', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
-  ('FB392TT', '2019-01-05', 120000, 'grigio',    false, 'A',  'Fiat'),
-  ('FF483AB', '2019-03-16', 90000,  'blu',       true,  'H',  'BMW'),
+insert into AutovetturaNoleggiabile(targa,km,colore,disponibile,carGroup,casaAuto) values
+  ('FR249GG', 30000,  'rosso',     false, 'E',  'Audi'),
+  ('FP445PM', 10000,  'grigio',    true,  'A',  'Renault'),
+  ('FZ142PG', 7000,   'arancione', true,  'L', 'Mercedes'),
+  ('FA101MM', 120000, 'nero',      true,  'A',  'BMW'),
+  ('FC552KM', 100000, 'blu',       false, 'C',  'Renault'),
+  ('FK597FM', 89000,  'bianco',    true,  'G',  'Peugeot'),
+  ('FQ647JK', 50000,  'rosso',     true,  'L',  'Audi'),
+  ('FW830IO', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
+  ('FB392TT', 120000, 'grigio',    false, 'A',  'Fiat'),
+  ('FF483AB', 90000,  'blu',       true,  'H',  'BMW'),
   --('FI994CD', '2019-07-02', 50000,  'blu',       true,  '',  'Peugeot'),
   --('FX277DD', '2020-03-23', 4000,   'grigio',    true,  '',  'Mercedes'),
   --('FD295RO', '2019-05-30', 87000,  'viola',     false, '',  'BMW'),
@@ -172,16 +172,16 @@ insert into AutovetturaNoleggiabile(targa,immatricolazione,km,colore,disponibile
 
 
 insert into AutovetturaVendita(targa,immatricolazione,km,colore,prezzoVendita,carGroup,casaAuto) values
-  ('ER245GG', '2016-12-09', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
-  ('EP443PM', '2017-01-11', 150000, 'grigio',    41000, 'J',  'Audi'),
-  ('EZ132PG', '2017-02-04', 150000, 'arancione', 40000, 'L', 'Mercedes'),
-  ('EA541MM', '2017-01-20', 150000, 'nero',      2100,  'P',  'BMW'),
-  ('EC642KM', '2017-03-10', 150000, 'blu',       8000,  'A',  'Renault'),
-  ('EK647FM', '2017-07-30', 150000, 'bianco',    7000,  'C',  'Peugeot'),
-  ('EQ227JK', '2017-08-19', 150000, 'rosso',     12000, 'H',  'Audi'),
-  ('EW520IO', '2017-09-22', 150000, 'nero',      22000, 'A',  'AlfaRomeo'),
-  ('EB122TT', '2017-01-05', 150000, 'grigio',    10000, 'C',  'BMW'),
-  ('EF813AB', '2017-03-16', 150000, 'blu',       5000,  'L',  'Renault'),
+  ('ER245GG', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
+  ('EP443PM', 150000, 'grigio',    41000, 'J',  'Audi'),
+  ('EZ132PG', 150000, 'arancione', 40000, 'L', 'Mercedes'),
+  ('EA541MM', 150000, 'nero',      2100,  'P',  'BMW'),
+  ('EC642KM', 150000, 'blu',       8000,  'A',  'Renault'),
+  ('EK647FM', 150000, 'bianco',    7000,  'C',  'Peugeot'),
+  ('EQ227JK', 150000, 'rosso',     12000, 'H',  'Audi'),
+  ('EW520IO', 150000, 'nero',      22000, 'A',  'AlfaRomeo'),
+  ('EB122TT', 150000, 'grigio',    10000, 'C',  'BMW'),
+  ('EF813AB', 150000, 'blu',       5000,  'L',  'Renault'),
   --('EI774CD', '2017-07-02', 150000, 'blu',       5500,  '',  'Peugeot'),
   --('EX137DD', '2017-03-23', 150000, 'grigio',    29000, '',  'Mercedes'),
   --('ED635RO', '2017-05-30', 150000, 'viola',     18000, '',  'BMW'),
@@ -259,76 +259,89 @@ insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
 
 --DA FARE
 insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
-  (0006, 'ER245GG'),
-  (0007, 'EK647FM'),
-  (0008, 'EW520IO'),
-  (0009, 'EK647FM'),
-  (0010, 'EW520IO');
+  ('R0006', 'ER245GG'),
+  ('R0007', 'EK647FM'),
+  ('R0008', 'EW520IO'),
+  ('R0009', 'EK647FM'),
+  ('R0010', 'EW520IO');
 
 insert into indirizzoOfficina(officina,città,civico,via) values
   ('Milli srl',       'Milano', '17',  'Piazza del Duomo')
   ('Ncm carrozzeria', 'Roma',   '113', 'Via Salaria')
 
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
-
+  ('FA00001', 5000.00, '2020-01-01', 'ER245GG', 'comprousato.srl'),
+  ('FA00002', 4000.00, '2020-01-03', 'EP443PM', 'comprousato.srl' )
+  ('FA00003', 5500.00, '2020-02-10', 'EQ227JK', 'tuttomotori')
+  ('FA00004', 3900.00, '2020-03-19', 'EF813AB', 'centoallora.com',)
+  ('FA00005', 5200.00, '2020-01-21', 'EK647FM', 'comprousato.srl' )
+  ('FA00006', 3400.00, '2020-01-14', 'EZ132PG', 'centoallora.com',)
 
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
-  (00028, 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
-  (00029, 100000.00,'2019-04-01', 6, 'Perinetti auto'),
-  (00031, 24000.00, '2018-12-14', 2, 'Il mondo delle auto'),
-  (00032, 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
-  (00033, 10000.00, '2018-11-07', 5, 'Great cars'),
-  (00034, 70000.00, '2018-09-19', 3, 'Sulla strada');
+  ('FA00028', 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
+  ('FA00029', 100000.00,'2019-04-01', 6, 'Perinetti auto'),
+  ('FA00031', 24000.00, '2018-12-14', 2, 'Il mondo delle auto'),
+  ('FA00032', 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
+  ('FA00033', 10000.00, '2018-11-07', 5, 'Great cars'),
+  ('FA00034', 70000.00, '2018-09-19', 3, 'Sulla strada');
 
 insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values
-  (00028, 'FR249GG'),
-  (00028, 'FZ142PG'),
-  (00028, 'FP445PM'),
-  (00032, 'FW830IO'),
-  (00029, 'FA101MM'),
-  (00029, 'FC552KM'),
-  (00029, 'FK597FM'),
-  (00029, 'FQ647JK'),
-  (00029, 'FB392TT'),
-  (00029, 'FF483AB');
+  ('FA00028', 'FR249GG'),
+  ('FA00028', 'FZ142PG'),
+  ('FA00028', 'FP445PM'),
+  ('FA00032', 'FW830IO'),
+  ('FA00029', 'FA101MM'),
+  ('FA00029', 'FC552KM'),
+  ('FA00029', 'FK597FM'),
+  ('FA00029', 'FQ647JK'),
+  ('FA00029', 'FB392TT'),
+  ('FA00029', 'FF483AB');
 
 insert into acquistoAutovetturaVendita(fatturaV,autovetturaV) values
-  (00031, 'ER245GG'),
-  (00031, 'EP443PM'),
-  (00033, 'EZ132PG'),
-  (00033, 'EA541MM'),
-  (00033, 'EC642KM'),
-  (00033, 'EK647FM'),
-  (00033, 'EQ227JK'),
-  (00034, 'EW520IO'),
-  (00034, 'EB122TT'),
-  (00034, 'EF813AB');
+  ('FA00031', 'ER245GG'),
+  ('FA00031', 'EP443PM'),
+  ('FA00033', 'EZ132PG'),
+  ('FA00033', 'EA541MM'),
+  ('FA00033', 'EC642KM'),
+  ('FA00033', 'EK647FM'),
+  ('FA00033', 'EQ227JK'),
+  ('FA00034', 'EW520IO'),
+  ('FA00034', 'EB122TT'),
+  ('FA00034', 'EF813AB');
 
 insert into fornitoreCarGroup(fornitore,carGroup) values
-  ('Perinetti auto','E'),
-  ('Perinetti auto','L'),
-  ('Perinetti auto','A'),
-  ('Sulla strada','D'),
-  ('Sulla strada','H'),
-  ('Great cars','J'),
-  ('Great cars','H'),
-  ('Il mondo delle auto','P'),
-  ('Il mondo delle auto','H');
+  ('Perinetti auto',      'E'),
+  ('Perinetti auto',      'L'),
+  ('Perinetti auto',      'A'),
+  ('Sulla strada',        'D'),
+  ('Sulla strada',        'H'),
+  ('Great cars',          'J'),
+  ('Great cars',          'H'),
+  ('Il mondo delle auto', 'P'),
+  ('Il mondo delle auto', 'H');
 
 insert into fornitoreCasa(fornitore,casa) values
-  ('Perinetti auto','Audi'),
-  ('Perinetti auto','BMW'),
-  ('Perinetti auto','Fiat'),
-  ('Sulla strada','Mercedes'),
-  ('Sulla strada','H'),
-  ('Great cars','J'),
-  ('Great cars','H'),
-  ('Il mondo delle auto','P'),
-  ('Il mondo delle auto','H');
-
+  ('Perinetti auto',      'Audi'),
+  ('Perinetti auto',      'BMW'),
+  ('Perinetti auto',      'Fiat'),
+  ('Perinetti auto',      'Peugeot'),
+  ('Sulla strada',        'Mercedes'),
+  ('Sulla strada',        'BMW'),
+  ('Sulla strada',        'Fiat'),
+  ('Great cars',          'Renault'),
+  ('Great cars',          'AlfaRomeo'),
+  ('Great cars',          'Peugeot'),
+  ('Il mondo delle auto', 'Peugeot'),
+  ('Il mondo delle auto', 'Audi'),
+  ('Il mondo delle auto', 'Renault'),
+  ('Il mondo delle auto', 'Fiat');
 
 insert into indirizzoFornitore(fornitore,città,civico,via) values
-  ()
+  ('Perinetti auto',      'Rieti',     '36',  'Via Virgola Mobile'),
+  ('Il mondo delle auto', 'Bologna',   '19',  'Via Guerrazzi'),
+  ('Great cars',          'Catanzaro', '32',  'Via Guiuseppe Poeri'),
+  ('Sulla strada',        'Benevento', '24',  'Via Avellino');
+
 insert into indirizzoAcquirente(acquirente,città,civico,via) values
   ('comprousato.srl', 'Pisa',   '22',  'Via della Torre'),
   ('autoricambi',     'Roma',   '1',   'Via Tiburtina'),
