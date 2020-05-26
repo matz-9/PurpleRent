@@ -157,14 +157,14 @@ create table sedeAttuale(
 
 create table noleggioAutovetturaNoleggiabile(
   contratto int auto_increment primary key,
-  autovetturaN character(7) unique not null,
+  autovetturaN character(7) not null,
   foreign key (contratto) references LetteraNoleggio(numeroLettera),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table noleggioAutovetturaVendita(
   contratto int auto_increment primary key,
-  autovetturaV character(7) not null unique,
+  autovetturaV character(7) not null,
   foreign key (contratto) references LetteraNoleggio(numeroLettera),
   foreign key (autovetturaV) references AutovetturaVendita(targa)
 );
@@ -222,7 +222,7 @@ create table FatturaVendita(
 
 create table FatturaAcquisto(
   numeroFattura character(7) primary key,
-  importo decimal(6,2) not null,
+  importo decimal(7,2) not null,
   data date not null,
   numVetture int not null,
   fornitore varchar(20) not null,
@@ -230,8 +230,8 @@ create table FatturaAcquisto(
 );
 
 create table acquistoAutovetturaNoleggiabili(
-  fatturaN character(7) primary key,
-  autovetturaN character(7) unique not null,
+  fatturaN character(7) unique not null,
+  autovetturaN character(7) primary key,
   foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );

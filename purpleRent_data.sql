@@ -257,7 +257,7 @@ insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
 insert into indirizzoOfficina(officina,città,civico,via) values
   ('Milli srl',       'Milano', '17',  'Piazza del Duomo'),
   ('Ncm carrozzeria', 'Roma',   '113', 'Via Salaria');
-OK
+
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
   ('FA00001', 5000.00, '2020-01-01', 'ER245GG', 'comprousato.srl'),
   ('FA00002', 4000.00, '2020-01-03', 'EP443PM', 'comprousato.srl'),
@@ -268,7 +268,7 @@ insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) va
 
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
   ('FA00028', 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
-  ('FA00029', 100000.00,'2019-04-01', 6, 'Perinetti auto'),
+  ('FA00029', 10000.00, '2019-04-01', 6, 'Perinetti auto'),
   ('FA00031', 24000.00, '2018-12-14', 2, 'Il mondo delle auto'),
   ('FA00032', 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
   ('FA00033', 10000.00, '2018-11-07', 5, 'Great cars'),
