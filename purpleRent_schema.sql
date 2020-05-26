@@ -125,13 +125,13 @@ create table AutovetturaVendita(
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
-  prezzoVendita decimal(5,2) not null,
+  prezzoVendita decimal(6,2) not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
   foreign key (carGroup) references CarGroup(lettera),
   foreign key (casaAuto) references CasaAutomobilistica(nome)
 );
-ok
+
 create table AcquirenteVetturaUsata(
   nomeAzienda varchar(15) primary key,
   partitaIva character(11) not null,
@@ -180,7 +180,7 @@ create table Officina(
 create table RiparazioniEffettuate(
   numeroRip char(5) primary key,
   data date not null,
-  motivazione varchar(20) not null,
+  motivazione text not null,
   costo decimal(5,2) not null,
   officina varchar(15) not null,
   foreign key (officina) references Officina(nome)
@@ -188,14 +188,14 @@ create table RiparazioniEffettuate(
 
 create table riparazioneAutovetturaN(
   riparazione char(5) primary key,
-  autovetturaN character(7)  unique not null,
+  autovetturaN character(7) not null,
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table riparazioneAutovetturaV(
   riparazione char(5) primary key,
-  autovetturaV character(7) unique not null,
+  autovetturaV character(7) not null,
   foreign key (autovetturaV) references AutovetturaVendita(targa),
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip)
 );

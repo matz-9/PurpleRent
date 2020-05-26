@@ -166,7 +166,7 @@ insert into AutovetturaVendita(targa,km,colore,prezzoVendita,carGroup,casaAuto) 
   ('EW520IO', 150000, 'nero',      7000, 'A',  'AlfaRomeo'),
   ('EB122TT', 150000, 'grigio',    6000, 'C',  'BMW'),
   ('EF813AB', 150000, 'blu',       8000,  'L',  'Renault');
-ok
+
 insert into AcquirenteVetturaUsata (nomeAzienda,partitaIva,telefono,datiBancari) values
   ('comprousato.srl', '18493827463', 0791062597, '8649254281'),
   ('autoricambi',     '38274027483', 0694729479, '4730184936'),
@@ -188,7 +188,7 @@ insert into sedeAttuale (autovetturaN, sede) values
   ('FK597FM', '61031'),
   ('FQ647JK', '41261'),
   ('FW830IO', '41261'),
-  ('FB392TT', '41261'),
+  ('FB392TT', '41261');
 
 insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
   (00001, 'FR249GG'),
@@ -211,7 +211,7 @@ insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
   ('Ncm carrozzeria', '09:30', '19:00', 025198713, 'ncmcarr@outlook.com');
 
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
-  ('R0001', '2019-04-09', 'cambio olio motore e cambio filtro ant.',  80.00,  'Milli srl'),
+  ('R0001', '2019-04-09', 'cambio olio motore e cambio filtro ant',  80.00,  'Milli srl'),
   ('R0002', '2019-06-18', 'cambio paraurti per incidente',            100.00, 'Milli srl'),
   ('R0003', '2020-01-14', 'cambio ruote',                             120.00, 'Ncm carrozzeria'),
   ('R0004', '2020-04-18', 'rodaggio e controllo freni',               50.00,  'Milli srl'),
