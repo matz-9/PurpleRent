@@ -273,7 +273,7 @@ insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) val
   ('FA00032', 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
   ('FA00033', 10000.00, '2018-11-07', 5, 'Great cars'),
   ('FA00034', 70000.00, '2018-09-19', 3, 'Sulla strada');
-
+ok
 insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values
   ('FA00028', 'FR249GG'),
   ('FA00028', 'FZ142PG'),

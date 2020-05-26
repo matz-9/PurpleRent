@@ -230,29 +230,31 @@ create table FatturaAcquisto(
 );
 
 create table acquistoAutovetturaNoleggiabili(
-  fatturaN character(7) unique not null,
+  fatturaN character(7) not null,
   autovetturaN character(7) primary key,
   foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table acquistoAutovetturaVendita(
-  fatturaV character(7) primary key,
-  autovetturaV character(7) unique not null,
+  fatturaV character(7) not null,
+  autovetturaV character(7) primary key,
   foreign key (fatturaV) references FatturaAcquisto(numeroFattura),
   foreign key (autovetturaV) references AutovetturaVendita(targa)
 );
 
 create table fornitoreCarGroup(
-  fornitore varchar(20) primary key,
-  carGroup char unique not null,
+  fornitore varchar(20),
+  carGroup char,
+  primary key (fornitore, carGroup),
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
   foreign key (carGroup) references CarGroup(lettera)
 );
 
 create table fornitoreCasa(
-  fornitore varchar(20) primary key,
-  casa varchar(15) unique not null,
+  fornitore varchar(20),
+  casa varchar(15),
+  primary key (fornitore, casa),
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
   foreign key (casa) references CasaAutomobilistica(nome)
 );
