@@ -49,12 +49,12 @@ create table sedePreferita(
   foreign key (cliente) references ClienteNoleggio(numDocumento),
   foreign key (sede) references Sede(codiceMnemonico)
 );
-ok
+
 create table Prenotazione(
   numeroPrenotazione int primary key,
   orarioInizio dateTime not null,
   orarioFine dateTime not null,
-  prezzo decimal(6,2) not null,
+  prezzo decimal(5,2) not null,
   sedeRitiro character(5) not null,
   sedeRilascio character(5) not null,
   cliente varchar(10) not null,
@@ -125,7 +125,7 @@ create table AutovetturaVendita(
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
-  prezzoVendita decimal(5,2) not null,
+  prezzoVendita decimal(6,2) not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
   foreign key (carGroup) references CarGroup(lettera),
@@ -181,7 +181,7 @@ create table RiparazioniEffettuate(
   numeroRip char(5) primary key,
   data date not null,
   motivazione varchar(20) not null,
-  costo decimal(4,2) not null,
+  costo decimal(5,2) not null,
   officina varchar(15) not null,
   foreign key (officina) references Officina(nome)
 );
@@ -212,7 +212,7 @@ create table indirizzoOfficina(
 
 create table FatturaVendita(
   numeroFattura character(7) primary key,
-  importo decimal(5,2) not null,
+  importo decimal(6,2) not null,
   data date not null,
   autovettura character(7) not null,
   acquirente varchar(15) unique not null,
