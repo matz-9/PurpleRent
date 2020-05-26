@@ -133,7 +133,7 @@ insert into residenzaCliente(cliente,città,civico,via) values
   ('RJ51230KL7', 'Firenze',            '6',   'Via Maremma Bucaiola'),
   ('GRT780H12L', 'Roma',               '6',   'Via Mar Rosso'),
   ('YR7I012KLU', 'Napoli',             '73',  'Via Napoli');
-OK
+
 insert into CasaAutomobilistica(nome,nazione) values
   ('Audi','Germania'),
   ('BMW','Germania'),
@@ -154,8 +154,8 @@ insert into AutovetturaNoleggiabile(targa,km,colore,disponibile,carGroup,casaAut
   ('FW830IO', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
   ('FB392TT', 120000, 'grigio',    false, 'A',  'Fiat'),
   ('FF483AB', 90000,  'blu',       true,  'H',  'BMW');
-
-insert into AutovetturaVendita(targa,immatricolazione,km,colore,prezzoVendita,carGroup,casaAuto) values
+ok
+insert into AutovetturaVendita(targa,km,colore,prezzoVendita,carGroup,casaAuto) values
   ('ER245GG', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
   ('EP443PM', 150000, 'grigio',    41000, 'J',  'Audi'),
   ('EZ132PG', 150000, 'arancione', 40000, 'L', 'Mercedes'),
