@@ -141,7 +141,7 @@ create table AcquirenteVetturaUsata(
 );
 
 create table Fornitore(
-  nomeAziendaFornitore varchar(15) primary key,
+  nomeAziendaFornitore varchar(20) primary key,
   partitaIva character(11) not null,
   telefono bigInt not null,
   datiBancari character(10) unique not null,
@@ -225,7 +225,7 @@ create table FatturaAcquisto(
   importo decimal(6,2) not null,
   data date not null,
   numVetture int not null,
-  fornitore varchar(15) unique not null,
+  fornitore varchar(20) unique not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore)
 );
 
@@ -244,21 +244,21 @@ create table acquistoAutovetturaVendita(
 );
 
 create table fornitoreCarGroup(
-  fornitore varchar(15) primary key,
+  fornitore varchar(20) primary key,
   carGroup char unique not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
   foreign key (carGroup) references CarGroup(lettera)
 );
 
 create table fornitoreCasa(
-  fornitore varchar(15) primary key,
+  fornitore varchar(20) primary key,
   casa varchar(15) unique not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
   foreign key (casa) references CasaAutomobilistica(nome)
 );
 
 create table indirizzoFornitore(
-  fornitore varchar(15) primary key,
+  fornitore varchar(20) primary key,
   città varchar(20) not null,
   civico int not null,
   via varchar(30) not null,
