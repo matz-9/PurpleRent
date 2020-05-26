@@ -156,17 +156,17 @@ insert into AutovetturaNoleggiabile(targa,km,colore,disponibile,carGroup,casaAut
   ('FF483AB', 90000,  'blu',       true,  'H',  'BMW');
 
 insert into AutovetturaVendita(targa,km,colore,prezzoVendita,carGroup,casaAuto) values
-  ('ER245GG', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
-  ('EP443PM', 150000, 'grigio',    41000, 'J',  'Audi'),
-  ('EZ132PG', 150000, 'arancione', 40000, 'L', 'Mercedes'),
-  ('EA541MM', 150000, 'nero',      2100,  'P',  'BMW'),
+  ('ER245GG', 150000, 'rosso',     9000, 'E',  'AlfaRomeo'),
+  ('EP443PM', 150000, 'grigio',    9000, 'J',  'Audi'),
+  ('EZ132PG', 150000, 'arancione', 9000, 'L', 'Mercedes'),
+  ('EA541MM', 150000, 'nero',      900,  'P',  'BMW'),
   ('EC642KM', 150000, 'blu',       8000,  'A',  'Renault'),
   ('EK647FM', 150000, 'bianco',    7000,  'C',  'Peugeot'),
-  ('EQ227JK', 150000, 'rosso',     12000, 'H',  'Audi'),
-  ('EW520IO', 150000, 'nero',      22000, 'A',  'AlfaRomeo'),
-  ('EB122TT', 150000, 'grigio',    10000, 'C',  'BMW'),
-  ('EF813AB', 150000, 'blu',       5000,  'L',  'Renault');
-
+  ('EQ227JK', 150000, 'rosso',     9000, 'H',  'Audi'),
+  ('EW520IO', 150000, 'nero',      7000, 'A',  'AlfaRomeo'),
+  ('EB122TT', 150000, 'grigio',    6000, 'C',  'BMW'),
+  ('EF813AB', 150000, 'blu',       8000,  'L',  'Renault');
+ok
 insert into AcquirenteVetturaUsata (nomeAzienda,partitaIva,telefono,datiBancari) values
   ('comprousato.srl', '18493827463', 0791062597, '8649254281'),
   ('autoricambi',     '38274027483', 0694729479, '4730184936'),

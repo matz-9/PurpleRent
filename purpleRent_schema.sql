@@ -125,7 +125,11 @@ create table AutovetturaVendita(
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
+<<<<<<< HEAD
   prezzoVendita decimal(5,2) not null,
+=======
+  prezzoVendita decimal(6,2) not null,
+>>>>>>> 9801da080719129232a2b7f235d939771c059ead
   carGroup char not null,
   casaAuto varchar(15) not null,
   foreign key (carGroup) references CarGroup(lettera),
@@ -141,7 +145,7 @@ create table AcquirenteVetturaUsata(
 );
 
 create table Fornitore(
-  nomeAziendaFornitore varchar(15) primary key,
+  nomeAziendaFornitore varchar(20) primary key,
   partitaIva character(11) not null,
   telefono bigInt not null,
   datiBancari character(10) unique not null,
@@ -181,7 +185,7 @@ create table RiparazioniEffettuate(
   numeroRip char(5) primary key,
   data date not null,
   motivazione varchar(20) not null,
-  costo decimal(4,2) not null,
+  costo decimal(5,2) not null,
   officina varchar(15) not null,
   foreign key (officina) references Officina(nome)
 );
@@ -212,7 +216,7 @@ create table indirizzoOfficina(
 
 create table FatturaVendita(
   numeroFattura character(7) primary key,
-  importo decimal(5,2) not null,
+  importo decimal(6,2) not null,
   data date not null,
   autovettura character(7) not null,
   acquirente varchar(15) unique not null,
@@ -225,7 +229,7 @@ create table FatturaAcquisto(
   importo decimal(6,2) not null,
   data date not null,
   numVetture int not null,
-  fornitore varchar(15) unique not null,
+  fornitore varchar(20) unique not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore)
 );
 
@@ -244,21 +248,21 @@ create table acquistoAutovetturaVendita(
 );
 
 create table fornitoreCarGroup(
-  fornitore varchar(15) primary key,
+  fornitore varchar(20) primary key,
   carGroup char unique not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
   foreign key (carGroup) references CarGroup(lettera)
 );
 
 create table fornitoreCasa(
-  fornitore varchar(15) primary key,
+  fornitore varchar(20) primary key,
   casa varchar(15) unique not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
   foreign key (casa) references CasaAutomobilistica(nome)
 );
 
 create table indirizzoFornitore(
-  fornitore varchar(15) primary key,
+  fornitore varchar(20) primary key,
   città varchar(20) not null,
   civico int not null,
   via varchar(30) not null,
