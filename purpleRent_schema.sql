@@ -215,7 +215,7 @@ create table FatturaVendita(
   importo decimal(6,2) not null,
   data date not null,
   autovettura character(7) not null,
-  acquirente varchar(15) unique not null,
+  acquirente varchar(15) not null,
   foreign key (autovettura) references AutovetturaVendita(targa),
   foreign key (acquirente) references AcquirenteVetturaUsata(nomeAzienda)
 );
@@ -225,7 +225,7 @@ create table FatturaAcquisto(
   importo decimal(6,2) not null,
   data date not null,
   numVetture int not null,
-  fornitore varchar(20) unique not null,
+  fornitore varchar(20) not null,
   foreign key (fornitore) references Fornitore(nomeAziendaFornitore)
 );
 

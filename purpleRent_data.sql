@@ -231,7 +231,6 @@ insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) val
 
 
 
-
 insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
   ('R0001', 'FR249GG'),
   ('R0002', 'FP445PM'),
@@ -255,19 +254,17 @@ insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
 
 
 
-
-
 insert into indirizzoOfficina(officina,città,civico,via) values
-  ('Milli srl',       'Milano', '17',  'Piazza del Duomo')
-  ('Ncm carrozzeria', 'Roma',   '113', 'Via Salaria')
-
+  ('Milli srl',       'Milano', '17',  'Piazza del Duomo'),
+  ('Ncm carrozzeria', 'Roma',   '113', 'Via Salaria');
+OK
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
   ('FA00001', 5000.00, '2020-01-01', 'ER245GG', 'comprousato.srl'),
-  ('FA00002', 4000.00, '2020-01-03', 'EP443PM', 'comprousato.srl' )
-  ('FA00003', 5500.00, '2020-02-10', 'EQ227JK', 'tuttomotori')
-  ('FA00004', 3900.00, '2020-03-19', 'EF813AB', 'centoallora.com',)
-  ('FA00005', 5200.00, '2020-01-21', 'EK647FM', 'comprousato.srl' )
-  ('FA00006', 3400.00, '2020-01-14', 'EZ132PG', 'centoallora.com',)
+  ('FA00002', 4000.00, '2020-01-03', 'EP443PM', 'comprousato.srl'),
+  ('FA00003', 5500.00, '2020-02-10', 'EQ227JK', 'tuttomotori'),
+  ('FA00004', 3900.00, '2020-03-19', 'EF813AB', 'centoallora.com'),
+  ('FA00005', 5200.00, '2020-01-21', 'EK647FM', 'comprousato.srl'),
+  ('FA00006', 3400.00, '2020-01-14', 'EZ132PG', 'centoallora.com');
 
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
   ('FA00028', 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
