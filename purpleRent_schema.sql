@@ -49,12 +49,12 @@ create table sedePreferita(
   foreign key (cliente) references ClienteNoleggio(numDocumento),
   foreign key (sede) references Sede(codiceMnemonico)
 );
-
+ok
 create table Prenotazione(
   numeroPrenotazione int primary key,
   orarioInizio dateTime not null,
   orarioFine dateTime not null,
-  prezzo decimal(4,2) not null,
+  prezzo decimal(6,2) not null,
   sedeRitiro character(5) not null,
   sedeRilascio character(5) not null,
   cliente varchar(10) not null,

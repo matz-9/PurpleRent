@@ -47,7 +47,6 @@ insert into Indirizzo(città,civico,via,cap) values
   ('Milano',             '1',   'Via Fieno',                '07419'),
   ('Benevento',          '24',  'Via Avellino',             '04020');
 
-
 insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
   ('1233958372', 'visa',             'IntesaSanPaolo'),
   ('3618304719', 'mastercard',       'IntesaSanPaolo'),
@@ -55,7 +54,7 @@ insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
   ('5930275641', 'visa',             'Unicredit'),
   ('9243856384', 'visa',             'Unicredit'),
   ('5629472036', 'visa',             'Unicredit'),
-  ('1947294759', 'american express', 'Ubi banca');
+  ('1947294759', 'american express', 'Ubi banca'),
   ('8649254281', 'mastercard',       'IntesaSanPaolo'),
   ('4730184936', 'visa',             'Mediolanum'),
   ('3649264281', 'mastercard',       'Ubi banca'),
@@ -78,41 +77,38 @@ insert into sedePreferita(cliente,sede) values
   ('AP1017Y890', '61031'),
   ('BO34590P70', '61031'),
   ('T946510KP4', '41261'),
-  ('456QOP760Y', '61040'),
   ('78OPISL348',  null),
-  ('56UR64FVOP', '41261'),
   ('GRT780H12L',  null),
-  ('TRY79O012K',  null),
   ('YR7I012KLU', '61040'),
   ('RJ51230KL7',  null);
 
-insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeDiRitiro,sedeDiRilascio,cliente,carGroup) values
+insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeRitiro,sedeRilascio,cliente,carGroup) values
   (7001, '2020-05-22 09:00', '2020-06-28 09:00', 90.00,  '61031', '61031', 'AP1017Y890', 'E'),
-  (7002, '2020-08-27 10:17', '2020-08-28 10:17', 9.00,   '41261', '41261', 'AP1017Y890', 'A'),
-  (7003, '2018-04-02 15:30', '2018-04-03 15:30', 14.00,  '61040', '41261', 'TRY79O012K', 'D'),
-  (7004, '2019-02-18 11:00', '2019-02-20 11:00', 24.00,  '61040', '41261', '56UR64FVOP', 'C'),
-  (7005, '2019-04-22 15:00', '2019-04-24 15:00', 18.00,  '61031', '61031', '456QOP760Y', 'A'),
-  (7006, '2019-03-03 10:05', '2019-03-06 10:05', 54.00,  '41261', '41261', '456QOP760Y', 'G'),
-  (7007, '2019-05-05 11:15', '2019-05-06 11:15', 55.00,  '41261', '61031', '456QOP760Y', 'L'),
-  (7008, '2019-04-05 12:15', '2019-04-07 12:15', 90.00,  '41261', '61031', '456QOP760Y', 'H'),
+  (7002, '2020-08-27 10:17', '2020-08-28 10:17', 09.00,  '41261', '41261', 'AP1017Y890', 'A'),
+  (7003, '2018-04-02 15:30', '2018-04-03 15:30', 14.00,  '61040', '41261', 'T946510KP4', 'D'),
+  (7004, '2019-02-18 11:00', '2019-02-20 11:00', 24.00,  '61040', '41261', '78OPISL348', 'C'),
+  (7005, '2019-04-22 15:00', '2019-04-24 15:00', 18.00,  '61031', '61031', '78OPISL348', 'A'),
+  (7006, '2019-03-03 10:05', '2019-03-06 10:05', 54.00,  '41261', '41261', 'BO34590P70', 'G'),
+  (7007, '2019-05-05 11:15', '2019-05-06 11:15', 55.00,  '41261', '61031', '78OPISL348', 'L'),
+  (7008, '2019-04-05 12:15', '2019-04-07 12:15', 90.00,  '41261', '61031', 'GRT780H12L', 'H'),
   (7009, '2019-06-25 17:30', '2019-06-26 17:30', 20.00,  '61031', '61031', 'GRT780H12L', 'J'),
-  (7010, '2019-04-09 17:00', '2019-04-18 17:00', 81.00,  '61040', '61031', 'TRY79O012K', 'A'),
-  (7011, '2020-01-22 08:30', '2020-01-30 08:30', 96.00,  '61040', '41261', 'TRY79O012K', 'C'),
-  (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', '78OPISL348', 'L');
+  (7010, '2019-04-09 17:00', '2019-04-18 17:00', 81.00,  '61040', '61031', 'YR7I012KLU', 'A'),
+  (7011, '2020-01-22 08:30', '2020-01-30 08:30', 96.00,  '61040', '41261', 'RJ51230KL7', 'C'),
+  (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', 'RJ51230KL7', 'L');
 
 insert into LetteraNoleggio(numeroLettera,kmPercorsi,tipo,prenotazione,datiBancari) values
-  (00001, null, 'aperta', 7001, '3456175110'),
-  (00002, null, 'aperta', 7002, '2121175432'),
-  (00003, 311,  'chiusa', 7003, '1996174444'),
-  (00004, 1190, 'chiusa', 7004, '1331661919'),
-  (00005, 720,  'chiusa', 7005, '1203125891'),
-  (00006, 1410, 'chiusa', 7006, '1506175891'),
-  (00007, 2101, 'chiusa', 7007, '1506779391'),
-  (00008, 250,  'chiusa', 7008, '1506175891'),
-  (00009, 451,  'chiusa', 7009, '0336175845'),
-  (00010, 1940, 'chiusa', 7010, '1004135811'),
-  (00011, 1300, 'chiusa', 7011, '9903145891'),
-  (00012, 510,  'chiusa', 7012, '8106135899');
+  (00001, null, 'aperta', 7001, '1233958372'),
+  (00002, null, 'aperta', 7002, '1233958372'),
+  (00003, 311,  'chiusa', 7003, '4639281049'),
+  (00004, 1190, 'chiusa', 7004, '5930275641'),
+  (00005, 720,  'chiusa', 7005, '5930275641'),
+  (00006, 1410, 'chiusa', 7006, '3618304719'),
+  (00007, 2101, 'chiusa', 7007, '5930275641'),
+  (00008, 250,  'chiusa', 7008, '9243856384'),
+  (00009, 451,  'chiusa', 7009, '9243856384'),
+  (00010, 1940, 'chiusa', 7010, '5629472036'),
+  (00011, 1300, 'chiusa', 7011, '1947294759'),
+  (00012, 510,  'chiusa', 7012, '1947294759');
 
 insert into Feedback(noleggio,voto,recensione) values
   (00005, 5, 'ottima vettura, una utililitaria fantastica'),
@@ -130,14 +126,14 @@ insert into indirizzoSede(sede,città,civico,via) values
   ('41261', 'Milano',  '1',   'Via Fieno');
 
 insert into residenzaCliente(cliente,città,civico,via) values
-  ('AP1017Y890', 'Roma',               '2',   'Via Ugo Bertossi')
-  ('BO34590P70', 'Milano',             '5',   'Via Alessandro Manzoni')
-  ('T946510KP4', 'Roma',               '15',  'Via Regina Margherita')
-  ('78OPISL348', 'Canistro Inferiore', '2',   'Via Largo Liri')
-  ('RJ51230KL7', 'Firenze',            '6',   'Via Maremma Bucaiola')
-  ('GRT780H12L', 'Roma',               '6',   'Via Mar Rosso')
-  ('YR7I012KLU', 'Napoli',             '73',  'Via Napoli')
-
+  ('AP1017Y890', 'Roma',               '2',   'Via Ugo Bertossi'),
+  ('BO34590P70', 'Milano',             '5',   'Via Alessandro Manzoni'),
+  ('T946510KP4', 'Roma',               '15',  'Via Regina Margherita'),
+  ('78OPISL348', 'Canistro Inferiore', '7',   'Via Largo Liri'),
+  ('RJ51230KL7', 'Firenze',            '6',   'Via Maremma Bucaiola'),
+  ('GRT780H12L', 'Roma',               '6',   'Via Mar Rosso'),
+  ('YR7I012KLU', 'Napoli',             '73',  'Via Napoli');
+OK
 insert into CasaAutomobilistica(nome,nazione) values
   ('Audi','Germania'),
   ('BMW','Germania'),
@@ -150,14 +146,14 @@ insert into CasaAutomobilistica(nome,nazione) values
 insert into AutovetturaNoleggiabile(targa,km,colore,disponibile,carGroup,casaAuto) values
   ('FR249GG', 30000,  'rosso',     false, 'E',  'Audi'),
   ('FP445PM', 10000,  'grigio',    true,  'A',  'Renault'),
-  ('FZ142PG', 7000,   'arancione', true,  'L', 'Mercedes'),
+  ('FZ142PG', 7000,   'arancione', true,  'L',  'Mercedes'),
   ('FA101MM', 120000, 'nero',      true,  'A',  'BMW'),
   ('FC552KM', 100000, 'blu',       false, 'C',  'Renault'),
   ('FK597FM', 89000,  'bianco',    true,  'G',  'Peugeot'),
   ('FQ647JK', 50000,  'rosso',     true,  'L',  'Audi'),
   ('FW830IO', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
   ('FB392TT', 120000, 'grigio',    false, 'A',  'Fiat'),
-  ('FF483AB', 90000,  'blu',       true,  'H',  'BMW'),
+  ('FF483AB', 90000,  'blu',       true,  'H',  'BMW');
 
 insert into AutovetturaVendita(targa,immatricolazione,km,colore,prezzoVendita,carGroup,casaAuto) values
   ('ER245GG', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
@@ -169,13 +165,13 @@ insert into AutovetturaVendita(targa,immatricolazione,km,colore,prezzoVendita,ca
   ('EQ227JK', 150000, 'rosso',     12000, 'H',  'Audi'),
   ('EW520IO', 150000, 'nero',      22000, 'A',  'AlfaRomeo'),
   ('EB122TT', 150000, 'grigio',    10000, 'C',  'BMW'),
-  ('EF813AB', 150000, 'blu',       5000,  'L',  'Renault'),
+  ('EF813AB', 150000, 'blu',       5000,  'L',  'Renault');
 
 insert into AcquirenteVetturaUsata (nomeAzienda,partitaIva,telefono,datiBancari) values
-  ('comprousato.srl', '18493827463', 0791062597, '8649254281')
-  ('autoricambi',     '38274027483', 0694729479, '4730184936')
-  ('centoallora.com', '11637355483', 0483284938, '7692394913')
-  ('tuttomotori',     '25366482637', 0778302840, '3649264281')
+  ('comprousato.srl', '18493827463', 0791062597, '8649254281'),
+  ('autoricambi',     '38274027483', 0694729479, '4730184936'),
+  ('centoallora.com', '11637355483', 0483284938, '7692394913'),
+  ('tuttomotori',     '25366482637', 0778302840, '3649264281');
 
 insert into Fornitore (nomeAziendaFornitore,partitaIva,telefono,datiBancari) values
   ('Perinetti auto',      '12034810019', 3791062567, '6241866284'),
