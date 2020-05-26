@@ -1,3 +1,5 @@
+--File di query necessarie a costruire lo scheletro del Database Purplerent
+
 create table Sede(
   codiceMnemonico character(5) primary key,
   orarioApertura time not null,
@@ -110,7 +112,6 @@ create table CasaAutomobilistica(
 
 create table AutovetturaNoleggiabile(
   targa character(7) primary key,
-  immatricolazione date not null,
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
@@ -123,7 +124,6 @@ create table AutovetturaNoleggiabile(
 
 create table AutovetturaVendita(
   targa character(7) primary key,
-  immatricolazione date not null,
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
@@ -224,7 +224,7 @@ create table FatturaVendita(
 
 create table FatturaAcquisto(
   numeroFattura bigInt primary key,
-  importo decimal(5,2) not null,
+  importo decimal(6,2) not null,
   data date not null,
   numVetture int not null,
   fornitore varchar(15) unique not null,

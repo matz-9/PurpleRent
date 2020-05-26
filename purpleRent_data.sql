@@ -1,4 +1,5 @@
---3 indirizzi
+--File di query necessarie al popolamento del Database PurpleRent
+
 insert into Sede(codiceMnemonico,orarioApertura,orarioChiusura,telefono,email) values
   ('61040', '08:30', '19:00', 3791062597, 'pippolos@purplerent.it'),
   ('61031', '08:30', '18:30', 3798000197, 'roma@purplerent.it'),
@@ -46,7 +47,7 @@ insert into Indirizzo(città,civico,via,cap) values
   ('Firenze',            '14',  'Viale Alessandro Guidoni', '05310'), --Sede
   ('Roma',               '9',   'Via Cristian Cocco',       '21359'), --Sede
   ('Milano',             '1',   'Via Fieno',                '07419'), --Sede
-  ('Ventotene',          '24',  'Via Olivi',                '04020');
+  ('Benevento',          '24',  'Via Avellino',             '04020');
 
 --cliente + fornitore + acquirente = 7 + 4 + 4 = 15
 insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
@@ -66,7 +67,6 @@ insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
   ('2649152096', 'visa',             'Unicredit'),
   ('6917392229', 'mastercard',       'Unicredit');
 
--- 7 indirizzi 7 dati bancari 7 noleggi(almeno)
 insert into ClienteNoleggio(numDocumento,nome,cognome,età,datiBancari) values
   ('AP1017Y890', 'Vittorio', 'Terzetti',     50, '1233958372'),
   ('BO34590P70', 'Enzo',     'Pesce',        22, '3618304719'),
@@ -150,14 +150,14 @@ insert into CasaAutomobilistica(nome,nazione) values
   ('AlfaRomeo', 'Italia');
 
 insert into AutovetturaNoleggiabile(targa,immatricolazione,km,colore,disponibile,carGroup,casaAuto) values
-  ('FR249GG', '2019-12-09', 30000,  'rosso',     false, 'E',  'Audi'),
-  ('FP445PM', '2020-01-11', 10000,  'grigio',    true,  'A',  'Renault'),
-  ('FZ142PG', '2020-02-04', 7000,   'arancione', true,  'L', 'Mercedes'),
-  ('FA101MM', '2019-01-20', 120000, 'nero',      true,  'A',  'BMW'),
-  ('FC552KM', '2019-03-10', 100000, 'blu',       false, 'C',  'Renault'),
+  ('FR249GG', '2018-12-09', 30000,  'rosso',     false, 'E',  'Audi'),
+  ('FP445PM', '2018-01-11', 10000,  'grigio',    true,  'A',  'Renault'),
+  ('FZ142PG', '2018-02-04', 7000,   'arancione', true,  'L', 'Mercedes'),
+  ('FA101MM', '2018-01-20', 120000, 'nero',      true,  'A',  'BMW'),
+  ('FC552KM', '2018-03-10', 100000, 'blu',       false, 'C',  'Renault'),
   ('FK597FM', '2019-07-30', 89000,  'bianco',    true,  'G',  'Peugeot'),
   ('FQ647JK', '2019-08-19', 50000,  'rosso',     true,  'L',  'Audi'),
-  ('FW830IO', '2019-09-22', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
+  ('FW830IO', '2018-09-22', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
   ('FB392TT', '2019-01-05', 120000, 'grigio',    false, 'A',  'Fiat'),
   ('FF483AB', '2019-03-16', 90000,  'blu',       true,  'H',  'BMW'),
   --('FI994CD', '2019-07-02', 50000,  'blu',       true,  '',  'Peugeot'),
@@ -201,7 +201,10 @@ insert into AcquirenteVetturaUsata (nomeAzienda,partitaIva,telefono,datiBancari)
 
 --4 indirizzi 4 dati bancari
 insert into Fornitore (nomeAziendaFornitore,partitaIva,telefono,datiBancari) values
-  ('Perinetti auto', '12034810019')
+  ('Perinetti auto',      '12034810019', 3791062567, '6241866284'),
+  ('Il mondo delle auto', '17737815014', 3381312367, '5691374113'),
+  ('Great cars',          '07917666023', 3880551087, '2649152096'),
+  ('Sulla strada',        '69573722295', 3491956789,'6917392229');
 
 insert into sedeAttuale (autovetturaN, sede) values
   ('FR249GG', '61040'),
@@ -215,10 +218,10 @@ insert into sedeAttuale (autovetturaN, sede) values
   ('FB392TT', '41261'),
 
 insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
-  (00001, 'FR249GG'), --in corso
-  (00002, 'FB392TT'), --in corso
-  (00003, 'FW830IO'), --in corso
-  (00004, 'FC552KM'), --in corso
+  (00001, 'FR249GG'),
+  (00002, 'FB392TT'),
+  (00003, 'FW830IO'),
+  (00004, 'FC552KM'),
   (00005, 'FA101MM'),
   (00006, 'FK597FM'),
   (00007, 'FQ647JK');
@@ -228,49 +231,66 @@ insert into noleggioAutovetturaVendita(contratto,autovetturaV) values
   (00009, 'EP443PM'),
   (00010, 'EC642KM'),
   (00011, 'EK647FM'),
-  (00012, 'EF813AB'); L
+  (00012, 'EF813AB');
 
---2 indirizzi
 insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
   ('Milli srl',       '09:00', '18:00', 065699991, 'millisrl@gmail.com'),
   ('Ncm carrozzeria', '09:30', '19:00', 025198713, 'ncmcarr@outlook.com');
 
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
-  (0001, '2019-04-09', 'cambio olio motore e cambio filtro ant.', 80.00,  'Milli srl'),
-  (0002, '2019-06-18', 'cambio paraurti per incidente',           100.00, 'Milli srl'),
-  (0003, '2020-01-14', 'cambio ruote',                            120.00, 'Ncm carrozzeria'),
-  (0004, '2020-04-18', 'rodaggio e controllo freni',              50.00,  'Milli srl'),
-  (0005, '2020-07-22', 'controllo freni e cambio gomme',          100.00, 'Ncm carrozzeria'),
-  (0006, '2020-02-28', 'cambio fari e luci di posizione',         40.00,  'Milli srl'),
-  (0007, '2020-12-25', 'riparazione cerchione',                   20.00,  'Ncm carrozzeria'),
-  (0008, '2020-03-24', 'cambio olio',                             15.00,  'Milli srl'),
-  (0009, '2020-04-01', 'riparazione marmitta',                    30.00,  'Milli srl'),
+  (0001, '2019-04-09', 'cambio olio motore e cambio filtro ant.',  80.00,  'Milli srl'),
+  (0002, '2019-06-18', 'cambio paraurti per incidente',            100.00, 'Milli srl'),
+  (0003, '2020-01-14', 'cambio ruote',                             120.00, 'Ncm carrozzeria'),
+  (0004, '2020-04-18', 'rodaggio e controllo freni',               50.00,  'Milli srl'),
+  (0005, '2020-07-22', 'controllo freni e cambio gomme',           100.00, 'Ncm carrozzeria'),
+  (0006, '2020-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
+  (0007, '2020-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
+  (0008, '2020-03-24', 'cambio olio',                              15.00,  'Milli srl'),
+  (0009, '2020-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
   (0010, '2020-05-06', 'riverniciatura paraurti e cambio pomello', 70.00, 'Ncm carrozzeria');
 
 insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
-  ()
+  (0001, 'FR249GG'),
+  (0002, 'FP445PM'),
+  (0003, 'FZ142PG'),
+  (0004, 'FA101MM'),
+  (0005, 'FZ142PG');
 
 insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
+  (0006, 'ER245GG'),
+  (0007, 'EK647FM'),
+  (0008, 'EW520IO'),
+  (0009, 'EK647FM'),
+  (0010, 'EW520IO');
 
 insert into indirizzoOfficina(officina,città,civico,via) values
-  ('Milli srl', 'Milano', '17',  'Piazza del Duomo')
+  ('Milli srl',       'Milano', '17',  'Piazza del Duomo')
   ('Ncm carrozzeria', 'Roma',   '113', 'Via Salaria')
 
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
 
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
-  (00028, 20000.00, '2017-03-24', 3, 'Il mondo delle auto'),
-  (00029, 100000.00,'2017-04-01', 6, 'Perinetti auto'),
+  (00028, 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
+  (00029, 100000.00,'2019-04-01', 6, 'Perinetti auto'),
   (00031, 24000.00, '2018-12-14', 2, 'Il mondo delle auto'),
-  (00032, 6000.00,  '2018-01-12', 1, 'Perinetti auto'),
+  (00032, 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
   (00033, 10000.00, '2018-11-07', 4, 'Great cars'),
-  (00034, 70000.00, '2018-09-19', 3, 'Perinetti auto');
+  (00034, 70000.00, '2018-09-19', 3, 'Sulla strada');
 
 insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values
+  (00028, 'FR249GG'),
+  (00028, 'FZ142PG'),
+  (00028, 'FP445PM'),
+  (00032, 'FW830IO');
 
 insert into acquistoAutovetturaVendita(fatturaV,autovetturaV) values
+  ()
 
 insert into fornitoreCarGroup(fornitore,carGroup) values
+  ('Perinetti auto')
+  ('Il mondo delle auto')
+  ('Great cars')
+  ('Perinetti auto')
 
 insert into fornitoreCasa(fornitore,casa) values
 
