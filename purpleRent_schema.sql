@@ -131,7 +131,7 @@ create table AutovetturaVendita(
   foreign key (carGroup) references CarGroup(lettera),
   foreign key (casaAuto) references CasaAutomobilistica(nome)
 );
-
+ok
 create table AcquirenteVetturaUsata(
   nomeAzienda varchar(15) primary key,
   partitaIva character(11) not null,
