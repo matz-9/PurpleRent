@@ -24,42 +24,42 @@ insert into CarGroup(lettera,prezzoGiornaliero) values
   ('O', 35),
   ('P', 32);
 
--- cliente + sede + fornitore + acquirente + officina = 7 + 3 + 4 + 4 + 2 = 20
+
 insert into Indirizzo(città,civico,via,cap) values
-  ('Roma',               '2',   'Via Ugo Bertossi',         '00159'), --ClienteNoleggio
-  ('Milano',             '5',   'Via Alessandro Manzoni',   '35126'), --ClienteNoleggio
-  ('Roma',               '15',  'Via Regina Margherita',    '00198'), --ClienteNoleggio
-  ('Canistro Inferiore', '7',   'Via Largo Liri',           '67050'), --ClienteNoleggio
-  ('Roma',               '6',   'Via Mar Rosso',            '00121'), --ClienteNoleggio
-  ('Napoli',             '73',  'Via Napoli',               '00184'), --ClienteNoleggio
-  ('Firenze',            '6',   'Via Maremma Bucaiola',     '20199'), --ClienteNoleggio
-  ('Pisa',               '22',  'Via della Torre',          '45009'), --Acquirente
-  ('Roma',               '1',   'Via Tiburtina',            '00133'), --Acquirente
-  ('Genova',             '14',  'Via degli Abeti',          '04310'), --Acquirente
-  ('Bari',               '9',   'Via Cristian Cocco',       '11159'), --Acquirente
-  ('Milano',             '17',  'Piazza del Duomo',         '05409'), --Officina
-  ('Roma',               '113', 'Via Salaria',              '10231'), --Officina
+  ('Roma',               '2',   'Via Ugo Bertossi',         '00159'),
+  ('Milano',             '5',   'Via Alessandro Manzoni',   '35126'),
+  ('Roma',               '15',  'Via Regina Margherita',    '00198'),
+  ('Canistro Inferiore', '7',   'Via Largo Liri',           '67050'),
+  ('Roma',               '6',   'Via Mar Rosso',            '00121'),
+  ('Napoli',             '73',  'Via Napoli',               '00184'),
+  ('Firenze',            '6',   'Via Maremma Bucaiola',     '20199'),
+  ('Pisa',               '22',  'Via della Torre',          '45009'),
+  ('Roma',               '1',   'Via Tiburtina',            '00133'),
+  ('Genova',             '14',  'Via degli Abeti',          '04310'),
+  ('Bari',               '9',   'Via Cristian Cocco',       '11159'),
+  ('Milano',             '17',  'Piazza del Duomo',         '05409'),
+  ('Roma',               '113', 'Via Salaria',              '10231'),
   ('Rieti',              '36',  'Via Virgola Mobile',       '01274'),
   ('Bologna',            '19',  'Via Guerrazzi',            '45009'),
   ('Catanzaro',          '32',  'Via Guiuseppe Poeri',      '00133'),
-  ('Firenze',            '14',  'Viale Alessandro Guidoni', '05310'), --Sede
-  ('Roma',               '9',   'Via Cristian Cocco',       '21359'), --Sede
-  ('Milano',             '1',   'Via Fieno',                '07419'), --Sede
+  ('Firenze',            '14',  'Viale Alessandro Guidoni', '05310'),
+  ('Roma',               '9',   'Via Cristian Cocco',       '21359'),
+  ('Milano',             '1',   'Via Fieno',                '07419'),
   ('Benevento',          '24',  'Via Avellino',             '04020');
 
---cliente + fornitore + acquirente = 7 + 4 + 4 = 15
+
 insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
-  ('1233958372', 'visa',             'IntesaSanPaolo'), --ClienteNoleggio
-  ('3618304719', 'mastercard',       'IntesaSanPaolo'), --ClienteNoleggio
-  ('4639281049', 'diner',            'Mediolanum'),     --ClienteNoleggio
-  ('5930275641', 'visa',             'Unicredit'),      --ClienteNoleggio
-  ('9243856384', 'visa',             'Unicredit'),      --ClienteNoleggio
-  ('5629472036', 'visa',             'Unicredit'),      --ClienteNoleggio
-  ('1947294759', 'american express', 'Ubi banca');      --ClienteNoleggio
-  ('8649254281', 'mastercard',       'IntesaSanPaolo'), --Acquirente
-  ('4730184936', 'visa',             'Mediolanum'),     --Acquirente
-  ('3649264281', 'mastercard',       'Ubi banca'),      --Acquirente
-  ('7692394913', 'american express', 'Mediolanum'),     --Acquirente
+  ('1233958372', 'visa',             'IntesaSanPaolo'),
+  ('3618304719', 'mastercard',       'IntesaSanPaolo'),
+  ('4639281049', 'diner',            'Mediolanum'),
+  ('5930275641', 'visa',             'Unicredit'),
+  ('9243856384', 'visa',             'Unicredit'),
+  ('5629472036', 'visa',             'Unicredit'),
+  ('1947294759', 'american express', 'Ubi banca');
+  ('8649254281', 'mastercard',       'IntesaSanPaolo'),
+  ('4730184936', 'visa',             'Mediolanum'),
+  ('3649264281', 'mastercard',       'Ubi banca'),
+  ('7692394913', 'american express', 'Mediolanum'),
   ('6241866284', 'visa',             'Unicredit'),
   ('5691374113', 'american express', 'Mediolanum'),
   ('2649152096', 'visa',             'Unicredit'),
@@ -158,16 +158,6 @@ insert into AutovetturaNoleggiabile(targa,km,colore,disponibile,carGroup,casaAut
   ('FW830IO', 60000,  'nero',      false, 'D',  'AlfaRomeo'),
   ('FB392TT', 120000, 'grigio',    false, 'A',  'Fiat'),
   ('FF483AB', 90000,  'blu',       true,  'H',  'BMW'),
-  --('FI994CD', '2019-07-02', 50000,  'blu',       true,  '',  'Peugeot'),
-  --('FX277DD', '2020-03-23', 4000,   'grigio',    true,  '',  'Mercedes'),
-  --('FD295RO', '2019-05-30', 87000,  'viola',     false, '',  'BMW'),
-  --('FO553FP', '2019-12-20', 34000,  'verde',     true,  '',  'Fiat'),
-  --('FM010NO', '2019-11-27', 52000,  'arancione', false, '',  'BMW');
-  --('FX277DD', '2020-03-23', 4000,   'grigio',    true,  '',  'Mercedes'),
-  --('FL882MO', '2019-08-30', 47000,  'blu',       false, '',  'BMW'),
-  --('FP418JP', '2019-10-20', 68000,  'grigio',    true,  '',  'Fiat'),
-  --('FN821LO', '2019-04-27', 77000,  'nero',      true,  '',  'Renault');
-
 
 insert into AutovetturaVendita(targa,immatricolazione,km,colore,prezzoVendita,carGroup,casaAuto) values
   ('ER245GG', 150000, 'rosso',     32000, 'E',  'AlfaRomeo'),
@@ -180,24 +170,13 @@ insert into AutovetturaVendita(targa,immatricolazione,km,colore,prezzoVendita,ca
   ('EW520IO', 150000, 'nero',      22000, 'A',  'AlfaRomeo'),
   ('EB122TT', 150000, 'grigio',    10000, 'C',  'BMW'),
   ('EF813AB', 150000, 'blu',       5000,  'L',  'Renault'),
-  --('EI774CD', '2017-07-02', 150000, 'blu',       5500,  '',  'Peugeot'),
-  --('EX137DD', '2017-03-23', 150000, 'grigio',    29000, '',  'Mercedes'),
-  --('ED635RO', '2017-05-30', 150000, 'viola',     18000, '',  'BMW'),
-  --('DZ223FP', '2016-12-20', 150000, 'verde',     5000,  '',  'Fiat'),
-  --('EM640NO', '2016-11-27', 150000, 'arancione', 49000, 'L', 'BMW');
-  --('EX217DD', '2017-03-23', 150000, 'grigio',    24000, '',  'Mercedes'),
-  --('EL772MO', '2017-08-30', 150000, 'blu',       21000, '',  'BMW'),
-  --('EP328JP', '2017-10-20', 150000, 'grigio',    60000, '',  'Fiat'),
-  --('EN181LO', '2017-04-27', 150000, 'nero',      11000, '',  'Renault');
 
---4 indirizzi 4 dati bancari
 insert into AcquirenteVetturaUsata (nomeAzienda,partitaIva,telefono,datiBancari) values
   ('comprousato.srl', '18493827463', 0791062597, '8649254281')
   ('autoricambi',     '38274027483', 0694729479, '4730184936')
   ('centoallora.com', '11637355483', 0483284938, '7692394913')
   ('tuttomotori',     '25366482637', 0778302840, '3649264281')
 
---4 indirizzi 4 dati bancari
 insert into Fornitore (nomeAziendaFornitore,partitaIva,telefono,datiBancari) values
   ('Perinetti auto',      '12034810019', 3791062567, '6241866284'),
   ('Il mondo delle auto', '17737815014', 3381312367, '5691374113'),
@@ -247,7 +226,16 @@ insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) val
   ('R0009', '2020-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
   ('R0010', '2020-05-06', 'riverniciatura paraurti e cambio pomello', 70.00,  'Ncm carrozzeria');
 
---DA FARE
+
+
+
+
+
+
+
+
+
+
 insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
   ('R0001', 'FR249GG'),
   ('R0002', 'FP445PM'),
@@ -255,13 +243,23 @@ insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
   ('R0004', 'FA101MM'),
   ('R0005', 'FZ142PG');
 
---DA FARE
+
 insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
   ('R0006', 'ER245GG'),
   ('R0007', 'EK647FM'),
   ('R0008', 'EW520IO'),
   ('R0009', 'EK647FM'),
   ('R0010', 'EW520IO');
+
+
+
+
+
+
+
+
+
+
 
 insert into indirizzoOfficina(officina,città,civico,via) values
   ('Milli srl',       'Milano', '17',  'Piazza del Duomo')
