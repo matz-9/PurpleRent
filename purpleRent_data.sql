@@ -1,5 +1,3 @@
---File di query necessarie al popolamento del Database PurpleRent
-
 insert into Sede(codiceMnemonico,orarioApertura,orarioChiusura,telefono,email) values
   ('61040', '08:30', '19:00', 3791062597, 'pippolos@purplerent.it'),
   ('61031', '08:30', '18:30', 3798000197, 'roma@purplerent.it'),

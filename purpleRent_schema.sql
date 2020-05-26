@@ -1,5 +1,3 @@
---File di query necessarie a costruire lo scheletro del Database Purplerent
-
 create table Sede(
   codiceMnemonico character(5) primary key,
   orarioApertura time not null,
