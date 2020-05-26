@@ -208,17 +208,18 @@ insert into Fornitore (nomeAziendaFornitore,partitaIva,telefono,datiBancari) val
   ()
 
 insert into sedeAttuale (autovetturaN, sede) values
-  ('FR249GG', ),
-  ('FP445PM', ),
-  ('FZ142PG', ),
-  ('FA101MM', ),
-  ('FC552KM', ),
-  ('FK597FM', ),
-  ('FQ647JK', ),
-  ('FW830IO', ),
-  ('FB392TT', ),
+  ('FR249GG', '61040'),
+  ('FP445PM', '61040'),
+  ('FZ142PG', '61040'),
+  ('FA101MM', '61031'),
+  ('FC552KM', '61031'),
+  ('FK597FM', '61031'),
+  ('FQ647JK', '41261'),
+  ('FW830IO', '41261'),
+  ('FB392TT', '41261'),
 
-
+--non ho controllato i car group
+--DA CORREGGERE
 insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
   (00001, 'FR249GG'), --in corso
   (00002, 'FB392TT'), --in corso
@@ -226,14 +227,16 @@ insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
   (00004, 'FC552KM'), --in corso
   (00005, 'FA101MM'),
   (00006, 'FK597FM'),
-  (00007, 'FQ647JK'),
-  (00008, 'FZ142PG'),
-  (00009, 'FP445PM'),
-  (00010, 'FC552KM'),
-  (00011, 'FQ647JK'),
-  (00012, 'FR249GG'),
+  (00007, 'FQ647JK');
 
-insert into noleggioAutovetturaVendita(contratto,autovetturaN) values
+  --non ho controllato i car group
+  --DA CORREGGERE
+insert into noleggioAutovetturaVendita(contratto,autovetturaV) values
+  (00008, 'EQ227JK'),
+  (00009, 'EP443PM'),
+  (00010, 'EC642KM'),
+  (00011, 'EK647FM'),
+  (00012, 'EF813AB'),
 
 --2 indirizzi
 insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
