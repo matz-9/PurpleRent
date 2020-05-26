@@ -125,11 +125,7 @@ create table AutovetturaVendita(
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
-<<<<<<< HEAD
   prezzoVendita decimal(5,2) not null,
-=======
-  prezzoVendita decimal(6,2) not null,
->>>>>>> 9801da080719129232a2b7f235d939771c059ead
   carGroup char not null,
   casaAuto varchar(15) not null,
   foreign key (carGroup) references CarGroup(lettera),
