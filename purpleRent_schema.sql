@@ -180,7 +180,7 @@ create table Officina(
 );
 
 create table RiparazioniEffettuate(
-  numeroRip int auto_increment primary key,
+  numeroRip char(5) primary key,
   data date not null,
   motivazione varchar(20) not null,
   costo decimal(4,2) not null,
@@ -189,14 +189,14 @@ create table RiparazioniEffettuate(
 );
 
 create table riparazioneAutovetturaN(
-  riparazione int auto_increment primary key,
+  riparazione char(5) primary key,
   autovetturaN character(7)  unique not null,
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table riparazioneAutovetturaV(
-  riparazione int auto_increment primary key,
+  riparazione char(5) primary key,
   autovetturaV character(7) unique not null,
   foreign key (autovetturaV) references AutovetturaVendita(targa),
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip)

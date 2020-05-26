@@ -238,24 +238,26 @@ insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
   ('Ncm carrozzeria', '09:30', '19:00', 025198713, 'ncmcarr@outlook.com');
 
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
-  (0001, '2019-04-09', 'cambio olio motore e cambio filtro ant.',  80.00,  'Milli srl'),
-  (0002, '2019-06-18', 'cambio paraurti per incidente',            100.00, 'Milli srl'),
-  (0003, '2020-01-14', 'cambio ruote',                             120.00, 'Ncm carrozzeria'),
-  (0004, '2020-04-18', 'rodaggio e controllo freni',               50.00,  'Milli srl'),
-  (0005, '2020-07-22', 'controllo freni e cambio gomme',           100.00, 'Ncm carrozzeria'),
-  (0006, '2020-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
-  (0007, '2020-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
-  (0008, '2020-03-24', 'cambio olio',                              15.00,  'Milli srl'),
-  (0009, '2020-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
-  (0010, '2020-05-06', 'riverniciatura paraurti e cambio pomello', 70.00, 'Ncm carrozzeria');
+  ('R0001', '2019-04-09', 'cambio olio motore e cambio filtro ant.',  80.00,  'Milli srl'),
+  ('R0002', '2019-06-18', 'cambio paraurti per incidente',            100.00, 'Milli srl'),
+  ('R0003', '2020-01-14', 'cambio ruote',                             120.00, 'Ncm carrozzeria'),
+  ('R0004', '2020-04-18', 'rodaggio e controllo freni',               50.00,  'Milli srl'),
+  ('R0005', '2020-07-22', 'controllo freni e cambio gomme',           100.00, 'Ncm carrozzeria'),
+  ('R0006', '2020-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
+  ('R0007', '2020-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
+  ('R0008', '2020-03-24', 'cambio olio',                              15.00,  'Milli srl'),
+  ('R0009', '2020-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
+  ('R0010', '2020-05-06', 'riverniciatura paraurti e cambio pomello', 70.00,  'Ncm carrozzeria');
 
+--DA FARE
 insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
-  (0001, 'FR249GG'),
-  (0002, 'FP445PM'),
-  (0003, 'FZ142PG'),
-  (0004, 'FA101MM'),
-  (0005, 'FZ142PG');
+  ('R0001', 'FR249GG'),
+  ('R0002', 'FP445PM'),
+  ('R0003', 'FZ142PG'),
+  ('R0004', 'FA101MM'),
+  ('R0005', 'FZ142PG');
 
+--DA FARE
 insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
   (0006, 'ER245GG'),
   (0007, 'EK647FM'),
@@ -269,33 +271,64 @@ insert into indirizzoOfficina(officina,città,civico,via) values
 
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
 
+
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
   (00028, 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
   (00029, 100000.00,'2019-04-01', 6, 'Perinetti auto'),
   (00031, 24000.00, '2018-12-14', 2, 'Il mondo delle auto'),
   (00032, 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
-  (00033, 10000.00, '2018-11-07', 4, 'Great cars'),
+  (00033, 10000.00, '2018-11-07', 5, 'Great cars'),
   (00034, 70000.00, '2018-09-19', 3, 'Sulla strada');
 
 insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values
   (00028, 'FR249GG'),
   (00028, 'FZ142PG'),
   (00028, 'FP445PM'),
-  (00032, 'FW830IO');
+  (00032, 'FW830IO'),
+  (00029, 'FA101MM'),
+  (00029, 'FC552KM'),
+  (00029, 'FK597FM'),
+  (00029, 'FQ647JK'),
+  (00029, 'FB392TT'),
+  (00029, 'FF483AB');
 
 insert into acquistoAutovetturaVendita(fatturaV,autovetturaV) values
-  ()
+  (00031, 'ER245GG'),
+  (00031, 'EP443PM'),
+  (00033, 'EZ132PG'),
+  (00033, 'EA541MM'),
+  (00033, 'EC642KM'),
+  (00033, 'EK647FM'),
+  (00033, 'EQ227JK'),
+  (00034, 'EW520IO'),
+  (00034, 'EB122TT'),
+  (00034, 'EF813AB');
 
 insert into fornitoreCarGroup(fornitore,carGroup) values
-  ('Perinetti auto')
-  ('Il mondo delle auto')
-  ('Great cars')
-  ('Perinetti auto')
+  ('Perinetti auto','E'),
+  ('Perinetti auto','L'),
+  ('Perinetti auto','A'),
+  ('Sulla strada','D'),
+  ('Sulla strada','H'),
+  ('Great cars','J'),
+  ('Great cars','H'),
+  ('Il mondo delle auto','P'),
+  ('Il mondo delle auto','H');
 
 insert into fornitoreCasa(fornitore,casa) values
+  ('Perinetti auto','Audi'),
+  ('Perinetti auto','BMW'),
+  ('Perinetti auto','Fiat'),
+  ('Sulla strada','Mercedes'),
+  ('Sulla strada','H'),
+  ('Great cars','J'),
+  ('Great cars','H'),
+  ('Il mondo delle auto','P'),
+  ('Il mondo delle auto','H');
+
 
 insert into indirizzoFornitore(fornitore,città,civico,via) values
-
+  ()
 insert into indirizzoAcquirente(acquirente,città,civico,via) values
   ('comprousato.srl', 'Pisa',   '22',  'Via della Torre'),
   ('autoricambi',     'Roma',   '1',   'Via Tiburtina'),
