@@ -2,7 +2,7 @@ create table Sede(
   codiceMnemonico character(5) primary key,
   orarioApertura time not null,
   orarioChiusura time not null,
-  telefono bigInt not null,
+  telefono character(10) not null,
   email varchar(30) not null
 );
 
@@ -51,7 +51,7 @@ create table sedePreferita(
 );
 
 create table Prenotazione(
-  numeroPrenotazione int primary key,
+  numeroPrenotazione varchar(6) primary key,
   orarioInizio dateTime not null,
   orarioFine dateTime not null,
   prezzo decimal(5,2) not null,
@@ -66,7 +66,7 @@ create table Prenotazione(
 );
 
 create table LetteraNoleggio(
-  numeroLettera int primary key,
+  numeroLettera varchar(6) primary key,
   kmPercorsi int,
   tipo enum("aperta", "chiusa") not null,
   prenotazione int not null,
@@ -76,7 +76,7 @@ create table LetteraNoleggio(
 );
 
 create table Feedback(
-  noleggio int auto_increment primary key,
+  noleggio varchar(6) primary key,
   recensione text,
   voto integer not null,
   foreign key (noleggio) references LetteraNoleggio(numeroLettera),
@@ -156,14 +156,14 @@ create table sedeAttuale(
 );
 
 create table noleggioAutovetturaNoleggiabile(
-  contratto int auto_increment primary key,
+  contratto varchar(6) primary key,
   autovetturaN character(7) not null,
   foreign key (contratto) references LetteraNoleggio(numeroLettera),
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
 );
 
 create table noleggioAutovetturaVendita(
-  contratto int auto_increment primary key,
+  contratto varchar(6) primary key,
   autovetturaV character(7) not null,
   foreign key (contratto) references LetteraNoleggio(numeroLettera),
   foreign key (autovetturaV) references AutovetturaVendita(targa)
