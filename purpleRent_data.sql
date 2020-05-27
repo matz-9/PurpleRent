@@ -1,7 +1,7 @@
 insert into Sede(codiceMnemonico,orarioApertura,orarioChiusura,telefono,email) values
-  ('61040', '08:30', '19:00', 3791062597, 'pippolos@purplerent.it'),
-  ('61031', '08:30', '18:30', 3798000197, 'roma@purplerent.it'),
-  ('41261', '08:30', '19:00', 0863479810, 'math@purplerent.it');
+  ('61040', '08:30', '19:00', '3791062597', 'pippolos@purplerent.it'),
+  ('61031', '08:30', '18:30', '3798000197', 'roma@purplerent.it'),
+  ('41261', '08:30', '19:00', '0863479810', 'math@purplerent.it');
 
 insert into Dipendente(id,nome,cognome,anniAnzianità,sede) values
   (1755368, 'Filippo', 'Sardi',       20, '61040'),
@@ -97,28 +97,28 @@ insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeR
   (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', 'RJ51230KL7', 'L');
 
 insert into LetteraNoleggio(numeroLettera,kmPercorsi,tipo,prenotazione,datiBancari) values
-  (00001, null, 'aperta', 7001, '1233958372'),
-  (00002, null, 'aperta', 7002, '1233958372'),
-  (00003, 311,  'chiusa', 7003, '4639281049'),
-  (00004, 1190, 'chiusa', 7004, '5930275641'),
-  (00005, 720,  'chiusa', 7005, '5930275641'),
-  (00006, 1410, 'chiusa', 7006, '3618304719'),
-  (00007, 2101, 'chiusa', 7007, '5930275641'),
-  (00008, 250,  'chiusa', 7008, '9243856384'),
-  (00009, 451,  'chiusa', 7009, '9243856384'),
-  (00010, 1940, 'chiusa', 7010, '5629472036'),
-  (00011, 1300, 'chiusa', 7011, '1947294759'),
-  (00012, 510,  'chiusa', 7012, '1947294759');
+  ('L00001', null, 'aperta', 7001, '1233958372'),
+  ('L00002', null, 'aperta', 7002, '1233958372'),
+  ('L00003', 311,  'chiusa', 7003, '4639281049'),
+  ('L00004', 1190, 'chiusa', 7004, '5930275641'),
+  ('L00005', 720,  'chiusa', 7005, '5930275641'),
+  ('L00006', 1410, 'chiusa', 7006, '3618304719'),
+  ('L00007', 2101, 'chiusa', 7007, '5930275641'),
+  ('L00008', 250,  'chiusa', 7008, '9243856384'),
+  ('L00009', 451,  'chiusa', 7009, '9243856384'),
+  ('L00010', 1940, 'chiusa', 7010, '5629472036'),
+  ('L00011', 1300, 'chiusa', 7011, '1947294759'),
+  ('L00012', 510,  'chiusa', 7012, '1947294759');
 
 insert into Feedback(noleggio,voto,recensione) values
-  (00005, 5, 'ottima vettura, una utililitaria fantastica'),
-  (00006, 3, 'buona vettura, una monovolume devvero comoda'),
-  (00007, 5, 'ottima vettura lussuosa, la PurpleRent è un azienda perfetta!'),
-  (00008, 4, 'viaggio liscio, auto lussuosa e comoda, superaccessoriata, tornerò sicuro per un altro noleggio!'),
-  (00009, 3, 'Great car! The best rental experience'),
-  (00010, 5, 'ottima vettura, una utililitaria davvero comoda e spaziosa'),
-  (00011, 2, 'Non sono rimasto molto soddisfatto, la mia utilitaria era sporca'),
-  (00012, 5, 'ottima vettura, PurpleRent ha da sempre le lussuose più belle e veloci');
+  ('L00005', 5, 'ottima vettura, una utililitaria fantastica'),
+  ('L00006', 3, 'buona vettura, una monovolume devvero comoda'),
+  ('L00007', 5, 'ottima vettura lussuosa, la PurpleRent è un azienda perfetta!'),
+  ('L00008', 4, 'viaggio liscio, auto lussuosa e comoda, superaccessoriata, tornerò sicuro per un altro noleggio!'),
+  ('L00009', 3, 'Great car! The best rental experience'),
+  ('L00010', 5, 'ottima vettura, una utililitaria davvero comoda e spaziosa'),
+  ('L00011', 2, 'Non sono rimasto molto soddisfatto, la mia utilitaria era sporca'),
+  ('L00012', 5, 'ottima vettura, PurpleRent ha da sempre le lussuose più belle e veloci');
 
 insert into indirizzoSede(sede,città,civico,via) values
   ('61040', 'Firenze', '14',  'Viale Alessandro Guidoni'),
@@ -191,20 +191,20 @@ insert into sedeAttuale (autovetturaN, sede) values
   ('FB392TT', '41261');
 
 insert into noleggioAutovetturaNoleggiabile(contratto,autovetturaN) values
-  (00001, 'FR249GG'),
-  (00002, 'FB392TT'),
-  (00003, 'FW830IO'),
-  (00004, 'FC552KM'),
-  (00005, 'FA101MM'),
-  (00006, 'FK597FM'),
-  (00007, 'FQ647JK');
+  ('L00001', 'FR249GG'),
+  ('L00002', 'FB392TT'),
+  ('L00003', 'FW830IO'),
+  ('L00004', 'FC552KM'),
+  ('L00005', 'FA101MM'),
+  ('L00006', 'FK597FM'),
+  ('L00007', 'FQ647JK');
 
 insert into noleggioAutovetturaVendita(contratto,autovetturaV) values
-  (00008, 'EQ227JK'),
-  (00009, 'EP443PM'),
-  (00010, 'EC642KM'),
-  (00011, 'EK647FM'),
-  (00012, 'EF813AB');
+  ('L00008', 'EQ227JK'),
+  ('L00009', 'EP443PM'),
+  ('L00010', 'EC642KM'),
+  ('L00011', 'EK647FM'),
+  ('L00012', 'EF813AB');
 
 insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
   ('Milli srl',       '09:00', '18:00', 065699991, 'millisrl@gmail.com'),
