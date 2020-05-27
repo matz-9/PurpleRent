@@ -173,7 +173,7 @@ create table Officina(
   nome varchar(15) primary key,
   orarioApertura time(1) not null,
   orarioChiusura time(1) not null,
-  numTel bigInt not null,
+  numTel character(10) not null,
   email varchar(30) not null
 );
 
