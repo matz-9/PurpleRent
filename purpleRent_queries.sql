@@ -15,13 +15,36 @@ create procedure visualizzaPrenotazione(p varchar(5))
     where prenotazione.cliente = clienteNoleggio.numDocumento
           and p = prenotazione.numeroPrenotazione;
   END//
--- operazione 2
-DELIMITER //
-create procedure creaPrenotazione(np character(6), oi dateTime, of dateTime
-)
-  BEGIN
 
--- cliente,sedeRitiro,sedeRilascio,carGroup <--- input creaPren
+
+-- operazione 2
+
+DELIMITER //
+create FUNCTION calcolaPrezzo(gruppo char, inizio dateTime, fine dateTime)
+    RETURNS int deterministic
+  BEGIN
+    Declare prezzo int;
+    set prezzo = (select prezzoGiornaliero
+                  from carGroup
+                  where gruppo = carGroup.lettera);
+    RETURN (prezzo * dateDiff(fine, inizio));
+  END //
+DELIMITER ;
+
+DELIMITER //
+create procedure creaPrenotazione(numeroP character(6), orarioIn dateTime, orarioFi dateTime,
+  sedeRit character(5), sedeRil character(5), cliente varchar(10), gruppo char)
+  BEGIN
+    Declare prezzo decimal(5,2);
+    set prezzo = (select calcolaPrezzo(gruppo, orarioIn, orarioFi));
+    insert into prenotazione values (
+      numeroP, orarioIn, orarioFi, prezzo,
+        sedeRit, sedeRil, cliente, gruppo);
+  END //
+DELIMITER ;
+-- call creaPrenotazione(7013 , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,
+--  '41261' , 'RJ51230KL7' , 'L');//
+
 
 -- CREATE FUNCTION CiaoMondo(ciao varchar(3)) RETURNS VARCHAR(3) deterministic
   -- BEGIN
