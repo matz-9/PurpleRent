@@ -211,26 +211,18 @@ insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
   ('Ncm carrozzeria', '09:30', '19:00', 025198713, 'ncmcarr@outlook.com');
 
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
-  ('R0001', '2019-04-09', 'cambio olio motore e cambio filtro ant',  80.00,  'Milli srl'),
+  ('R0001', '2019-06-09', 'cambio olio motore e cambio filtro ant',   80.00,  'Milli srl'),
   ('R0002', '2019-06-18', 'cambio paraurti per incidente',            100.00, 'Milli srl'),
   ('R0003', '2020-01-14', 'cambio ruote',                             120.00, 'Ncm carrozzeria'),
   ('R0004', '2020-04-18', 'rodaggio e controllo freni',               50.00,  'Milli srl'),
   ('R0005', '2020-07-22', 'controllo freni e cambio gomme',           100.00, 'Ncm carrozzeria'),
-  ('R0006', '2020-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
-  ('R0007', '2020-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
-  ('R0008', '2020-03-24', 'cambio olio',                              15.00,  'Milli srl'),
-  ('R0009', '2020-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
-  ('R0010', '2020-05-06', 'riverniciatura paraurti e cambio pomello', 70.00,  'Ncm carrozzeria');
+  ('R0006', '2018-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
+  ('R0007', '2018-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
+  ('R0008', '2018-03-24', 'cambio olio',                              15.00,  'Milli srl'),
+  ('R0009', '2018-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
+  ('R0010', '2018-05-06', 'riverniciatura paraurti e cambio pomello', 70.00,  'Ncm carrozzeria');
 
-
-
-
-
-
-
-
-
-
+-- vincolo data riparazione > data acquisto autovettura
 insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
   ('R0001', 'FR249GG'),
   ('R0002', 'FP445PM'),
@@ -238,21 +230,12 @@ insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
   ('R0004', 'FA101MM'),
   ('R0005', 'FZ142PG');
 
-
 insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
   ('R0006', 'ER245GG'),
   ('R0007', 'EK647FM'),
   ('R0008', 'EW520IO'),
   ('R0009', 'EK647FM'),
   ('R0010', 'EW520IO');
-
-
-
-
-
-
-
-
 
 insert into indirizzoOfficina(officina,città,civico,via) values
   ('Milli srl',       'Milano', '17',  'Piazza del Duomo'),
@@ -269,11 +252,11 @@ insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) va
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
   ('FA00028', 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
   ('FA00029', 10000.00, '2019-04-01', 6, 'Perinetti auto'),
-  ('FA00031', 24000.00, '2018-12-14', 2, 'Il mondo delle auto'),
-  ('FA00032', 6000.00,  '2019-01-12', 1, 'Perinetti auto'),
-  ('FA00033', 10000.00, '2018-11-07', 5, 'Great cars'),
-  ('FA00034', 70000.00, '2018-09-19', 3, 'Sulla strada');
-ok
+  ('FA00031', 24000.00, '2017-12-14', 2, 'Il mondo delle auto'),
+  ('FA00032', 6000.00,  '2017-12-12', 1, 'Perinetti auto'),
+  ('FA00033', 10000.00, '2017-11-30', 5, 'Great cars'),
+  ('FA00034', 70000.00, '2017-12-01', 3, 'Sulla strada');
+
 insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values
   ('FA00028', 'FR249GG'),
   ('FA00028', 'FZ142PG'),
