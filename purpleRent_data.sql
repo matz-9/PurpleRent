@@ -24,28 +24,27 @@ insert into CarGroup(lettera,prezzoGiornaliero) values
   ('O', 35),
   ('P', 32);
 
-
 insert into Indirizzo(città,civico,via,cap) values
-  ('Roma',               '2',   'Via Ugo Bertossi',         '00159'),
-  ('Milano',             '5',   'Via Alessandro Manzoni',   '35126'),
-  ('Roma',               '15',  'Via Regina Margherita',    '00198'),
-  ('Canistro Inferiore', '7',   'Via Largo Liri',           '67050'),
-  ('Roma',               '6',   'Via Mar Rosso',            '00121'),
-  ('Napoli',             '73',  'Via Napoli',               '00184'),
-  ('Firenze',            '6',   'Via Maremma Bucaiola',     '20199'),
-  ('Pisa',               '22',  'Via della Torre',          '45009'),
-  ('Roma',               '1',   'Via Tiburtina',            '00133'),
-  ('Genova',             '14',  'Via degli Abeti',          '04310'),
-  ('Bari',               '9',   'Via Cristian Cocco',       '11159'),
-  ('Milano',             '17',  'Piazza del Duomo',         '05409'),
-  ('Roma',               '113', 'Via Salaria',              '10231'),
-  ('Rieti',              '36',  'Via Virgola Mobile',       '01274'),
-  ('Bologna',            '19',  'Via Guerrazzi',            '45009'),
-  ('Catanzaro',          '32',  'Via Guiuseppe Poeri',      '00133'),
-  ('Firenze',            '14',  'Viale Alessandro Guidoni', '05310'),
-  ('Roma',               '9',   'Via Cristian Cocco',       '21359'),
-  ('Milano',             '1',   'Via Fieno',                '07419'),
-  ('Benevento',          '24',  'Via Avellino',             '04020');
+  ('Roma',               2,   'Via Ugo Bertossi',         '00159'),
+  ('Milano',             5,   'Via Alessandro Manzoni',   '35126'),
+  ('Roma',               15,  'Via Regina Margherita',    '00198'),
+  ('Canistro Inferiore', 7,   'Via Largo Liri',           '67050'),
+  ('Roma',               6,   'Via Mar Rosso',            '00121'),
+  ('Napoli',             73,  'Via Napoli',               '00184'),
+  ('Firenze',            6,   'Via Maremma Bucaiola',     '20199'),
+  ('Pisa',               22,  'Via della Torre',          '45009'),
+  ('Roma',               1,   'Via Tiburtina',            '00133'),
+  ('Genova',             14,  'Via degli Abeti',          '04310'),
+  ('Bari',               9,   'Via Cristian Cocco',       '11159'),
+  ('Milano',             17,  'Piazza del Duomo',         '05409'),
+  ('Roma',               113, 'Via Salaria',              '10231'),
+  ('Rieti',              36,  'Via Virgola Mobile',       '01274'),
+  ('Bologna',            19,  'Via Guerrazzi',            '45009'),
+  ('Catanzaro',          32,  'Via Guiuseppe Poeri',      '00133'),
+  ('Firenze',            14,  'Viale Alessandro Guidoni', '05310'),
+  ('Roma',               9,   'Via Cristian Cocco',       '21359'),
+  ('Milano',             1,   'Via Fieno',                '07419'),
+  ('Benevento',          24,  'Via Avellino',             '04020');
 
 insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
   ('1233958372', 'visa',             'IntesaSanPaolo'),
@@ -83,32 +82,32 @@ insert into sedePreferita(cliente,sede) values
   ('RJ51230KL7',  null);
 
 insert into Prenotazione(numeroPrenotazione,orarioInizio,orarioFine,prezzo,sedeRitiro,sedeRilascio,cliente,carGroup) values
-  (7001, '2020-05-22 09:00', '2020-06-28 09:00', 90.00,  '61031', '61031', 'AP1017Y890', 'E'),
-  (7002, '2020-08-27 10:17', '2020-08-28 10:17', 09.00,  '41261', '41261', 'AP1017Y890', 'A'),
-  (7003, '2018-04-02 15:30', '2018-04-03 15:30', 14.00,  '61040', '41261', 'T946510KP4', 'D'),
-  (7004, '2019-02-18 11:00', '2019-02-20 11:00', 24.00,  '61040', '41261', '78OPISL348', 'C'),
-  (7005, '2019-04-22 15:00', '2019-04-24 15:00', 18.00,  '61031', '61031', '78OPISL348', 'A'),
-  (7006, '2019-03-03 10:05', '2019-03-06 10:05', 54.00,  '41261', '41261', 'BO34590P70', 'G'),
-  (7007, '2019-05-05 11:15', '2019-05-06 11:15', 55.00,  '41261', '61031', '78OPISL348', 'L'),
-  (7008, '2019-04-05 12:15', '2019-04-07 12:15', 90.00,  '41261', '61031', 'GRT780H12L', 'H'),
-  (7009, '2019-06-25 17:30', '2019-06-26 17:30', 20.00,  '61031', '61031', 'GRT780H12L', 'J'),
-  (7010, '2019-04-09 17:00', '2019-04-18 17:00', 81.00,  '61040', '61031', 'YR7I012KLU', 'A'),
-  (7011, '2020-01-22 08:30', '2020-01-30 08:30', 96.00,  '61040', '41261', 'RJ51230KL7', 'C'),
-  (7012, '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', 'RJ51230KL7', 'L');
+  ('P07001', '2020-05-22 09:00', '2020-06-28 09:00', 90.00,  '61031', '61031', 'AP1017Y890', 'E'),
+  ('P07002', '2020-08-27 10:17', '2020-08-28 10:17', 09.00,  '41261', '41261', 'AP1017Y890', 'A'),
+  ('P07003', '2018-04-02 15:30', '2018-04-03 15:30', 14.00,  '61040', '41261', 'T946510KP4', 'D'),
+  ('P07004', '2019-02-18 11:00', '2019-02-20 11:00', 24.00,  '61040', '41261', '78OPISL348', 'C'),
+  ('P07005', '2019-04-22 15:00', '2019-04-24 15:00', 18.00,  '61031', '61031', '78OPISL348', 'A'),
+  ('P07006', '2019-03-03 10:05', '2019-03-06 10:05', 54.00,  '41261', '41261', 'BO34590P70', 'G'),
+  ('P07007', '2019-05-05 11:15', '2019-05-06 11:15', 55.00,  '41261', '61031', '78OPISL348', 'L'),
+  ('P07008', '2019-04-05 12:15', '2019-04-07 12:15', 90.00,  '41261', '61031', 'GRT780H12L', 'H'),
+  ('P07009', '2019-06-25 17:30', '2019-06-26 17:30', 20.00,  '61031', '61031', 'GRT780H12L', 'J'),
+  ('P07010', '2019-04-09 17:00', '2019-04-18 17:00', 81.00,  '61040', '61031', 'YR7I012KLU', 'A'),
+  ('P07011', '2020-01-22 08:30', '2020-01-30 08:30', 96.00,  '61040', '41261', 'RJ51230KL7', 'C'),
+  ('P07012', '2020-04-05 09:11', '2020-04-08 09:11', 165.00, '41261', '41261', 'RJ51230KL7', 'L');
 
 insert into LetteraNoleggio(numeroLettera,kmPercorsi,tipo,prenotazione,datiBancari) values
-  ('L00001', null, 'aperta', 7001, '1233958372'),
-  ('L00002', null, 'aperta', 7002, '1233958372'),
-  ('L00003', 311,  'chiusa', 7003, '4639281049'),
-  ('L00004', 1190, 'chiusa', 7004, '5930275641'),
-  ('L00005', 720,  'chiusa', 7005, '5930275641'),
-  ('L00006', 1410, 'chiusa', 7006, '3618304719'),
-  ('L00007', 2101, 'chiusa', 7007, '5930275641'),
-  ('L00008', 250,  'chiusa', 7008, '9243856384'),
-  ('L00009', 451,  'chiusa', 7009, '9243856384'),
-  ('L00010', 1940, 'chiusa', 7010, '5629472036'),
-  ('L00011', 1300, 'chiusa', 7011, '1947294759'),
-  ('L00012', 510,  'chiusa', 7012, '1947294759');
+  ('L00001', null, 'aperta', 'P07001', '1233958372'),
+  ('L00002', null, 'aperta', 'P07002', '1233958372'),
+  ('L00003', 311,  'chiusa', 'P07003', '4639281049'),
+  ('L00004', 1190, 'chiusa', 'P07004', '5930275641'),
+  ('L00005', 720,  'chiusa', 'P07005', '5930275641'),
+  ('L00006', 1410, 'chiusa', 'P07006', '3618304719'),
+  ('L00007', 2101, 'chiusa', 'P07007', '5930275641'),
+  ('L00008', 250,  'chiusa', 'P07008', '9243856384'),
+  ('L00009', 451,  'chiusa', 'P07009', '9243856384'),
+  ('L00010', 1940, 'chiusa', 'P07010', '5629472036'),
+  ('L00011', 1300, 'chiusa', 'P07011', '1947294759'),
+  ('L00012', 510,  'chiusa', 'P07012', '1947294759');
 
 insert into Feedback(noleggio,voto,recensione) values
   ('L00005', 5, 'ottima vettura, una utililitaria fantastica'),
@@ -121,18 +120,18 @@ insert into Feedback(noleggio,voto,recensione) values
   ('L00012', 5, 'ottima vettura, PurpleRent ha da sempre le lussuose più belle e veloci');
 
 insert into indirizzoSede(sede,città,civico,via) values
-  ('61040', 'Firenze', '14',  'Viale Alessandro Guidoni'),
-  ('61031', 'Roma',    '9',   'Via Cristian Cocco'),
-  ('41261', 'Milano',  '1',   'Via Fieno');
+  ('61040', 'Firenze', 14,  'Viale Alessandro Guidoni'),
+  ('61031', 'Roma',    9,   'Via Cristian Cocco'),
+  ('41261', 'Milano',  1,   'Via Fieno');
 
 insert into residenzaCliente(cliente,città,civico,via) values
-  ('AP1017Y890', 'Roma',               '2',   'Via Ugo Bertossi'),
-  ('BO34590P70', 'Milano',             '5',   'Via Alessandro Manzoni'),
-  ('T946510KP4', 'Roma',               '15',  'Via Regina Margherita'),
-  ('78OPISL348', 'Canistro Inferiore', '7',   'Via Largo Liri'),
-  ('RJ51230KL7', 'Firenze',            '6',   'Via Maremma Bucaiola'),
-  ('GRT780H12L', 'Roma',               '6',   'Via Mar Rosso'),
-  ('YR7I012KLU', 'Napoli',             '73',  'Via Napoli');
+  ('AP1017Y890', 'Roma',               2,   'Via Ugo Bertossi'),
+  ('BO34590P70', 'Milano',             5,   'Via Alessandro Manzoni'),
+  ('T946510KP4', 'Roma',               15,  'Via Regina Margherita'),
+  ('78OPISL348', 'Canistro Inferiore', 7,   'Via Largo Liri'),
+  ('RJ51230KL7', 'Firenze',            6,   'Via Maremma Bucaiola'),
+  ('GRT780H12L', 'Roma',               6,   'Via Mar Rosso'),
+  ('YR7I012KLU', 'Napoli',             73,  'Via Napoli');
 
 insert into CasaAutomobilistica(nome,nazione) values
   ('Audi','Germania'),
@@ -207,8 +206,8 @@ insert into noleggioAutovetturaVendita(contratto,autovetturaV) values
   ('L00012', 'EF813AB');
 
 insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
-  ('Milli srl',       '09:00', '18:00', 065699991, 'millisrl@gmail.com'),
-  ('Ncm carrozzeria', '09:30', '19:00', 025198713, 'ncmcarr@outlook.com');
+  ('Milli srl',       '09:00', '18:00', '0656999910', 'millisrl@gmail.com'),
+  ('Ncm carrozzeria', '09:30', '19:00', '0251987143', 'ncmcarr@outlook.com');
 
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
   ('R0001', '2019-06-09', 'cambio olio motore e cambio filtro ant',   80.00,  'Milli srl'),
@@ -238,8 +237,8 @@ insert into riparazioneAutovetturaV(riparazione,autovetturaV) values
   ('R0010', 'EW520IO');
 
 insert into indirizzoOfficina(officina,città,civico,via) values
-  ('Milli srl',       'Milano', '17',  'Piazza del Duomo'),
-  ('Ncm carrozzeria', 'Roma',   '113', 'Via Salaria');
+  ('Milli srl',       'Milano', 17,  'Piazza del Duomo'),
+  ('Ncm carrozzeria', 'Roma',   113, 'Via Salaria');
 
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
   ('FA00001', 5000.00, '2020-01-01', 'ER245GG', 'comprousato.srl'),
@@ -309,13 +308,13 @@ insert into fornitoreCasa(fornitore,casa) values
   ('Il mondo delle auto', 'Fiat');
 
 insert into indirizzoFornitore(fornitore,città,civico,via) values
-  ('Perinetti auto',      'Rieti',     '36',  'Via Virgola Mobile'),
-  ('Il mondo delle auto', 'Bologna',   '19',  'Via Guerrazzi'),
-  ('Great cars',          'Catanzaro', '32',  'Via Guiuseppe Poeri'),
-  ('Sulla strada',        'Benevento', '24',  'Via Avellino');
+  ('Perinetti auto',      'Rieti',     36,  'Via Virgola Mobile'),
+  ('Il mondo delle auto', 'Bologna',   19,  'Via Guerrazzi'),
+  ('Great cars',          'Catanzaro', 32,  'Via Guiuseppe Poeri'),
+  ('Sulla strada',        'Benevento', 24,  'Via Avellino');
 
 insert into indirizzoAcquirente(acquirente,città,civico,via) values
-  ('comprousato.srl', 'Pisa',   '22',  'Via della Torre'),
-  ('autoricambi',     'Roma',   '1',   'Via Tiburtina'),
-  ('centoallora.com', 'Genova', '14',  'Via degli Abeti'),
-  ('tuttomotori',     'Bari',   '9',   'Via Cristian Cocco');
+  ('comprousato.srl', 'Pisa',   22,  'Via della Torre'),
+  ('autoricambi',     'Roma',   1,   'Via Tiburtina'),
+  ('centoallora.com', 'Genova', 14,  'Via degli Abeti'),
+  ('tuttomotori',     'Bari',   9,   'Via Cristian Cocco');
