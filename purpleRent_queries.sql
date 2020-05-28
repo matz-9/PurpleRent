@@ -41,45 +41,20 @@ DELIMITER ;
 DELIMITER //
 create procedure visualizzaContratto(l varchar(6))
   BEGIN
-    select numeroLettera,kmPercorsi,tipo,prenotazione,targa
-    from LetteraNoleggio,AutovetturaNoleggiabile
-    where LetteraNoleggio.numeroLettera=l
-      and noleggioAutovetturaNoleggiabile.contratto  = LetteraNoleggio.numeroLettera
+    select numeroLettera, kmPercorsi, tipo, prenotazione, targa, casaAuto
+    from LetteraNoleggio, AutovetturaNoleggiabile, noleggioAutovetturaNoleggiabile
+    where noleggioAutovetturaNoleggiabile.contratto  = l
+      and LetteraNoleggio.numeroLettera = l
       and noleggioAutovetturaNoleggiabile.autovetturaN = AutovetturaNoleggiabile.targa
     UNION
-    select numeroLettera,kmPercorsi,tipo,prenotazione,targa
-    from LetteraNoleggio,AutovetturaVendita
-    where LetteraNoleggio.numeroLettera=l
-      and noleggioAutovetturaVendita.contratto = LetteraNoleggio.numeroLettera
-      and
+    select numeroLettera,kmPercorsi,tipo,prenotazione,targa,casaAuto
+    from LetteraNoleggio,AutovetturaVendita, noleggioAutovetturaVendita
+    where noleggioAutovetturaVendita.contratto = l
+      and LetteraNoleggio.numeroLettera = l
+      and noleggioAutovetturaVendita.autovetturaV = AutovetturaVendita.targa;
   END//
 DELIMITER ;
 
-+---------------+------------+--------+--------------+---------+
-| numeroLettera | kmPercorsi | tipo   | prenotazione | targa   |
-+---------------+------------+--------+--------------+---------+
-| L00011        |       1300 | chiusa | P07011       | FA101MM |
-| L00011        |       1300 | chiusa | P07011       | FB392TT |
-| L00011        |       1300 | chiusa | P07011       | FP445PM |
-| L00011        |       1300 | chiusa | P07011       | FC552KM |
-| L00011        |       1300 | chiusa | P07011       | FW830IO |
-| L00011        |       1300 | chiusa | P07011       | FR249GG |
-| L00011        |       1300 | chiusa | P07011       | FK597FM |
-| L00011        |       1300 | chiusa | P07011       | FF483AB |
-| L00011        |       1300 | chiusa | P07011       | FQ647JK |
-| L00011        |       1300 | chiusa | P07011       | FZ142PG |
-| L00011        |       1300 | chiusa | P07011       | EC642KM |
-| L00011        |       1300 | chiusa | P07011       | EW520IO |
-| L00011        |       1300 | chiusa | P07011       | EB122TT |
-| L00011        |       1300 | chiusa | P07011       | EK647FM |
-| L00011        |       1300 | chiusa | P07011       | ER245GG |
-| L00011        |       1300 | chiusa | P07011       | EQ227JK |
-| L00011        |       1300 | chiusa | P07011       | EP443PM |
-| L00011        |       1300 | chiusa | P07011       | EF813AB |
-| L00011        |       1300 | chiusa | P07011       | EZ132PG |
-| L00011        |       1300 | chiusa | P07011       | EA541MM |
-+---------------+------------+--------+--------------+---------+
-20 rows in set (0.01 sec)
 -- call creaPrenotazione(7013 , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,
 --  '41261' , 'RJ51230KL7' , 'L');//
 
@@ -89,8 +64,7 @@ DELIMITER ;
 -- assegnando  una autovettura ( aggiornando la disponibilità attuale )
 -- e i dati bancari per il pagamento.
 DELIMITER $$
-
-
+create procedure
 
 
 
