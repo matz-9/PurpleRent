@@ -48,7 +48,7 @@ DELIMITER //
 create procedure visualizzaContratto(l varchar(6))
   BEGIN
     select numeroLettera,kmPercorsi,tipo,prenotazione,targa
-    from LetteraNoleggio,AutovetturaVendita,AutovetturaNoleggiabile
+    from LetteraNoleggio,AutovetturaNoleggiabile
     where LetteraNoleggio.numeroLettera=l;
   END//
 
