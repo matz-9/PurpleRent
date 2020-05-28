@@ -65,13 +65,12 @@ DELIMITER ;
 -- e i dati bancari per il pagamento.
 DELIMITER //
   create trigger attualmenteDisponibile
-    after insert on LetteraNoleggio
+    after insert on noleggioAutovetturaNoleggiabile
     for each row
     BEGIN
-      update autovetturaNoleggiabile
-      set disponibile=false
-      where new.numeroLettera = noleggioAutovetturaNoleggiabile.contratto
-        and autovetturaNoleggiabile.targa = noleggioAutovetturaNoleggiabile.autovetturaN;
+      update AutovetturaNoleggiabile
+      set disponibile = false
+      where AutovetturaNoleggiabile.targa = new.autovetturaN;
     END //
 DELIMITER ;
 
@@ -79,8 +78,7 @@ DELIMITER //
 create procedure creaLetteraNoleggio(numeroLettera varchar(6), kmPercorsi int, tipo enum("aperta", "chiusa"),
                                       prenotazione varchar(6),datiBancari character(10))
   BEGIN
-    insert into LetteraNoleggio values (
-      numeroLettera, kmPercorsi, tipo, prenotazione, datiBancari);
+    insert into LetteraNoleggio values(numeroLettera, kmPercorsi, tipo, prenotazione, datiBancari);
 
     insert into noleggioAutovetturaNoleggiabile values
       (numeroLettera, (select targa
@@ -89,26 +87,44 @@ create procedure creaLetteraNoleggio(numeroLettera varchar(6), kmPercorsi int, t
                               and p.numeroPrenotazione =  prenotazione
                               and aN.carGroup = p.carGroup
                         limit 1));
+
   END //
 DELIMITER ;
-
--- call creaLetteraNoleggio()
+-- call creaPrenotazione('P07013' , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,'41261' , 'RJ51230KL7' , 'L');
+-- call creaLetteraNoleggio('L00013', null, 'aperta', 'P07013', '1233958372');
 
 -- operazione 5
--- trova fornitori che vendono un’autovettura BMW con gruppo H
+-- trova fornitori che vendono un’autovettura di un dato marchio con un dato gruppo
 DELIMITER //
-  create procedure trovaFornitori()
+  create procedure trovaFornitori(gruppo char,casa varchar(15))
   BEGIN
     select nomeAziendaFornitore
     from fornitore, fornitoreCasa, fornitoreCarGroup
     where fornitoreCarGroup.fornitore = fornitore.nomeAziendaFornitore and
           fornitoreCasa.fornitore = fornitore.nomeAziendaFornitore and
-          fornitoreCarGroup.carGroup = 'H' and fornitoreCasa.casa = 'BMW';
+          fornitoreCarGroup.carGroup = gruppo and fornitoreCasa.casa = casa;
   END //
+DELIMITER ;
 
 -- operazione 6
 -- estrai il nome della sede con il maggior numero di ritiri autovetture
+delimiter //
+create procedure trovaSedeMaxRitiri()
+  begin
+    create view ritiri(sede,città,num)
+      as
+        select sede,città,count(*) as num
+        from prenotazione,indirizzoSede
+        where prenotazione.sedeRitiro=indirizzoSede.sede
+        group by sedeRitiro;
 
+    select *
+    from ritiri
+    where ritiri.num= ( select max(num)
+                        from ritiri );
+
+    drop view ritiri;
+  END//
 
 
 
