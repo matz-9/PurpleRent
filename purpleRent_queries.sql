@@ -1,4 +1,6 @@
--- operazione 1 visualizza, data una prenotazione, dati cliente e sedi associate
+
+-- -------------------------- OPERAZIONE 1 -------------------------------
+-- visualizza, data una prenotazione, dati cliente e sedi associate
 
 DELIMITER //
 create procedure visualizzaPrenotazione(p varchar(5))
@@ -9,8 +11,14 @@ create procedure visualizzaPrenotazione(p varchar(5))
           and p = prenotazione.numeroPrenotazione;
   END//
 DELIMITER ;
+-- ----------------------------------------------------------------------
 
--- operazione 2 effettua una prenotazione
+
+
+
+
+-- -------------------------- OPERAZIONE 2 -------------------------------
+-- effettua una prenotazione
 
 DELIMITER //
 create FUNCTION calcolaPrezzo(gruppo char, inizio dateTime, fine dateTime)
@@ -28,15 +36,21 @@ DELIMITER //
 create procedure creaPrenotazione(numeroP character(6), orarioIn dateTime, orarioFi dateTime,
   sedeRit character(5), sedeRil character(5), cliente varchar(10), gruppo char)
   BEGIN
-    Declare prezzo decimal(5,2);
+    declare prezzo decimal(5,2);
     set prezzo = (select calcolaPrezzo(gruppo, orarioIn, orarioFi));
     insert into prenotazione values (
       numeroP, orarioIn, orarioFi, prezzo,
         sedeRit, sedeRil, cliente, gruppo);
   END //
 DELIMITER ;
+-- ----------------------------------------------------------------------
 
--- operazione 3 visualizza lettera di noleggio,prenotazione associata e autovettura assegnata
+
+
+
+
+-- -------------------------- OPERAZIONE 3 -------------------------------
+-- visualizza lettera di noleggio,prenotazione associata e autovettura assegnata
 
 DELIMITER //
 create procedure visualizzaContratto(l varchar(6))
@@ -57,45 +71,62 @@ DELIMITER ;
 
 -- call creaPrenotazione(7013 , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,
 --  '41261' , 'RJ51230KL7' , 'L');//
+-- ----------------------------------------------------------------------
 
 
--- operazione 4
+
+
+
+-- ---------------------------- TRIGGER ---------------------------------
+-- trigger per rendere un'autovettura non disponibile quando si crea un contratto
+DELIMITER //
+  create trigger attualmenteDisponibile
+    after insert on noleggioAutovetturaNoleggiabile
+    for each row
+    BEGIN
+      update AutovetturaNoleggiabile
+      set AutovetturaNoleggiabile.disponibile = false
+      where AutovetturaNoleggiabile.targa = new.autovetturaN;
+    END //
+DELIMITER ;
+-- ----------------------------------------------------------------------
+
+
+
+
+
+-- -------------------------- OPERAZIONE 4 -------------------------------
 -- crea un lettera di noleggio associata ad una prenotazione,
 -- assegnando  una autovettura ( aggiornando la disponibilità attuale )
 -- e i dati bancari per il pagamento.
 DELIMITER //
-  create trigger attualmenteDisponibile
-    after insert on LetteraNoleggio
-    for each row
-    BEGIN
-      update autovetturaNoleggiabile
-      set disponibile=false
-      where new.numeroLettera = noleggioAutovetturaNoleggiabile.contratto
-        and autovetturaNoleggiabile.targa = noleggioAutovetturaNoleggiabile.autovetturaN;
-    END //
-DELIMITER ;
-
-DELIMITER //
 create procedure creaLetteraNoleggio(numeroLettera varchar(6), kmPercorsi int, tipo enum("aperta", "chiusa"),
                                       prenotazione varchar(6),datiBancari character(10))
   BEGIN
-    insert into LetteraNoleggio values (
-      numeroLettera, kmPercorsi, tipo, prenotazione, datiBancari);
+    declare automobile character(7);
+    set automobile = (select targa
+                      from AutovetturaNoleggiabile as aN, Prenotazione as pr
+                      where aN.disponibile = true
+                          and pr.numeroPrenotazione = prenotazione
+                          and aN.carGroup = pr.carGroup
+                      limit 1);
 
-    insert into noleggioAutovetturaNoleggiabile values
-      (numeroLettera, (select targa
-                        from AutovetturaNoleggiabile as aN, Prenotazione as p
-                        where aN.disponibile = true
-                              and p.numeroPrenotazione =  prenotazione
-                              and aN.carGroup = p.carGroup
-                        limit 1));
-  END //
+    insert into LetteraNoleggio values(numeroLettera, kmPercorsi, tipo, prenotazione, datiBancari);
+    insert into noleggioAutovetturaNoleggiabile values(numeroLettera, automobile);
+
+  END//
 DELIMITER ;
+-- call creaPrenotazione('P07013' , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,'41261' , 'RJ51230KL7' , 'L');
+-- call creaLetteraNoleggio('L00013', null, 'aperta', 'P07013', '1233958372');
+-- FUNZIONA DIO BONOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+-- ----------------------------------------------------------------------
 
--- call creaLetteraNoleggio()
 
--- operazione 5
--- trova fornitori che vendono un’autovettura BMW con gruppo H
+
+
+
+-- -------------------------- OPERAZIONE 5 -------------------------------
+-- trova fornitori che vendono un’autovettura BMW gruppo H
 DELIMITER //
   create procedure trovaFornitori()
   BEGIN
@@ -105,9 +136,122 @@ DELIMITER //
           fornitoreCasa.fornitore = fornitore.nomeAziendaFornitore and
           fornitoreCarGroup.carGroup = 'H' and fornitoreCasa.casa = 'BMW';
   END //
+DELIMITER ;
+-- ----------------------------------------------------------------------
 
--- operazione 6
+
+
+
+
+-- -------------------------- OPERAZIONE 6 -------------------------------
 -- estrai il nome della sede con il maggior numero di ritiri autovetture
+DELIMITER //
+create procedure trovaSedeMaxRitiri()
+  BEGIN
+    create view ritiri(sede,città,num) as
+        select sede,città,count(*) as num
+        from prenotazione,indirizzoSede
+        where prenotazione.sedeRitiro=indirizzoSede.sede
+        group by sedeRitiro;
+    select *
+    from ritiri
+    where ritiri.num= ( select max(num)
+                        from ritiri );
+    drop view ritiri;
+  END//
+DELIMITER ;
+-- ----------------------------------------------------------------------
+
+
+
+
+
+-------------------------- OPERAZIONE 7 -------------------------------
+-- identifica il car group più richiesto nel 2019
+DELIMITER //
+create procedure carGroupPiuRichiesto(out carg char ) -- con "out" si indica la var in cui salvo il risultato
+  BEGIN
+    create view prenotazioni(carGroup, prenotato) as
+        select carGroup, count(*) as prenotato
+        from Prenotazione
+        where year(Prenotazione.orarioInizio) = 2019
+        group by carGroup;
+
+    select *
+    from prenotazioni
+    where prenotato = (select max(prenotato)
+                       from prenotazioni);
+    select carGroup
+    into carg -- il risultato viene salvato dentro carg
+    from prenotazioni
+    where prenotato = (select max(prenotato)
+                       from prenotazioni);
+
+    drop view prenotazioni;
+  END//
+DELIMITER ;
+-- call carGroupPiuRichiesto();
+-- ----------------------------------------------------------------------
+
+
+
+
+
+-------------------------- OPERAZIONE 8 -------------------------------
+-- estrai i nomi delle aziende che hanno fornito le vetture del car group più richiesto nel 2019 (operazione 7)
+DELIMITER //
+create procedure aziendaTopCarGroup()
+  BEGIN
+
+    call carGroupPiuRichiesto(@res);
+
+    select targa, f.nomeAziendaFornitore
+    from AutovetturaNoleggiabile as aN, acquistoAutovetturaNoleggiabili as aAn, FatturaAcquisto as fA, Fornitore as f
+    where aN.carGroup = (select @res)
+          and aAn.autovetturaN = aN.targa
+          and aAn.fatturaN = fA.numeroFattura
+          and f.nomeAziendaFornitore = fA.fornitore
+    UNION
+    select targa, f.nomeAziendaFornitore
+    from AutovetturaVendita as aV, acquistoAutovetturaVendita as aAv, FatturaAcquisto as fA, Fornitore as f
+    where aV.carGroup = (select @res)
+          and aAv.autovetturaV = aV.targa
+          and aAv.fatturaV = fA.numeroFattura
+          and f.nomeAziendaFornitore = fA.fornitore;
+
+  END//
+DELIMITER ;
+-- call aziendaTopCarGroup();
+-- ----------------------------------------------------------------------
+
+
+
+
+
+
+-------------------------- OPERAZIONE 9 -------------------------------
+-- l’azienda deve riscuotere il pagamento relativo ad un noleggio:
+-- estrai il numero del conto corrente associato ad una lettera di noleggio
+DELIMITER //
+create procedure estraiConto(contratto varchar(6))
+  BEGIN
+    select nome, cognome, LetteraNoleggio.datiBancari, numeroLettera
+    from LetteraNoleggio, ClienteNoleggio
+    where LetteraNoleggio.numeroLettera = contratto
+          and ClienteNoleggio.datiBancari = LetteraNoleggio.datiBancari; -- omissibile
+  END//
+DELIMITER ;
+-- call estraiConto('L00006');
+-- ----------------------------------------------------------------------
+
+
+
+
+
+-------------------------- OPERAZIONE 10 -------------------------------
+
+
+-- ----------------------------------------------------------------------
 
 
 
