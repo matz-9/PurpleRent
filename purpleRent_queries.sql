@@ -169,7 +169,7 @@ DELIMITER ;
 -------------------------- OPERAZIONE 7 -------------------------------
 -- identifica il car group più richiesto nel 2019
 DELIMITER //
-create procedure carGroupPiuRichiesto(out carg char )
+create procedure carGroupPiuRichiesto(out carg char ) -- con "out" si indica la var in cui salvo il risultato
   BEGIN
     create view prenotazioni(carGroup, prenotato) as
         select carGroup, count(*) as prenotato
