@@ -63,13 +63,15 @@ DELIMITER ;
 -- crea un lettera di noleggio associata ad una prenotazione,
 -- assegnando  una autovettura ( aggiornando la disponibilità attuale )
 -- e i dati bancari per il pagamento.
+
+-- Q
 DELIMITER //
   create trigger attualmenteDisponibile
     after insert on noleggioAutovetturaNoleggiabile
     for each row
     BEGIN
       update AutovetturaNoleggiabile
-      set disponibile = false
+      set AutovetturaNoleggiabile.disponibile = false
       where AutovetturaNoleggiabile.targa = new.autovetturaN;
     END //
 DELIMITER ;
@@ -78,31 +80,36 @@ DELIMITER //
 create procedure creaLetteraNoleggio(numeroLettera varchar(6), kmPercorsi int, tipo enum("aperta", "chiusa"),
                                       prenotazione varchar(6),datiBancari character(10))
   BEGIN
+
+
+    Declare automobile character(7);
+    set automobile = (select targa
+                        from AutovetturaNoleggiabile as aN, Prenotazione as pr
+                        where aN.disponibile = true
+                          and pr.numeroPrenotazione = 'L'-- prenotazione
+                          and aN.carGroup = pr.carGroup
+                        limit 1);
+
     insert into LetteraNoleggio values(numeroLettera, kmPercorsi, tipo, prenotazione, datiBancari);
 
-    insert into noleggioAutovetturaNoleggiabile values
-      (numeroLettera, (select targa
-                        from AutovetturaNoleggiabile as aN, Prenotazione as p
-                        where aN.disponibile = true
-                              and p.numeroPrenotazione =  prenotazione
-                              and aN.carGroup = p.carGroup
-                        limit 1));
+    insert into noleggioAutovetturaNoleggiabile values(numeroLettera, automobile);
 
-  END //
+  END//
 DELIMITER ;
 -- call creaPrenotazione('P07013' , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,'41261' , 'RJ51230KL7' , 'L');
 -- call creaLetteraNoleggio('L00013', null, 'aperta', 'P07013', '1233958372');
+-- FUNZIONA DIO BONOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
 -- operazione 5
--- trova fornitori che vendono un’autovettura di un dato marchio con un dato gruppo
+-- trova fornitori che vendono un’autovettura BMW gruppo H
 DELIMITER //
-  create procedure trovaFornitori(gruppo char,casa varchar(15))
+  create procedure trovaFornitori()
   BEGIN
     select nomeAziendaFornitore
     from fornitore, fornitoreCasa, fornitoreCarGroup
     where fornitoreCarGroup.fornitore = fornitore.nomeAziendaFornitore and
           fornitoreCasa.fornitore = fornitore.nomeAziendaFornitore and
-          fornitoreCarGroup.carGroup = gruppo and fornitoreCasa.casa = casa;
+          fornitoreCarGroup.carGroup = 'H' and fornitoreCasa.casa = 'BMW';
   END //
 DELIMITER ;
 
@@ -111,18 +118,15 @@ DELIMITER ;
 delimiter //
 create procedure trovaSedeMaxRitiri()
   begin
-    create view ritiri(sede,città,num)
-      as
+    create view ritiri(sede,città,num) as
         select sede,città,count(*) as num
         from prenotazione,indirizzoSede
         where prenotazione.sedeRitiro=indirizzoSede.sede
         group by sedeRitiro;
-
     select *
     from ritiri
     where ritiri.num= ( select max(num)
                         from ritiri );
-
     drop view ritiri;
   END//
 
