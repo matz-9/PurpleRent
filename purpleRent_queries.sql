@@ -1,12 +1,5 @@
-
-select targa, sede, casaAuto ,km
-from AutovetturaNoleggiabile as vettura, Sede, sedeAttuale
-where vettura.targa = sedeAttuale.autovetturaN
-    and sedeAttuale.sede = Sede.codiceMnemonico
-    and vettura.disponibile = true;
-
-
 -- operazione 1 visualizza, data una prenotazione, dati cliente e sedi associate
+
 DELIMITER //
 create procedure visualizzaPrenotazione(p varchar(5))
   BEGIN
@@ -44,16 +37,35 @@ create procedure creaPrenotazione(numeroP character(6), orarioIn dateTime, orari
 DELIMITER ;
 
 -- operazione 3 visualizza lettera di noleggio,prenotazione associata e autovettura assegnata
+
 DELIMITER //
 create procedure visualizzaContratto(l varchar(6))
   BEGIN
     select numeroLettera,kmPercorsi,tipo,prenotazione,targa
     from LetteraNoleggio,AutovetturaNoleggiabile
     where LetteraNoleggio.numeroLettera=l;
+    UNION
+    select numeroLettera,kmPercorsi,tipo,prenotazione,targa
+    from LetteraNoleggio,AutovetturaVendita
+    where LetteraNoleggio.numeroLettera=l;
   END//
-
+DELIMITER ;
 -- call creaPrenotazione(7013 , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,
 --  '41261' , 'RJ51230KL7' , 'L');//
+
+
+-- operazione 4
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- CREATE FUNCTION CiaoMondo(ciao varchar(3)) RETURNS VARCHAR(3) deterministic
