@@ -166,10 +166,10 @@ DELIMITER ;
 
 
 
--------------------------- OPERAZIONE 7 -------------------------------
+-- -------------------------- OPERAZIONE 7 -------------------------------
 -- identifica il car group più richiesto nel 2019
 DELIMITER //
-create procedure carGroupPiuRichiesto(out carg char ) -- con "out" si indica la var in cui salvo il risultato
+create procedure carGroupPiuRichiesto(out carg char) -- con "out" si indica la var in cui salvo il risultato
   BEGIN
     create view prenotazioni(carGroup, prenotato) as
         select carGroup, count(*) as prenotato
@@ -197,7 +197,7 @@ DELIMITER ;
 
 
 
--------------------------- OPERAZIONE 8 -------------------------------
+-- -------------------------- OPERAZIONE 8 -------------------------------
 -- estrai i nomi delle aziende che hanno fornito le vetture del car group più richiesto nel 2019 (operazione 7)
 DELIMITER //
 create procedure aziendaTopCarGroup()
@@ -229,7 +229,7 @@ DELIMITER ;
 
 
 
--------------------------- OPERAZIONE 9 -------------------------------
+-- -------------------------- OPERAZIONE 9 -------------------------------
 -- l’azienda deve riscuotere il pagamento relativo ad un noleggio:
 -- estrai il numero del conto corrente associato ad una lettera di noleggio
 DELIMITER //
@@ -248,8 +248,17 @@ DELIMITER ;
 
 
 
--------------------------- OPERAZIONE 10 -------------------------------
-
+-- -------------------------- OPERAZIONE 10 -------------------------------
+-- varia i prezzi di tutti i car group per una certa cifra:
+-- l'operazione consiste nell'inserire come input di una procedura il numero
+-- int che sarà l'aggiunta sul prezzo del car group in base alla Lettera
+DELIMITER //
+create procedure modificaPrezzo(aggiunta int)
+  BEGIN
+    update carGroup set prezzoGiornaliero = prezzoGiornaliero + aggiunta
+  END//
+DELIMITER ;
+-- call modificaPrezzo(20);
 
 -- ----------------------------------------------------------------------
 
@@ -257,15 +266,127 @@ DELIMITER ;
 
 
 
+-- -------------------------- OPERAZIONE 11 -------------------------------
+-- Calcola la somma del denaro previsto incassato dalle prenotazioni
+-- nell’ultimo anno per ogni tipologia di Car group
+
+DELIMITER //
+create procedure incassoCarGroup()
+  BEGIN
+    select carGroup, sum(prezzo) as totale
+    from Prenotazione
+    where year(Prenotazione.orarioInizio) = 2019
+    group by carGroup;
+  END//
+DELIMITER ;
+-- call incassoCarGroup();
+-- ----------------------------------------------------------------------
+
+
+-------------------------- OPERAZIONE 12 -------------------------------
+-- L’azienda propone delle offerte : reperisci i contatti telefonici
+-- dei clienti che hanno noleggiato nell’ultimo anno con almeno due
+-- prenotazioni e con età maggiore di 45.
+
+DELIMITER //
+create procedure clientiFidati()
+  BEGIN
+    create view clientePrenotazione(cliente,pren) as
+        select cliente, count(*) as pren
+        from Prenotazione
+        group by cliente;
+
+        select nome,cognome,pren
+        from ClienteNoleggio,clientePrenotazione
+        where pren >= 2
+          and clientePrenotazione.cliente = ClienteNoleggio.numDocumento;
+
+        drop view clientePrenotazione;
+  END //
+
+  DELIMITER ;
+
+  -- call clientiFidati();
+
+-- ------------------------------------------------------------------------
+
+-- -------------------------- OPERAZIONE 13 -------------------------------
+-- verifica la sede attuale di un'autovettura
+-- l'operazione consiste nell'inserire in input ad una procedura trovaSede()
+-- il varchar targa per trovare la rispettiva sede in cui è disponibile, essendo
+-- un'autovettura AutovetturaNoleggiabile
+-- nel caso in cui la targa appartenga ad un'autovettura in vendita la procedura
+-- deve restituire un empity set
+DELIMITER //
+create procedure trovaSede(targauto char(7))
+  BEGIN
+    select sedeattuale.sede,città
+    from sedeattuale,indirizzosede,autovetturanoleggiabile
+    where autovetturanoleggiabile.targa=sedeattuale.autovetturaN and
+    sedeattuale.sede=indirizzosede.sede and autovetturanoleggiabile.targa=targauto;
+  END //
+  DELIMITER ;
+-- CALL trovaSede('op560po');
+-- ----------------------------------------------------------------------
+
+
+
+-- -------------------------- OPERAZIONE 14 -------------------------------
+-- Individua la casa automobilistica a cui appartengono il maggior numero di
+-- autovetture noleggiabili della flotta dell’azienda
+
+DELIMITER //
+create procedure casaAutoFlotta()
+  BEGIN
+    create view totxCasa(carGroup, totale) as
+      select casaAuto, count(*) as totale
+      from AutovetturaNoleggiabile
+      group by casaAuto;
+
+    select *
+    from totxCasa
+    where totale = ( select max(totale)
+                      from totxCasa);
+
+    drop view totxCasa;
+  END//
+DELIMITER ;
+-- call casaAutoFlotta();
+-- ----------------------------------------------------------------------
 
 
 
 
 
+-- -------------------------- OPERAZIONE 15 -------------------------------
+-- Estrai i nomi e p.iva delle aziende che hanno acquistato vetture con una fattura
+-- di valore superiore a 10.000 euro
+DELIMITER //
+create procedure fattureDieciK()
+  BEGIN
+    select distinct nomeAzienda
+    from FatturaVendita as f, AcquirenteVetturaUsata as a
+    where importo >= 10000 and a.nomeAzienda = f.acquirente;
+  END//
+DELIMITER ;
+-- call fattureDieciK();
+-- ----------------------------------------------------------------------
 
 
 
 
+
+-- -------------------------- OPERAZIONE 16 -------------------------------
+-- Estrai i nomi e p.iva delle aziende che hanno acquistato vetture con una fattura
+-- di valore superiore a 10.000 euro
+DELIMITER //
+create procedure ()
+  BEGIN
+
+  END//
+DELIMITER ;
+-- call fattureDieciK();
+-- ----------------------------------------------------------------------
 
 
 
@@ -273,3 +394,50 @@ DELIMITER ;
   -- BEGIN
     -- RETURN (ciao);
   -- END$$
+-- -------------------------- OPERAZIONE 17 -------------------------------
+-- Cambia la sede attuale di un’autovettura
+-- l'operazione consiste nel cambiare la sede con una sede data in input ad una
+-- procedura cambiaSede()
+DELIMITER //
+create procedure cambiaSede(newS char(5),targ char(7) )
+  BEGIN
+    update sedeattuale set sede = newS where autovetturaN=targ;
+  END//
+DELIMITER ;
+-- CALL cambiaSede('61031','FQ647JK);
+-- ----------------------------------------------------------------------
+
+
+-- -------------------------- OPERAZIONE 18 ------------------------------
+-- Visualizza le riparazioni effettuate su una vettura
+--  in vendita, inclusa l’officina interessata
+
+DELIMITER //
+create procedure visualizzaRiparazioni(targ char(7))
+  BEGIN
+    select numeroRip,officina,nome,orarioApertura,orarioChiusura
+    from riparazioneAutovetturaV,RiparazioniEffettuate,Officina
+    where riparazioneAutovetturaV.autovetturaV = targ
+      and officina.nome = RiparazioniEffettuate.officina
+        and riparazioneAutovetturaV.riparazione = RiparazioniEffettuate.numeroRip;
+  END //
+DELIMITER;
+
+-- call visualizzaRiparazioni('EK647FM');
+
+-- -----------------------------------------------------------------------
+
+-- -------------------------- OPERAZIONE 19 ------------------------------
+-- Visualizza le sedi di ritiro con un voto nel feedback associato alla lettera
+-- di noleggio maggiore di 4
+DELIMITER //
+create procedure trovaSRitiroVoto4()
+  BEGIN
+    select sede.codiceMnemonico,città
+    from prenotazione,LetteraNoleggio,feedback,indirizzoSede
+    where prenotazione.numeroPrenotazione=LetteraNoleggio.prenotazione AND
+    feedback.noleggio=LetteraNoleggio.numeroLettera and
+    prenotazione.sedeRitiro=indirizzoSede.sede
+    sede.codiceMnemonico=prenotazione.sedeRitiro and feedback.voto>4;
+  END//
+  DELIMITER ;

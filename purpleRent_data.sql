@@ -241,19 +241,19 @@ insert into indirizzoOfficina(officina,città,civico,via) values
   ('Ncm carrozzeria', 'Roma',   113, 'Via Salaria');
 
 insert into FatturaVendita(numeroFattura,importo,data,autovettura,acquirente) values
-  ('FA00001', 5000.00, '2020-01-01', 'ER245GG', 'comprousato.srl'),
-  ('FA00002', 4000.00, '2020-01-03', 'EP443PM', 'comprousato.srl'),
-  ('FA00003', 5500.00, '2020-02-10', 'EQ227JK', 'tuttomotori'),
-  ('FA00004', 3900.00, '2020-03-19', 'EF813AB', 'centoallora.com'),
-  ('FA00005', 5200.00, '2020-01-21', 'EK647FM', 'comprousato.srl'),
-  ('FA00006', 3400.00, '2020-01-14', 'EZ132PG', 'centoallora.com');
+  ('FA00001', 15000.00, '2020-01-01', 'ER245GG', 'comprousato.srl'),
+  ('FA00002', 14000.00, '2020-01-03', 'EP443PM', 'comprousato.srl'),
+  ('FA00003', 25500.00, '2020-02-10', 'EQ227JK', 'tuttomotori'),
+  ('FA00004', 13900.00, '2020-03-19', 'EF813AB', 'centoallora.com'),
+  ('FA00005', 35200.00, '2020-01-21', 'EK647FM', 'comprousato.srl'),
+  ('FA00006', 13400.00, '2020-01-14', 'EZ132PG', 'centoallora.com');
 
 insert into FatturaAcquisto(numeroFattura,importo,data,numVetture,fornitore) values
-  ('FA00028', 20000.00, '2019-03-24', 3, 'Il mondo delle auto'),
-  ('FA00029', 10000.00, '2019-04-01', 6, 'Perinetti auto'),
+  ('FA00028', 32000.00, '2019-03-24', 3, 'Il mondo delle auto'),
+  ('FA00029', 100000.00, '2019-04-01', 6, 'Perinetti auto'),
   ('FA00031', 24000.00, '2017-12-14', 2, 'Il mondo delle auto'),
-  ('FA00032', 6000.00,  '2017-12-12', 1, 'Perinetti auto'),
-  ('FA00033', 10000.00, '2017-11-30', 5, 'Great cars'),
+  ('FA00032', 8000.00,  '2017-12-12', 1, 'Perinetti auto'),
+  ('FA00033', 210000.00, '2017-11-30', 5, 'Great cars'),
   ('FA00034', 70000.00, '2017-12-01', 3, 'Sulla strada');
 
 insert into acquistoAutovetturaNoleggiabili(fatturaN,autovetturaN) values

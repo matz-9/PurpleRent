@@ -212,7 +212,7 @@ create table indirizzoOfficina(
 
 create table FatturaVendita(
   numeroFattura character(7) primary key,
-  importo decimal(6,2) not null,
+  importo decimal(9,2) not null,
   data date not null,
   autovettura character(7) not null,
   acquirente varchar(15) not null,
@@ -222,7 +222,7 @@ create table FatturaVendita(
 
 create table FatturaAcquisto(
   numeroFattura character(7) primary key,
-  importo decimal(7,2) not null,
+  importo decimal(9,2) not null,
   data date not null,
   numVetture int not null,
   fornitore varchar(20) not null,
