@@ -424,7 +424,6 @@ create procedure visualizzaRiparazioni(targ char(7))
 DELIMITER;
 
 -- call visualizzaRiparazioni('EK647FM');
-
 -- -----------------------------------------------------------------------
 
 -- -------------------------- OPERAZIONE 19 ------------------------------
@@ -433,11 +432,15 @@ DELIMITER;
 DELIMITER //
 create procedure trovaSRitiroVoto4()
   BEGIN
-    select sede.codiceMnemonico,città
+    select distinct prenotazione.sedeRitiro,città
     from prenotazione,LetteraNoleggio,feedback,indirizzoSede
-    where prenotazione.numeroPrenotazione=LetteraNoleggio.prenotazione AND
-    feedback.noleggio=LetteraNoleggio.numeroLettera and
-    prenotazione.sedeRitiro=indirizzoSede.sede
-    sede.codiceMnemonico=prenotazione.sedeRitiro and feedback.voto>4;
+    where prenotazione.numeroPrenotazione=LetteraNoleggio.prenotazione
+      and feedback.noleggio=LetteraNoleggio.numeroLettera
+      and prenotazione.sedeRitiro=indirizzoSede.sede
+      and feedback.voto>4;
   END//
   DELIMITER ;
+
+-- call trovaSRitiroVoto4()
+
+-- -----------------------------------------------------------------------
