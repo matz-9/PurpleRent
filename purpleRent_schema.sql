@@ -69,7 +69,7 @@ create table LetteraNoleggio(
   numeroLettera varchar(6) primary key,
   kmPercorsi int,
   tipo enum("aperta", "chiusa") not null,
-  prenotazione varchar(6) not null,
+  prenotazione varchar(6) unique not null,
   datiBancari character(10) not null,
   foreign key (prenotazione) references Prenotazione(numeroPrenotazione),
   foreign key (datiBancari) references DatiBancari(contoCorrente)
