@@ -232,10 +232,23 @@ DELIMITER ;
 -------------------------- OPERAZIONE 9 -------------------------------
 -- l’azienda deve riscuotere il pagamento relativo ad un noleggio:
 -- estrai il numero del conto corrente associato ad una lettera di noleggio
+DELIMITER //
+create procedure estraiConto(contratto varchar(6))
+  BEGIN
+    select nome, cognome, LetteraNoleggio.datiBancari, numeroLettera
+    from LetteraNoleggio, ClienteNoleggio
+    where LetteraNoleggio.numeroLettera = contratto
+          and ClienteNoleggio.datiBancari = LetteraNoleggio.datiBancari; -- omissibile
+  END//
+DELIMITER ;
+-- call estraiConto('L00006');
+-- ----------------------------------------------------------------------
 
 
 
 
+
+-------------------------- OPERAZIONE 10 -------------------------------
 
 
 -- ----------------------------------------------------------------------
