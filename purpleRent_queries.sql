@@ -142,6 +142,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 6 -------------------------------
 -- estrai il nome della sede con il maggior numero di ritiri autovetture
 DELIMITER //
@@ -168,7 +169,7 @@ DELIMITER ;
 -------------------------- OPERAZIONE 7 -------------------------------
 -- identifica il car group più richiesto nel 2019
 DELIMITER //
-create procedure carGroupPiuRichiesto()
+create procedure carGroupPiuRichiesto(out carg char )
   BEGIN
     create view prenotazioni(carGroup, prenotato) as
         select carGroup, count(*) as prenotato
@@ -177,6 +178,11 @@ create procedure carGroupPiuRichiesto()
         group by carGroup;
 
     select *
+    from prenotazioni
+    where prenotato = (select max(prenotato)
+                       from prenotazioni);
+    select carGroup
+    into carg -- il risultato viene salvato dentro carg
     from prenotazioni
     where prenotato = (select max(prenotato)
                        from prenotazioni);
@@ -192,6 +198,50 @@ DELIMITER ;
 
 
 -------------------------- OPERAZIONE 8 -------------------------------
+-- estrai i nomi delle aziende che hanno fornito le vetture del car group più richiesto nel 2019 (operazione 7)
+DELIMITER //
+create procedure aziendaTopCarGroup()
+  BEGIN
+
+    call carGroupPiuRichiesto(@res);
+
+    select targa, f.nomeAziendaFornitore
+    from AutovetturaNoleggiabile as aN, acquistoAutovetturaNoleggiabili as aAn, FatturaAcquisto as fA, Fornitore as f
+    where aN.carGroup = (select @res)
+          and aAn.autovetturaN = aN.targa
+          and aAn.fatturaN = fA.numeroFattura
+          and f.nomeAziendaFornitore = fA.fornitore
+    UNION
+    select targa, f.nomeAziendaFornitore
+    from AutovetturaVendita as aV, acquistoAutovetturaVendita as aAv, FatturaAcquisto as fA, Fornitore as f
+    where aV.carGroup = (select @res)
+          and aAv.autovetturaV = aV.targa
+          and aAv.fatturaV = fA.numeroFattura
+          and f.nomeAziendaFornitore = fA.fornitore;
+
+  END//
+DELIMITER ;
+-- call aziendaTopCarGroup();
+-- ----------------------------------------------------------------------
+
+
+
+
+
+
+-------------------------- OPERAZIONE 9 -------------------------------
+-- l’azienda deve riscuotere il pagamento relativo ad un noleggio:
+-- estrai il numero del conto corrente associato ad una lettera di noleggio
+
+
+
+
+
+
+-- ----------------------------------------------------------------------
+
+
+
 
 
 
