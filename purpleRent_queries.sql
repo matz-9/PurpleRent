@@ -63,8 +63,54 @@ DELIMITER ;
 -- crea un lettera di noleggio associata ad una prenotazione,
 -- assegnando  una autovettura ( aggiornando la disponibilità attuale )
 -- e i dati bancari per il pagamento.
-DELIMITER $$
-create procedure
+DELIMITER //
+  create trigger attualmenteDisponibile
+    after insert on LetteraNoleggio
+    for each row
+    BEGIN
+      update autovetturaNoleggiabile
+      set disponibile=false
+      where new.numeroLettera = noleggioAutovetturaNoleggiabile.contratto
+        and autovetturaNoleggiabile.targa = noleggioAutovetturaNoleggiabile.autovetturaN;
+    END //
+DELIMITER ;
+
+DELIMITER //
+create procedure creaLetteraNoleggio(numeroLettera varchar(6), kmPercorsi int, tipo enum("aperta", "chiusa"),
+                                      prenotazione varchar(6),datiBancari character(10))
+  BEGIN
+    insert into LetteraNoleggio values (
+      numeroLettera, kmPercorsi, tipo, prenotazione, datiBancari);
+
+    insert into noleggioAutovetturaNoleggiabile values
+      (numeroLettera, (select targa
+                        from AutovetturaNoleggiabile as aN, Prenotazione as p
+                        where aN.disponibile = true
+                              and p.numeroPrenotazione =  prenotazione
+                              and aN.carGroup = p.carGroup
+                        limit 1));
+  END //
+DELIMITER ;
+
+-- call creaLetteraNoleggio()
+
+-- operazione 5
+-- trova fornitori che vendono un’autovettura BMW con gruppo H
+DELIMITER //
+  create procedure trovaFornitori()
+  BEGIN
+    select nomeAziendaFornitore
+    from fornitore, fornitoreCasa, fornitoreCarGroup
+    where fornitoreCarGroup.fornitore = fornitore.nomeAziendaFornitore and
+          fornitoreCasa.fornitore = fornitore.nomeAziendaFornitore and
+          fornitoreCarGroup.carGroup = 'H' and fornitoreCasa.casa = 'BMW';
+  END //
+
+-- operazione 6
+-- estrai il nome della sede con il maggior numero di ritiri autovetture
+
+
+
 
 
 
