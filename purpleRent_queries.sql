@@ -6,7 +6,7 @@ where vettura.targa = sedeAttuale.autovetturaN
     and vettura.disponibile = true;
 
 
--- operazione 1 visualizza una prenotazione
+-- operazione 1 visualizza, data una prenotazione, dati cliente e sedi associate
 DELIMITER //
 create procedure visualizzaPrenotazione(p varchar(5))
   BEGIN
@@ -15,9 +15,9 @@ create procedure visualizzaPrenotazione(p varchar(5))
     where prenotazione.cliente = clienteNoleggio.numDocumento
           and p = prenotazione.numeroPrenotazione;
   END//
+DELIMITER ;
 
-
--- operazione 2 crea una prenotazione
+-- operazione 2 effettua una prenotazione
 
 DELIMITER //
 create FUNCTION calcolaPrezzo(gruppo char, inizio dateTime, fine dateTime)
@@ -42,6 +42,16 @@ create procedure creaPrenotazione(numeroP character(6), orarioIn dateTime, orari
         sedeRit, sedeRil, cliente, gruppo);
   END //
 DELIMITER ;
+
+-- operazione 3 visualizza lettera di noleggio,prenotazione associata e autovettura assegnata
+DELIMITER //
+create procedure visualizzaContratto(l varchar(6))
+  BEGIN
+    select numeroLettera,kmPercorsi,tipo,prenotazione,targa
+    from LetteraNoleggio,AutovetturaVendita,AutovetturaNoleggiabile
+    where LetteraNoleggio.numeroLettera=l;
+  END//
+
 -- call creaPrenotazione(7013 , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,
 --  '41261' , 'RJ51230KL7' , 'L');//
 
