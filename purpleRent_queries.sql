@@ -6,7 +6,7 @@ where vettura.targa = sedeAttuale.autovetturaN
     and vettura.disponibile = true;
 
 
--- operazione 1
+-- operazione 1 visualizza una prenotazione
 DELIMITER //
 create procedure visualizzaPrenotazione(p varchar(5))
   BEGIN
@@ -17,7 +17,7 @@ create procedure visualizzaPrenotazione(p varchar(5))
   END//
 
 
--- operazione 2
+-- operazione 2 crea una prenotazione
 
 DELIMITER //
 create FUNCTION calcolaPrezzo(gruppo char, inizio dateTime, fine dateTime)
