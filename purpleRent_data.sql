@@ -158,7 +158,7 @@ insert into AutovetturaVendita(targa,km,colore,prezzoVendita,carGroup,casaAuto) 
   ('ER245GG', 150000, 'rosso',     9000, 'E',  'AlfaRomeo'),
   ('EP443PM', 150000, 'grigio',    9000, 'J',  'Audi'),
   ('EZ132PG', 150000, 'arancione', 9000, 'L', 'Mercedes'),
-  ('EA541MM', 150000, 'nero',      900,  'P',  'BMW'),
+  ('EA541MM', 150000, 'nero',      9900,  'P',  'BMW'),
   ('EC642KM', 150000, 'blu',       8000,  'A',  'Renault'),
   ('EK647FM', 150000, 'bianco',    7000,  'C',  'Peugeot'),
   ('EQ227JK', 150000, 'rosso',     9000, 'H',  'Audi'),

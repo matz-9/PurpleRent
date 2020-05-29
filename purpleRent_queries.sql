@@ -166,6 +166,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 7 -------------------------------
 -- identifica il car group più richiesto nel 2019
 DELIMITER //
@@ -377,15 +378,19 @@ DELIMITER ;
 
 
 -- -------------------------- OPERAZIONE 16 -------------------------------
--- Estrai i nomi e p.iva delle aziende che hanno acquistato vetture con una fattura
--- di valore superiore a 10.000 euro
+-- Estrai la targa delle autovetture in vendita, ma non ancora vendute
 DELIMITER //
-create procedure ()
+create procedure nonVendute()
   BEGIN
-
+    select targa, colore, prezzoVendita, casaAuto
+    from AutovetturaVendita as a
+    where not exists (select *
+                      from FatturaVendita as f
+                      where a.targa = f.autovettura)
+    order by prezzoVendita;
   END//
 DELIMITER ;
--- call fattureDieciK();
+-- call nonVendute();
 -- ----------------------------------------------------------------------
 
 
@@ -444,3 +449,76 @@ create procedure trovaSRitiroVoto4()
 -- call trovaSRitiroVoto4()
 
 -- -----------------------------------------------------------------------
+
+
+-- -------------------------- OPERAZIONE 20 ------------------------------
+-- Estrai il nome della città con maggior numero di clienti
+-- e con la relativa sede preferita
+-- query annidata 3 livelli
+
+DRLIMITER //
+create procedure sedePrefCittàMaxClienti()
+  BEGIN
+      create view clientiCittà(città,numeroclienti) as
+        select città, count(*) as numeroclienti
+        from clienteNoleggio,residenzaCliente
+        where clienteNoleggio.numDocumento=residenzaCliente.cliente
+        group by città;
+
+        select indirizzosede.sede,indirizzosede.città,clienteNoleggio.numDocumento,
+               clienteNoleggio.nome,clienteNoleggio.cognome
+        from clienteNoleggio,sedepreferita,indirizzoSede,residenzaCliente
+        where clienteNoleggio.numDocumento = sedePreferita.cliente
+        and   sedepreferita.sede = indirizzoSede.sede
+        and   clienteNoleggio.numDocumento = residenzaCliente.cliente
+        and   residenzacliente.città = ( select città
+                                         from clientiCittà
+                                         where numeroclienti = ( select max(numeroclienti)
+                                                                 from clientiCittà )
+        );
+    drop view clientiCittà;
+  END //
+  DELIMITER ;
+
+-- call sedePrefCittàMaxClienti();
+-- -----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+-- --------------------------- OPERAZIONE 21 -------------------------------
+-- Inserisci una riparazione effettuata in una nuova officina convenzionata
+ -- primi 5 attributi necessari all'officina nuova , in seguito per le riparazioni
+DELIMITER //
+create procedure nuovaRiparazione(nomeOfficina varchar(15), orarioAperturaOff time(1),
+                                  orarioChiusuraOff time(1), numTelOff character(10),
+                                  emailOff varchar(30), nRip char(5), dataRip date,
+                                  motiv text, prezzo decimal(5,2), macchina character(7))
+BEGIN
+  insert into Officina values(nomeOfficina,orarioAperturaOff,orarioChiusuraOff,
+                               numTelOff,emailOff);
+  insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo);
+
+  insert into riparazioneAutovetturaV values(nRip,macchina);
+
+  insert into riparazioneAutovetturaN values(nRip,macchina);
+END//
+DELIMITER ;
+
+-- call nuovaRiparazione('filippo srl','08:00' ,
+--  '19:00' , '3356974196' , 'filippo@filppo.it' , 'R0014' ,
+-- '2020-01-14' , ' ripar' , 18.00 , 'FR249GG');
+
+
+
+
+
+        if ((select count(*)
+              from autovetturanoleggiabile
+              where autovetturanoleggiabile.targa=macchina)=1) then
+                insert into riparazioneAutovetturaV values(nRip,macchina);
+        END if
