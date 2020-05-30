@@ -286,21 +286,20 @@ create procedure incassoCarGroup()
     from Prenotazione
     where year(Prenotazione.orarioInizio) = 2019
     group by carGroup;
-  END//
+  END //
 DELIMITER ;
 -- call incassoCarGroup();
--- ----------------------------------------------------------------------
+-- --------------------------------------------------------------------
 
 
 
 
 
 
--------------------------- OPERAZIONE 12 -------------------------------
--- L’azienda propone delle offerte : reperisci i contatti telefonici
+-- ------------------------ OPERAZIONE 12 -------------------------------
+-- L’azienda propone delle offerte reperisci i contatti telefonici
 -- dei clienti che hanno noleggiato nell’ultimo anno con almeno due
--- prenotazioni e con età maggiore di 45.
-
+-- prenotazioni e con età maggiore di 45
 DELIMITER //
 create procedure clientiFidati()
   BEGIN
@@ -319,8 +318,7 @@ create procedure clientiFidati()
 
   DELIMITER ;
 
-  -- call clientiFidati();
-
+-- call clientiFidati();
 -- ------------------------------------------------------------------------
 
 
@@ -430,7 +428,7 @@ create procedure cambiaSede(newS char(5),targ char(7) )
     update sedeattuale set sede = newS where autovetturaN=targ;
   END//
 DELIMITER ;
--- CALL cambiaSede('61031','FQ647JK);
+-- call cambiaSede('61031','FQ647JK);
 -- ----------------------------------------------------------------------
 
 
@@ -450,9 +448,9 @@ create procedure visualizzaRiparazioni(targ char(7))
     from riparazioneAutovetturaV,RiparazioniEffettuate,Officina
     where riparazioneAutovetturaV.autovetturaV = targ
       and officina.nome = RiparazioniEffettuate.officina
-        and riparazioneAutovetturaV.riparazione = RiparazioniEffettuate.numeroRip;
+      and riparazioneAutovetturaV.riparazione = RiparazioniEffettuate.numeroRip;
   END //
-DELIMITER;
+DELIMITER ;
 
 -- call visualizzaRiparazioni('EK647FM');
 -- -----------------------------------------------------------------------
@@ -474,11 +472,10 @@ create procedure trovaSRitiroVoto4()
       and feedback.noleggio=LetteraNoleggio.numeroLettera
       and prenotazione.sedeRitiro=indirizzoSede.sede
       and feedback.voto>4;
-  END//
-  DELIMITER ;
+  END //
+DELIMITER ;
 
 -- call trovaSRitiroVoto4()
-
 -- -----------------------------------------------------------------------
 
 
@@ -491,7 +488,7 @@ create procedure trovaSRitiroVoto4()
 -- e con la relativa sede preferita
 -- query annidata 3 livelli
 
-DRLIMITER //
+DELIMITER //
 create procedure sedePrefCittàMaxClienti()
   BEGIN
       create view clientiCittà(città,numeroclienti) as
@@ -513,7 +510,7 @@ create procedure sedePrefCittàMaxClienti()
         );
     drop view clientiCittà;
   END //
-  DELIMITER ;
+DELIMITER ;
 
 -- call sedePrefCittàMaxClienti();
 -- -----------------------------------------------------------------------
@@ -526,7 +523,7 @@ create procedure sedePrefCittàMaxClienti()
 
 -- --------------------------- OPERAZIONE 21 -------------------------------
 -- Inserisci una riparazione effettuata in una nuova officina convenzionata
- -- primi 5 attributi necessari all'officina nuova , in seguito per le riparazioni
+-- primi 5 attributi necessari all'officina nuova , in seguito per le riparazioni
 DELIMITER //
 create procedure nuovaRiparazione(nomeOfficina varchar(15), orarioAperturaOff time(1),
                                   orarioChiusuraOff time(1), numTelOff character(10),
@@ -553,5 +550,25 @@ BEGIN
 END//
 DELIMITER ;
 
- -- call nuovaRiparazione('wezzz srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0015' ,'2020-01-14' , ' ripar' , 18.00 , 'ER245GG');
+--  call nuovaRiparazione('wezzz srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0015' ,'2020-01-14' , ' ripar' , 18.00 , 'ER245GG');
+-- -----------------------------------------------------------------------
+
+
+
+
+
+
+-- --------------------------- OPERAZIONE 22 -------------------------------
+-- Inserisci nuovo cliente con dati bancari associati
+DELIMITER //
+create procedure nuovoCliente(nDoc varchar(10), nome varchar(12), cognome varchar(12),
+                              età int, contoCorr character(10),
+                              circuito enum('visa','mastercard', 'american express','diner'),
+                              nomeBanca varchar(15))
+BEGIN
+  insert into DatiBancari values (contoCorr,circuito,nomeBanca);
+
+  insert into ClienteNoleggio values (nDoc,nome,cognome,età,contoCorr);
+END //
+DELIMITER ;
 -- -----------------------------------------------------------------------

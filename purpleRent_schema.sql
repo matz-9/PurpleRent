@@ -151,7 +151,8 @@ create table Fornitore(
 create table sedeAttuale(
   autovetturaN character(7) primary key,
   sede character(5) not null,
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa),
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
+  delete cascade,
   foreign key (sede) references Sede(codiceMnemonico)
 );
 
@@ -159,7 +160,8 @@ create table noleggioAutovetturaNoleggiabile(
   contratto varchar(6) primary key,
   autovetturaN character(7) not null,
   foreign key (contratto) references LetteraNoleggio(numeroLettera),
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
+  delete cascade
 );
 
 create table noleggioAutovetturaVendita(
@@ -190,7 +192,8 @@ create table riparazioneAutovetturaN(
   riparazione char(5) primary key,
   autovetturaN character(7) not null,
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip),
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
+  delete cascade
 );
 
 create table riparazioneAutovetturaV(
@@ -233,7 +236,8 @@ create table acquistoAutovetturaNoleggiabili(
   fatturaN character(7) not null,
   autovetturaN character(7) primary key,
   foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa)
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
+  delete cascade
 );
 
 create table acquistoAutovetturaVendita(
@@ -278,3 +282,53 @@ create table indirizzoAcquirente(
   foreign key (acquirente) references AcquirenteVetturaUsata(nomeAzienda),
   foreign key (città, civico, via) references Indirizzo(città, civico, via)
 );
+
+-- --------------------------------TRIGGER--------------------------------------
+
+DELIMITER //
+create trigger attualmenteDisponibile
+  after insert on noleggioAutovetturaNoleggiabile
+  for each row
+  BEGIN
+    update AutovetturaNoleggiabile
+    set AutovetturaNoleggiabile.disponibile = false
+    where AutovetturaNoleggiabile.targa = new.autovetturaN;
+  END //
+DELIMITER ;
+
+
+
+DELIMITER //
+create trigger cliente21anni
+  after insert on ClienteNoleggio
+  for each row
+  BEGIN
+    if (new.età < 21) then
+      signal sqlstate '45000'
+      set message_text = 'Errore: età cliente non conforme al regolamento';
+    end if ;
+  END //
+DELIMITER ;
+
+
+
+-- DELIMITER //
+-- create trigger vendiVetturaVecchia
+--   after update on AutovetturaNoleggiabile
+--   for each row
+--   BEGIN
+--     if (new.km >= 150000) then
+--       delete from AutovetturaNoleggiabile;
+--
+--       where AutovetturaNoleggiabile.targa = new.targa;
+
+--     end if;
+--   END //
+-- DELIMITER ;
+
+
+
+
+
+
+-- create trigger
