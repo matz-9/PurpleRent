@@ -499,21 +499,20 @@ create procedure nuovaRiparazione(nomeOfficina varchar(15), orarioAperturaOff ti
                                   emailOff varchar(30), nRip char(5), dataRip date,
                                   motiv text, prezzo decimal(5,2), macchina character(7))
 BEGIN
+  declare numeroAuto int;
   insert into Officina values(nomeOfficina,orarioAperturaOff,orarioChiusuraOff,
                                numTelOff,emailOff);
   insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo);
 
-  create view esistenzaN() as
-      select count(*) as cont
-      from autovetturanoleggiabile
-      where autovetturanoleggiabile.targa=macchina;
+  set numeroAuto = (select count(*) as conta
+                    from AutovetturaNoleggiabile
+                    where AutovetturaNoleggiabile.targa=macchina);
 
-  if EsistenzaN.cont!= 1 then
+  IF (numeroAuto!= 1) then
     insert into riparazioneAutovetturaV values(nRip,macchina);
   else
     insert into riparazioneAutovetturaN values(nRip,macchina);
-  END IF
-  drop view esistenzaN;
+  END if
 END//
 DELIMITER ;
 
