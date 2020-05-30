@@ -500,32 +500,21 @@ create procedure nuovaRiparazione(nomeOfficina varchar(15), orarioAperturaOff ti
                                   motiv text, prezzo decimal(5,2), macchina character(7))
 BEGIN
   declare numeroAuto int;
-  insert into Officina values(nomeOfficina,orarioAperturaOff,orarioChiusuraOff,
-                               numTelOff,emailOff);
-  insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo);
 
   set numeroAuto = (select count(*) as conta
                     from AutovetturaNoleggiabile
                     where AutovetturaNoleggiabile.targa=macchina);
 
-  IF (numeroAuto!= 1) then
+  insert into Officina values(nomeOfficina,orarioAperturaOff,orarioChiusuraOff,
+                               numTelOff,emailOff);
+  insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo);
+
+  if (numeroAuto!=1) then
     insert into riparazioneAutovetturaV values(nRip,macchina);
   else
     insert into riparazioneAutovetturaN values(nRip,macchina);
-  END if
+  END if;
 END//
 DELIMITER ;
 
--- call nuovaRiparazione('filippo srl','08:00' ,
---  '19:00' , '3356974196' , 'filippo@filppo.it' , 'R0014' ,
--- '2020-01-14' , ' ripar' , 18.00 , 'FR249GG');
-
-
-
-
-
-        if ((select count(*)
-              from autovetturanoleggiabile
-              where autovetturanoleggiabile.targa=macchina)=1) then
-                insert into riparazioneAutovetturaV values(nRip,macchina);
-        END if
+call nuovaRiparazione('fil srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0014' ,'2020-01-14' , ' ripar' , 18.00 , 'FR249GG');
