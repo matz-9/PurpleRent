@@ -1,4 +1,3 @@
-
 -- -------------------------- OPERAZIONE 1 -------------------------------
 -- visualizza, data una prenotazione, dati cliente e sedi associate
 
@@ -12,6 +11,7 @@ create procedure visualizzaPrenotazione(p varchar(5))
   END//
 DELIMITER ;
 -- ----------------------------------------------------------------------
+
 
 
 
@@ -49,6 +49,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 3 -------------------------------
 -- visualizza lettera di noleggio,prenotazione associata e autovettura assegnata
 
@@ -77,6 +78,7 @@ DELIMITER ;
 
 
 
+
 -- ---------------------------- TRIGGER ---------------------------------
 -- trigger per rendere un'autovettura non disponibile quando si crea un contratto
 DELIMITER //
@@ -90,6 +92,7 @@ DELIMITER //
     END //
 DELIMITER ;
 -- ----------------------------------------------------------------------
+
 
 
 
@@ -125,6 +128,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 5 -------------------------------
 -- trova fornitori che vendono un’autovettura BMW gruppo H
 DELIMITER //
@@ -138,6 +142,7 @@ DELIMITER //
   END //
 DELIMITER ;
 -- ----------------------------------------------------------------------
+
 
 
 
@@ -198,6 +203,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 8 -------------------------------
 -- estrai i nomi delle aziende che hanno fornito le vetture del car group più richiesto nel 2019 (operazione 7)
 DELIMITER //
@@ -249,6 +255,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 10 -------------------------------
 -- varia i prezzi di tutti i car group per una certa cifra:
 -- l'operazione consiste nell'inserire come input di una procedura il numero
@@ -262,6 +269,7 @@ DELIMITER ;
 -- call modificaPrezzo(20);
 
 -- ----------------------------------------------------------------------
+
 
 
 
@@ -282,6 +290,10 @@ create procedure incassoCarGroup()
 DELIMITER ;
 -- call incassoCarGroup();
 -- ----------------------------------------------------------------------
+
+
+
+
 
 
 -------------------------- OPERAZIONE 12 -------------------------------
@@ -311,6 +323,11 @@ create procedure clientiFidati()
 
 -- ------------------------------------------------------------------------
 
+
+
+
+
+
 -- -------------------------- OPERAZIONE 13 -------------------------------
 -- verifica la sede attuale di un'autovettura
 -- l'operazione consiste nell'inserire in input ad una procedura trovaSede()
@@ -329,6 +346,9 @@ create procedure trovaSede(targauto char(7))
   DELIMITER ;
 -- CALL trovaSede('op560po');
 -- ----------------------------------------------------------------------
+
+
+
 
 
 
@@ -359,6 +379,7 @@ DELIMITER ;
 
 
 
+
 -- -------------------------- OPERAZIONE 15 -------------------------------
 -- Estrai i nomi e p.iva delle aziende che hanno acquistato vetture con una fattura
 -- di valore superiore a 10.000 euro
@@ -372,6 +393,7 @@ create procedure fattureDieciK()
 DELIMITER ;
 -- call fattureDieciK();
 -- ----------------------------------------------------------------------
+
 
 
 
@@ -395,10 +417,9 @@ DELIMITER ;
 
 
 
--- CREATE FUNCTION CiaoMondo(ciao varchar(3)) RETURNS VARCHAR(3) deterministic
-  -- BEGIN
-    -- RETURN (ciao);
-  -- END$$
+
+
+
 -- -------------------------- OPERAZIONE 17 -------------------------------
 -- Cambia la sede attuale di un’autovettura
 -- l'operazione consiste nel cambiare la sede con una sede data in input ad una
@@ -411,6 +432,11 @@ create procedure cambiaSede(newS char(5),targ char(7) )
 DELIMITER ;
 -- CALL cambiaSede('61031','FQ647JK);
 -- ----------------------------------------------------------------------
+
+
+
+
+
 
 
 -- -------------------------- OPERAZIONE 18 ------------------------------
@@ -431,6 +457,11 @@ DELIMITER;
 -- call visualizzaRiparazioni('EK647FM');
 -- -----------------------------------------------------------------------
 
+
+
+
+
+
 -- -------------------------- OPERAZIONE 19 ------------------------------
 -- Visualizza le sedi di ritiro con un voto nel feedback associato alla lettera
 -- di noleggio maggiore di 4
@@ -449,6 +480,10 @@ create procedure trovaSRitiroVoto4()
 -- call trovaSRitiroVoto4()
 
 -- -----------------------------------------------------------------------
+
+
+
+
 
 
 -- -------------------------- OPERAZIONE 20 ------------------------------
@@ -489,7 +524,6 @@ create procedure sedePrefCittàMaxClienti()
 
 
 
-
 -- --------------------------- OPERAZIONE 21 -------------------------------
 -- Inserisci una riparazione effettuata in una nuova officina convenzionata
  -- primi 5 attributi necessari all'officina nuova , in seguito per le riparazioni
@@ -520,3 +554,4 @@ END//
 DELIMITER ;
 
  -- call nuovaRiparazione('wezzz srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0015' ,'2020-01-14' , ' ripar' , 18.00 , 'ER245GG');
+-- -----------------------------------------------------------------------
