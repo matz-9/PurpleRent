@@ -503,9 +503,17 @@ BEGIN
                                numTelOff,emailOff);
   insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo);
 
-  insert into riparazioneAutovetturaV values(nRip,macchina);
+  create view esistenzaN() as
+      select count(*) as cont
+      from autovetturanoleggiabile
+      where autovetturanoleggiabile.targa=macchina;
 
-  insert into riparazioneAutovetturaN values(nRip,macchina);
+  if EsistenzaN.cont!= 1 then
+    insert into riparazioneAutovetturaV values(nRip,macchina);
+  else
+    insert into riparazioneAutovetturaN values(nRip,macchina);
+  END IF
+  drop view esistenzaN;
 END//
 DELIMITER ;
 
