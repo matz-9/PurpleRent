@@ -535,7 +535,7 @@ create procedure nuovaRiparazione(nomeOfficina varchar(15), orarioAperturaOff ti
 BEGIN
   declare numeroAuto int;
 
-  set numeroAuto = (select count(*) as conta
+  set numeroAuto = (select count(*)
                     from AutovetturaNoleggiabile
                     where AutovetturaNoleggiabile.targa=macchina);
 
