@@ -507,14 +507,16 @@ BEGIN
 
   insert into Officina values(nomeOfficina,orarioAperturaOff,orarioChiusuraOff,
                                numTelOff,emailOff);
-  insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo);
+
+  insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo,nomeOfficina);
 
   if (numeroAuto!=1) then
     insert into riparazioneAutovetturaV values(nRip,macchina);
   else
     insert into riparazioneAutovetturaN values(nRip,macchina);
   END if;
+
 END//
 DELIMITER ;
 
-call nuovaRiparazione('fil srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0014' ,'2020-01-14' , ' ripar' , 18.00 , 'FR249GG');
+ -- call nuovaRiparazione('wezzz srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0015' ,'2020-01-14' , ' ripar' , 18.00 , 'ER245GG');
