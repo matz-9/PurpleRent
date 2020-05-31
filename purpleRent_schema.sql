@@ -313,6 +313,7 @@ DELIMITER ;
 
 
 DELIMITER //
+start transaction
 create trigger vendiVetturaVecchia
   after update on AutovetturaNoleggiabile
   for each row
@@ -320,11 +321,14 @@ create trigger vendiVetturaVecchia
      if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
                                                9000.00, new.cargroup, new.casaAuto );
-        delete
+        delete from autovetturanoleggiabile where autovetturanoleggiabile.targa=new.targa;
       end if;
 
 END //
-  DELIMITER ;
+DELIMITER ;
+commit;
+
+
 
 
 DELIMITER //

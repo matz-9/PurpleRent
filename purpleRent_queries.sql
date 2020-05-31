@@ -580,8 +580,8 @@ BEGIN
       tipo = 'chiusa'
   where numeroLettera = numLet;
 END //
-commit;
 DELIMITER ;
+commit;
 -- call chiudiLettera('L00001', 1200);
 -- -----------------------------------------------------------------------
 
