@@ -12,7 +12,7 @@ create table Dipendente(
   cognome varchar(12) not null,
   anniAnzianità int,
   sede character(5) not null,
-  foreign key (sede) references Sede(codiceMnemonico)
+  foreign key (sede) references Sede(codiceMnemonico) on delete cascade
 );
 
 create table CarGroup(
@@ -40,14 +40,14 @@ create table ClienteNoleggio(
   cognome varchar(12) not null,
   età int not null,
   datiBancari character(10) not null,
-  foreign key (datiBancari) references DatiBancari(contoCorrente)
+  foreign key (datiBancari) references DatiBancari(contoCorrente) on delete cascade
 );
 
 create table sedePreferita(
   cliente varchar(10) primary key,
   sede character(5),
-  foreign key (cliente) references ClienteNoleggio(numDocumento),
-  foreign key (sede) references Sede(codiceMnemonico)
+  foreign key (cliente) references ClienteNoleggio(numDocumento) on delete cascade,
+  foreign key (sede) references Sede(codiceMnemonico) on delete cascade
 );
 
 create table Prenotazione(
@@ -59,10 +59,10 @@ create table Prenotazione(
   sedeRilascio character(5) not null,
   cliente varchar(10) not null,
   carGroup char not null,
-  foreign key (sedeRitiro) references Sede(codiceMnemonico),
-  foreign key (sedeRilascio) references Sede(codiceMnemonico),
-  foreign key (cliente) references ClienteNoleggio(numDocumento),
-  foreign key (carGroup) references CarGroup(lettera)
+  foreign key (sedeRitiro) references Sede(codiceMnemonico) on delete cascade,
+  foreign key (sedeRilascio) references Sede(codiceMnemonico) on delete cascade,
+  foreign key (cliente) references ClienteNoleggio(numDocumento) on delete cascade,
+  foreign key (carGroup) references CarGroup(lettera) on delete cascade
 );
 
 create table LetteraNoleggio(
@@ -71,15 +71,15 @@ create table LetteraNoleggio(
   tipo enum("aperta", "chiusa") not null,
   prenotazione varchar(6) unique not null,
   datiBancari character(10) not null,
-  foreign key (prenotazione) references Prenotazione(numeroPrenotazione),
-  foreign key (datiBancari) references DatiBancari(contoCorrente)
+  foreign key (prenotazione) references Prenotazione(numeroPrenotazione) on delete cascade,
+  foreign key (datiBancari) references DatiBancari(contoCorrente) on delete cascade
 );
 
 create table Feedback(
   noleggio varchar(6) primary key,
   recensione text,
   voto integer not null,
-  foreign key (noleggio) references LetteraNoleggio(numeroLettera),
+  foreign key (noleggio) references LetteraNoleggio(numeroLettera) on delete cascade,
   check (voto>=0 AND voto<=5)
 );
 
@@ -89,8 +89,9 @@ create table indirizzoSede(
   civico int not null,
   via varchar(30) not null,
   unique (città, civico, via),
-  foreign key (sede) references Sede(codiceMnemonico),
+  foreign key (sede) references Sede(codiceMnemonico) on delete cascade,
   foreign key (città, civico, via) references Indirizzo(città, civico, via)
+  on delete cascade
 );
 
 create table residenzaCliente(
@@ -99,8 +100,8 @@ create table residenzaCliente(
   civico int not null,
   via varchar(30) not null,
   unique (città,civico,via),
-  foreign key (cliente) references ClienteNoleggio(numDocumento),
-  foreign key (città, civico, via) references Indirizzo(città, civico, via)
+  foreign key (cliente) references ClienteNoleggio(numDocumento) on delete cascade,
+  foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
 create table CasaAutomobilistica(
@@ -116,8 +117,8 @@ create table AutovetturaNoleggiabile(
   disponibile boolean not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
-  foreign key (carGroup) references CarGroup(lettera),
-  foreign key (casaAuto) references CasaAutomobilistica(nome)
+  foreign key (carGroup) references CarGroup(lettera) on delete cascade,
+  foreign key (casaAuto) references CasaAutomobilistica(nome) on delete cascade
 );
 
 create table AutovetturaVendita(
@@ -128,8 +129,8 @@ create table AutovetturaVendita(
   prezzoVendita decimal(6,2) not null,
   carGroup char not null,
   casaAuto varchar(15) not null,
-  foreign key (carGroup) references CarGroup(lettera),
-  foreign key (casaAuto) references CasaAutomobilistica(nome)
+  foreign key (carGroup) references CarGroup(lettera) on delete cascade,
+  foreign key (casaAuto) references CasaAutomobilistica(nome) on delete cascade
 );
 
 create table AcquirenteVetturaUsata(
@@ -137,7 +138,7 @@ create table AcquirenteVetturaUsata(
   partitaIva character(11) not null,
   telefono bigInt not null,
   datiBancari character(10) unique not null,
-  foreign key (datiBancari) references DatiBancari(contoCorrente)
+  foreign key (datiBancari) references DatiBancari(contoCorrente) on delete cascade
 );
 
 create table Fornitore(
@@ -145,30 +146,28 @@ create table Fornitore(
   partitaIva character(11) not null,
   telefono bigInt not null,
   datiBancari character(10) unique not null,
-  foreign key (datiBancari) references DatiBancari(contoCorrente)
+  foreign key (datiBancari) references DatiBancari(contoCorrente) on delete cascade
 );
 
 create table sedeAttuale(
   autovetturaN character(7) primary key,
   sede character(5) not null,
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
-  delete cascade,
-  foreign key (sede) references Sede(codiceMnemonico)
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on delete cascade,
+  foreign key (sede) references Sede(codiceMnemonico) on delete cascade
 );
 
 create table noleggioAutovetturaNoleggiabile(
   contratto varchar(6) primary key,
   autovetturaN character(7) not null,
-  foreign key (contratto) references LetteraNoleggio(numeroLettera),
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
-  delete cascade
+  foreign key (contratto) references LetteraNoleggio(numeroLettera) on delete cascade,
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on delete cascade;
 );
 
 create table noleggioAutovetturaVendita(
   contratto varchar(6) primary key,
   autovetturaV character(7) not null,
-  foreign key (contratto) references LetteraNoleggio(numeroLettera),
-  foreign key (autovetturaV) references AutovetturaVendita(targa)
+  foreign key (contratto) references LetteraNoleggio(numeroLettera) on delete cascade,
+  foreign key (autovetturaV) references AutovetturaVendita(targa) on delete cascade
 );
 
 create table Officina(
@@ -185,7 +184,7 @@ create table RiparazioniEffettuate(
   motivazione text not null,
   costo decimal(5,2) not null,
   officina varchar(15) not null,
-  foreign key (officina) references Officina(nome)
+  foreign key (officina) references Officina(nome) on delete cascade
 );
 
 create table riparazioneAutovetturaN(
@@ -199,8 +198,8 @@ create table riparazioneAutovetturaN(
 create table riparazioneAutovetturaV(
   riparazione char(5) primary key,
   autovetturaV character(7) not null,
-  foreign key (autovetturaV) references AutovetturaVendita(targa),
-  foreign key (riparazione) references RiparazioniEffettuate(numeroRip)
+  foreign key (autovetturaV) references AutovetturaVendita(targa) on delete cascade,
+  foreign key (riparazione) references RiparazioniEffettuate(numeroRip) on delete cascade
 );
 
 create table indirizzoOfficina(
@@ -209,8 +208,8 @@ create table indirizzoOfficina(
   civico int not null,
   via varchar(30) not null,
   unique (città, civico, via),
-  foreign key (officina) references Officina(nome),
-  foreign key (città, civico, via) references Indirizzo(città, civico, via)
+  foreign key (officina) references Officina(nome) on delete cascade,
+  foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
 create table FatturaVendita(
@@ -219,8 +218,8 @@ create table FatturaVendita(
   data date not null,
   autovettura character(7) not null,
   acquirente varchar(15) not null,
-  foreign key (autovettura) references AutovetturaVendita(targa),
-  foreign key (acquirente) references AcquirenteVetturaUsata(nomeAzienda)
+  foreign key (autovettura) references AutovetturaVendita(targa) on delete cascade,
+  foreign key (acquirente) references AcquirenteVetturaUsata(nomeAzienda) on delete cascade
 );
 
 create table FatturaAcquisto(
@@ -229,13 +228,13 @@ create table FatturaAcquisto(
   data date not null,
   numVetture int not null,
   fornitore varchar(20) not null,
-  foreign key (fornitore) references Fornitore(nomeAziendaFornitore)
+  foreign key (fornitore) references Fornitore(nomeAziendaFornitore) on delete cascade
 );
 
 create table acquistoAutovetturaNoleggiabili(
   fatturaN character(7) not null,
   autovetturaN character(7) primary key,
-  foreign key (fatturaN) references FatturaAcquisto(numeroFattura),
+  foreign key (fatturaN) references FatturaAcquisto(numeroFattura) on delete cascade,
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
   delete cascade
 );
@@ -243,24 +242,24 @@ create table acquistoAutovetturaNoleggiabili(
 create table acquistoAutovetturaVendita(
   fatturaV character(7) not null,
   autovetturaV character(7) primary key,
-  foreign key (fatturaV) references FatturaAcquisto(numeroFattura),
-  foreign key (autovetturaV) references AutovetturaVendita(targa)
+  foreign key (fatturaV) references FatturaAcquisto(numeroFattura) on delete cascade,
+  foreign key (autovetturaV) references AutovetturaVendita(targa) on delete cascade
 );
 
 create table fornitoreCarGroup(
   fornitore varchar(20),
   carGroup char,
   primary key (fornitore, carGroup),
-  foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
-  foreign key (carGroup) references CarGroup(lettera)
+  foreign key (fornitore) references Fornitore(nomeAziendaFornitore) on delete cascade,
+  foreign key (carGroup) references CarGroup(lettera) on delete cascade
 );
 
 create table fornitoreCasa(
   fornitore varchar(20),
   casa varchar(15),
   primary key (fornitore, casa),
-  foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
-  foreign key (casa) references CasaAutomobilistica(nome)
+  foreign key (fornitore) references Fornitore(nomeAziendaFornitore) on delete cascade,
+  foreign key (casa) references CasaAutomobilistica(nome) on delete cascade
 );
 
 create table indirizzoFornitore(
@@ -269,8 +268,8 @@ create table indirizzoFornitore(
   civico int not null,
   via varchar(30) not null,
   unique (città, civico, via),
-  foreign key (fornitore) references Fornitore(nomeAziendaFornitore),
-  foreign key (città, civico, via) references Indirizzo(città, civico, via)
+  foreign key (fornitore) references Fornitore(nomeAziendaFornitore) on delete cascade,
+  foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
 create table indirizzoAcquirente(
@@ -279,8 +278,8 @@ create table indirizzoAcquirente(
   civico int not null,
   via varchar(30) not null,
   unique (città, civico, via),
-  foreign key (acquirente) references AcquirenteVetturaUsata(nomeAzienda),
-  foreign key (città, civico, via) references Indirizzo(città, civico, via)
+  foreign key (acquirente) references AcquirenteVetturaUsata(nomeAzienda) on delete cascade,
+  foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
 -- --------------------------------TRIGGER--------------------------------------
@@ -314,82 +313,6 @@ DELIMITER ;
 
 -- ---------------------------------------------------------------------------------
 
-
-
-
-DELIMITER //
-create trigger vendiVetturaVecchia
-  after update on AutovetturaNoleggiabile
-  for each row
-  BEGIN
-      declare nuovaTarga character(7);
-
-       if(new.km > 150000) then
-        insert into AutovetturaVendita values (new.targa, new.km, new.colore,
-                                               9000.00, new.cargroup, new.casaAuto);
-        set nuovaTarga = new.targa;
-
-      end if;
-      delete from AutovetturaNoleggiabile where AutovetturaNoleggiabile.targa = nuovaTarga;
-    END //
-DELIMITER ;
-
-
-
-
-
-
--- copia kilu
-DELIMITER //
-create trigger vendiVetturaVecchia
-  after update on AutovetturaNoleggiabile
-  for each row
-  BEGIN
-      declare  targ character(7);
-      if(new.km > 150000) then
-        insert into AutovetturaVendita values (new.targa, new.km, new.colore,
-                                               9000.00, new.cargroup, new.casaAuto);
-        set targ = new.targa;
-      end if;
-  END //
-  delimiter ;
-
-  DELIMITER //
-  create trigger vecchiaPerNoleggio
-    after insert on AutovetturaVendita
-    for each row
-
-    BEGIN
-      delete from AutovetturaNoleggiabile
-        where autovetturanoleggiabile.targa = new.targa;
-    END //
-
-  DELIMITER ;
-
-
-
-  update autovetturanoleggiabile
-  set autovetturanoleggiabile.km = 160000
-  where autovetturanoleggiabile.targa='FR249GG';
-
-
--- ------------------------------------------------------------------------------
--- SE LA TOCCATE VE AMMAZZO
-DELIMITER //
-create trigger vendiVetturaVecchia
-  after update on AutovetturaNoleggiabile
-  for each row
-  BEGIN
-      if(new.km > 150000) then
-        insert into AutovetturaVendita values (new.targa, new.km, new.colore,
-                                             9000.00, new.cargroup, new.casaAuto);
-        delete from AutovetturaNoleggiabile where AutovetturaNoleggiabile.targa = new.targa;
-
-      end if;
-  END //
-DELIMITER ;
--- ------------------------------------------------------------------------------
-
 DELIMITER //
 create trigger dataPrenotazione
   before insert on Prenotazione
@@ -404,6 +327,23 @@ DELIMITER ;
 
 
 
+
+DELIMITER //
+create trigger vendiVetturaVecchia
+  after update on AutovetturaNoleggiabile
+  for each row
+  BEGIN
+      if(new.km > 150000) then
+        insert into AutovetturaVendita values (new.targa, new.km, new.colore,
+                                               9000.00, new.cargroup, new.casaAuto);
+
+      end if;
+  END //
+  delimiter ;
+
+
+
+
 -- TRIGGER vincoli 4-7
 DELIMITER //
 create trigger chiusuraContratto
@@ -411,6 +351,8 @@ create trigger chiusuraContratto
   for each row
   BEGIN
     declare targaSelect character(7);
+    declare kmtot int;
+
     set targaSelect = (select targa
                        from noleggioAutovetturaNoleggiabile as na, AutovetturaNoleggiabile as a
                         where new.numeroLettera = na.contratto
@@ -422,26 +364,15 @@ create trigger chiusuraContratto
           disponibile = true
       where targa = targaSelect;
     end if;
+
+    set kmtot = (select km
+                  from noleggioAutovetturaNoleggiabile as na, AutovetturaNoleggiabile as a
+                  where new.numeroLettera = na.contratto
+                  and a.targa = na.autovetturaN);
+    if(kmtot >= 150000) then
+      delete
+      from AutovetturaNoleggiabile
+      where AutovetturaNoleggiabile.targa = targaSelect;
+    end if;
   END //
 DELIMITER ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- create trigger
