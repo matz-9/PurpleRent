@@ -248,8 +248,8 @@ DELIMITER ;
 DELIMITER //
 create procedure modificaPrezzo(aggiunta int)
   BEGIN
-    update carGroup set prezzoGiornaliero = prezzoGiornaliero + aggiunta
-  END//
+    update carGroup set prezzoGiornaliero = prezzoGiornaliero + aggiunta;
+  END //
 DELIMITER ;
 -- call modificaPrezzo(20);
 

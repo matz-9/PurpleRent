@@ -312,21 +312,83 @@ DELIMITER ;
 
 
 
+-- ---------------------------------------------------------------------------------
+
+
+
+
 DELIMITER //
-start transaction;
 create trigger vendiVetturaVecchia
   after update on AutovetturaNoleggiabile
   for each row
   BEGIN
-     if(new.km > 150000) then
+      declare nuovaTarga character(7);
+
+       if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
                                                9000.00, new.cargroup, new.casaAuto);
-        delete from autovetturanoleggiabile where autovetturanoleggiabile.targa=new.targa;
-      end if;
+        set nuovaTarga = new.targa;
 
-END //
+      end if;
+      delete from AutovetturaNoleggiabile where AutovetturaNoleggiabile.targa = nuovaTarga;
+    END //
 DELIMITER ;
-commit;
+
+
+
+
+
+
+-- copia kilu
+DELIMITER //
+create trigger vendiVetturaVecchia
+  after update on AutovetturaNoleggiabile
+  for each row
+  BEGIN
+      declare  targ character(7);
+      if(new.km > 150000) then
+        insert into AutovetturaVendita values (new.targa, new.km, new.colore,
+                                               9000.00, new.cargroup, new.casaAuto);
+        set targ = new.targa;
+      end if;
+  END //
+  delimiter ;
+
+  DELIMITER //
+  create trigger vecchiaPerNoleggio
+    after insert on AutovetturaVendita
+    for each row
+
+    BEGIN
+      delete from AutovetturaNoleggiabile
+        where autovetturanoleggiabile.targa = new.targa;
+    END //
+
+  DELIMITER ;
+
+
+
+  update autovetturanoleggiabile
+  set autovetturanoleggiabile.km = 160000
+  where autovetturanoleggiabile.targa='FR249GG';
+
+
+-- ------------------------------------------------------------------------------
+-- SE LA TOCCATE VE AMMAZZO
+DELIMITER //
+create trigger vendiVetturaVecchia
+  after update on AutovetturaNoleggiabile
+  for each row
+  BEGIN
+      if(new.km > 150000) then
+        insert into AutovetturaVendita values (new.targa, new.km, new.colore,
+                                             9000.00, new.cargroup, new.casaAuto);
+        delete from AutovetturaNoleggiabile where AutovetturaNoleggiabile.targa = new.targa;
+
+      end if;
+  END //
+DELIMITER ;
+-- ------------------------------------------------------------------------------
 
 DELIMITER //
 create trigger dataPrenotazione
