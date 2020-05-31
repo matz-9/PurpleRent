@@ -364,24 +364,7 @@ DELIMITER ;
 
 
 
--- TRIGGER vincolo 6
-DELIMITER //
-create trigger aperturaContratto
-  after insert on LetteraNoleggio
-  for each row
-  BEGIN
-    declare targaSelect character(7);
-    set targaSelect = (select targa
-                       from noleggioAutovetturaNoleggiabile as na, AutovetturaNoleggiabile as a
-                        where new.numeroLettera = na.contratto
-                          and a.targa = na.autovetturaN);
 
-    update AutovetturaNoleggiabile
-    set disponibile = false
-    where targa = targaSelect;
-
-  END //
-DELIMITER ;
 
 
 

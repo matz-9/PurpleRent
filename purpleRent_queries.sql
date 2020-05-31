@@ -79,21 +79,6 @@ DELIMITER ;
 
 
 
--- ---------------------------- TRIGGER ---------------------------------
--- trigger per rendere un'autovettura non disponibile quando si crea un contratto
-DELIMITER //
-  create trigger attualmenteDisponibile
-    after insert on noleggioAutovetturaNoleggiabile
-    for each row
-    BEGIN
-      update AutovetturaNoleggiabile
-      set AutovetturaNoleggiabile.disponibile = false
-      where AutovetturaNoleggiabile.targa = new.autovetturaN;
-    END //
-DELIMITER ;
--- ----------------------------------------------------------------------
-
-
 
 
 
@@ -556,6 +541,10 @@ DELIMITER ;
 
 
 
+-- ---------------------------- OPERAZIONI DI SERVIZIO ------------------------
+-- Queste operazioni non sono menzionate all'interno del documento, vengono
+-- utilizzate per il popolamento del database e per la verifica dei trigger
+
 
 
 
@@ -595,3 +584,8 @@ commit;
 DELIMITER ;
 -- call chiudiLettera('L00001', 1200);
 -- -----------------------------------------------------------------------
+
+
+
+
+-- ---------------------------- OPERAZIONE 24 -------------------------------
