@@ -336,7 +336,6 @@ create trigger vendiVetturaVecchia
       if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
                                                null, new.cargroup, new.casaAuto);
-        insert into noleggioAutovetturaVendita (new.targa, )
       end if;
   END //
   delimiter ;
