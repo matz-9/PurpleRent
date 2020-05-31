@@ -341,9 +341,9 @@ DELIMITER ;
 
 
 
-
+-- TRIGGER vincoli 4-7
 DELIMITER //
-create trigger aggiornaKm
+create trigger chiusuraContratto
   after update on LetteraNoleggio
   for each row
   BEGIN
@@ -355,9 +355,31 @@ create trigger aggiornaKm
 
     if (new.tipo = 'chiusa') then
       update AutovetturaNoleggiabile
-      set km = km + new.kmPercorsi
+      set km = km + new.kmPercorsi,
+          disponibile = true
       where targa = targaSelect;
     end if;
+  END //
+DELIMITER ;
+
+
+
+-- TRIGGER vincolo 6
+DELIMITER //
+create trigger aperturaContratto
+  after insert on LetteraNoleggio
+  for each row
+  BEGIN
+    declare targaSelect character(7);
+    set targaSelect = (select targa
+                       from noleggioAutovetturaNoleggiabile as na, AutovetturaNoleggiabile as a
+                        where new.numeroLettera = na.contratto
+                          and a.targa = na.autovetturaN);
+
+    update AutovetturaNoleggiabile
+    set disponibile = false
+    where targa = targaSelect;
+
   END //
 DELIMITER ;
 
