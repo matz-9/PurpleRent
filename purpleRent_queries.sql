@@ -106,7 +106,6 @@ create procedure creaLetteraNoleggio(numeroLettera varchar(6), kmPercorsi int, t
 DELIMITER ;
 -- call creaPrenotazione('P07013' , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,'41261' , 'RJ51230KL7' , 'L');
 -- call creaLetteraNoleggio('L00013', null, 'aperta', 'P07013', '1233958372');
--- FUNZIONA DIO BONOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 -- ----------------------------------------------------------------------
 
 
@@ -252,7 +251,6 @@ create procedure modificaPrezzo(aggiunta int)
   END //
 DELIMITER ;
 -- call modificaPrezzo(20);
-
 -- ----------------------------------------------------------------------
 
 

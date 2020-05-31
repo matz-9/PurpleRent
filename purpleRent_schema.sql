@@ -126,7 +126,7 @@ create table AutovetturaVendita(
   km int not null,
   colore enum('blu', 'verde', 'viola', 'nero', 'bianco',
               'grigio', 'giallo', 'rosso', 'arancione') not null,
-  prezzoVendita decimal(6,2) not null,
+  prezzoVendita decimal(6,2),
   carGroup char not null,
   casaAuto varchar(15) not null,
   foreign key (carGroup) references CarGroup(lettera) on delete cascade,
@@ -335,8 +335,8 @@ create trigger vendiVetturaVecchia
   BEGIN
       if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
-                                               9000.00, new.cargroup, new.casaAuto);
-
+                                               null, new.cargroup, new.casaAuto);
+        insert into noleggioAutovetturaVendita (new.targa, )
       end if;
   END //
   delimiter ;
