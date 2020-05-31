@@ -558,6 +558,8 @@ DELIMITER ;
 
 
 
+
+
 -- --------------------------- OPERAZIONE 22 -------------------------------
 -- Inserisci nuovo cliente con dati bancari associati
 DELIMITER //
@@ -571,4 +573,25 @@ BEGIN
   insert into ClienteNoleggio values (nDoc,nome,cognome,età,contoCorr);
 END //
 DELIMITER ;
+-- -----------------------------------------------------------------------
+
+
+
+
+
+
+-- --------------------------- OPERAZIONE 23 -------------------------------
+-- chiusura di una lettera di noleggio conclusa
+DELIMITER //
+start transaction;
+create procedure chiudiLettera(numLet varchar(6), km int)
+BEGIN
+  update LetteraNoleggio
+  set kmPercorsi = km,
+      tipo = 'chiusa'
+  where numeroLettera = numLet;
+END //
+commit;
+DELIMITER ;
+-- call chiudiLettera('L00001', 1200);
 -- -----------------------------------------------------------------------

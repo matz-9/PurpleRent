@@ -300,7 +300,7 @@ DELIMITER ;
 
 DELIMITER //
 create trigger cliente21anni
-  after insert on ClienteNoleggio
+  before insert on ClienteNoleggio
   for each row
   BEGIN
     if (new.età < 21) then
@@ -325,6 +325,51 @@ DELIMITER ;
 --     end if;
 --   END //
 -- DELIMITER ;
+
+
+DELIMITER //
+create trigger dataPrenotazione
+  before insert on Prenotazione
+  for each row
+  BEGIN
+    if (new.orarioInizio > new.orarioFine) then
+      signal sqlstate '45000'
+      set message_text = 'Errore: data inizio prenotazione successiva a data fine';
+    end if ;
+  END //
+DELIMITER ;
+
+
+
+
+DELIMITER //
+create trigger aggiornaKm
+  after update on LetteraNoleggio
+  for each row
+  BEGIN
+    declare targaSelect character(7);
+    set targaSelect = (select targa
+                       from noleggioAutovetturaNoleggiabile as na, AutovetturaNoleggiabile as a
+                        where new.numeroLettera = na.contratto
+                          and a.targa = na.autovetturaN);
+
+    if (new.tipo = 'chiusa') then
+      update AutovetturaNoleggiabile
+      set km = km + new.kmPercorsi
+      where targa = targaSelect;
+    end if;
+  END //
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
 
 
 
