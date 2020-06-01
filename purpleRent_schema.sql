@@ -17,7 +17,7 @@ create table Dipendente(
 
 create table CarGroup(
   lettera char primary key,
-  prezzoGiornaliero int
+  prezzoGiornaliero int not null
 );
 
 create table Indirizzo(
@@ -190,7 +190,8 @@ create table RiparazioniEffettuate(
 create table riparazioneAutovetturaN(
   riparazione char(5) primary key,
   autovetturaN character(7) not null,
-  foreign key (riparazione) references RiparazioniEffettuate(numeroRip),
+  foreign key (riparazione) references RiparazioniEffettuate(numeroRip) on
+  delete cascade,
   foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on
   delete cascade
 );
@@ -289,7 +290,10 @@ create table indirizzoAcquirente(
 
 
 
--- TRIGGER per vincolo 
+-- TRIGGER per vincolo 6
+-- L’attributo attualmente disponibile dell’entità Autovettura Noleggiabile deve essere
+-- settato a false quando un’autovettura viene assegnata a un contratto di noleggio.
+
 DELIMITER //
 create trigger attualmenteDisponibile
   after insert on noleggioAutovetturaNoleggiabile
@@ -303,6 +307,8 @@ DELIMITER ;
 
 
 
+-- TRIGGER per vincolo 6
+--
 DELIMITER //
 create trigger cliente21anni
   before insert on ClienteNoleggio
@@ -350,6 +356,13 @@ create trigger vendiVetturaVecchia
 
 
 -- TRIGGER vincoli 4-7
+
+-- Dopo la chiusura di un contratto il chilometraggio delle vetture deve essere aggiornato
+-- con i km percorsi dal cliente.
+
+-- L’attributo attualmente disponibile dell’entità Autovettura Noleggiabile associata
+-- ad un contratto di noleggio deve essere settato a true quando il contratto viene chiuso.
+
 DELIMITER //
 create trigger chiusuraContratto
   after update on LetteraNoleggio
