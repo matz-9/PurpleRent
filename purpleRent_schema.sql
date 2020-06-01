@@ -411,7 +411,6 @@ create trigger chiusuraContratto
       delete
       from AutovetturaNoleggiabile
       where AutovetturaNoleggiabile.targa = targaSelect;
-
     end if;
   END //
 DELIMITER ;
