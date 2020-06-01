@@ -198,7 +198,7 @@ create table sostituzione(
   partiSostituite varchar(20),
   foreign key (numeroRiparazione) references RiparazioniEffettuate(numeroRip)
   on delete cascade,
-  foreign key (partiSostituite) references RicambiVettura(ricambio)
+  foreign key (partiSostituite) references RicambiVettura(idRicambio)
   on delete cascade
 );
 
