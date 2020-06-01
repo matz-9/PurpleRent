@@ -178,13 +178,28 @@ create table Officina(
   email varchar(30) not null
 );
 
+create table RicambiVettura(
+  idRicambio character(5) primary key,
+  ricambio varchar(20)
+);
+
 create table RiparazioniEffettuate(
   numeroRip char(5) primary key,
   data date not null,
   motivazione text not null,
   costo decimal(5,2) not null,
   officina varchar(15) not null,
+  partiSostituite varchar(20),
   foreign key (officina) references Officina(nome) on delete cascade
+);
+
+create table sostituzione(
+  numeroRiparazione char(5) primary key,
+  partiSostituite varchar(20),
+  foreign key (numeroRiparazione) references RiparazioniEffettuate(numeroRip)
+  on delete cascade,
+  foreign key (partiSostituite) references RicambiVettura(ricambio)
+  on delete cascade
 );
 
 create table riparazioneAutovetturaN(
@@ -283,7 +298,7 @@ create table indirizzoAcquirente(
   foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
-
+create table tmpAutovetturaContratti
 
 
 -- --------------------------------TRIGGER--------------------------------------
@@ -348,6 +363,7 @@ create trigger vendiVetturaVecchia
       if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
                                                null, new.cargroup, new.casaAuto);
+
       end if;
   END //
   delimiter ;

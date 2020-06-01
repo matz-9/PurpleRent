@@ -209,12 +209,28 @@ insert into Officina(nome, orarioApertura, orarioChiusura, numTel, email) values
   ('Milli srl',       '09:00', '18:00', '0656999910', 'millisrl@gmail.com'),
   ('Ncm carrozzeria', '09:30', '19:00', '0251987143', 'ncmcarr@outlook.com');
 
+insert into RicambiVettura(idRicambio, ricambio) values
+  ('RI001', 'motore'),
+  ('RI002', 'marmitta'),
+  ('RI003', 'parabrezza'),
+  ('RI004', 'paraurti'),
+  ('RI005', 'cambio'),
+  ('RI006', 'gomme'),
+  ('RI007', 'luci');
+
+insert into sostituzione(numeroRiparazione,partiSostituite) values
+  ('R0002', 'RI004'),
+  ('R0003', 'RI006'),
+  ('R0006', 'RI007'),
+  ('R0009', 'RI002');
+
+
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
   ('R0001', '2019-06-09', 'cambio olio motore e cambio filtro ant',   80.00,  'Milli srl'),
   ('R0002', '2019-06-18', 'cambio paraurti per incidente',            100.00, 'Milli srl'),
-  ('R0003', '2020-01-14', 'cambio ruote',                             120.00, 'Ncm carrozzeria'),
+  ('R0003', '2020-01-14', 'cambio gomme',                             120.00, 'Ncm carrozzeria'),
   ('R0004', '2020-04-18', 'rodaggio e controllo freni',               50.00,  'Milli srl'),
-  ('R0005', '2020-07-22', 'controllo freni e cambio gomme',           100.00, 'Ncm carrozzeria'),
+  ('R0005', '2020-07-22', 'controllo freni e cambio luci anteriori',  100.00, 'Ncm carrozzeria'),
   ('R0006', '2018-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
   ('R0007', '2018-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
   ('R0008', '2018-03-24', 'cambio olio',                              15.00,  'Milli srl'),
