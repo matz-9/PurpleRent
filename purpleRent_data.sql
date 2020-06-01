@@ -222,8 +222,8 @@ insert into sostituzione(numeroRiparazione,partiSostituite) values
   ('R0002', 'RI004'),
   ('R0003', 'RI006'),
   ('R0006', 'RI007'),
-  ('R0009', 'RI002');
-
+  ('R0009', 'RI002'),
+  ('R0009', 'RI001');
 
 insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) values
   ('R0001', '2019-06-09', 'cambio olio motore e cambio filtro ant',   80.00,  'Milli srl'),
@@ -234,7 +234,7 @@ insert into RiparazioniEffettuate(numeroRip,data,motivazione,costo,officina) val
   ('R0006', '2018-02-28', 'cambio fari e luci di posizione',          40.00,  'Milli srl'),
   ('R0007', '2018-12-25', 'riparazione cerchione',                    20.00,  'Ncm carrozzeria'),
   ('R0008', '2018-03-24', 'cambio olio',                              15.00,  'Milli srl'),
-  ('R0009', '2018-04-01', 'riparazione marmitta',                     30.00,  'Milli srl'),
+  ('R0009', '2018-04-01', 'riparazione marmitta e motore',            240.00,  'Milli srl'),
   ('R0010', '2018-05-06', 'riverniciatura paraurti e cambio pomello', 70.00,  'Ncm carrozzeria');
 
 -- vincolo data riparazione > data acquisto autovettura

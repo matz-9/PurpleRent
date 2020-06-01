@@ -178,11 +178,6 @@ create table Officina(
   email varchar(30) not null
 );
 
-create table RicambiVettura(
-  idRicambio character(5) primary key,
-  ricambio varchar(20)
-);
-
 create table RiparazioniEffettuate(
   numeroRip char(5) primary key,
   data date not null,
@@ -193,9 +188,15 @@ create table RiparazioniEffettuate(
   foreign key (officina) references Officina(nome) on delete cascade
 );
 
+create table RicambiVettura(
+  idRicambio character(5) primary key,
+  ricambio varchar(20)
+);
+
 create table sostituzione(
-  numeroRiparazione char(5) primary key,
+  numeroRiparazione char(5),
   partiSostituite varchar(20),
+  primary key(numeroRiparazione,partiSostituite),
   foreign key (numeroRiparazione) references RiparazioniEffettuate(numeroRip)
   on delete cascade,
   foreign key (partiSostituite) references RicambiVettura(idRicambio)
