@@ -282,8 +282,14 @@ create table indirizzoAcquirente(
   foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
+
+
+
 -- --------------------------------TRIGGER--------------------------------------
 
+
+
+-- TRIGGER per vincolo 
 DELIMITER //
 create trigger attualmenteDisponibile
   after insert on noleggioAutovetturaNoleggiabile
@@ -311,7 +317,7 @@ DELIMITER ;
 
 
 
--- ---------------------------------------------------------------------------------
+
 
 DELIMITER //
 create trigger dataPrenotazione
@@ -327,7 +333,7 @@ DELIMITER ;
 
 
 
-
+-- TRIGGER per il vincolo
 DELIMITER //
 create trigger vendiVetturaVecchia
   after update on AutovetturaNoleggiabile
