@@ -160,7 +160,7 @@ create table noleggioAutovetturaNoleggiabile(
   contratto varchar(6) primary key,
   autovetturaN character(7) not null,
   foreign key (contratto) references LetteraNoleggio(numeroLettera) on delete cascade,
-  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on delete cascade;
+  foreign key (autovetturaN) references AutovetturaNoleggiabile(targa) on delete cascade
 );
 
 create table noleggioAutovetturaVendita(
@@ -179,7 +179,7 @@ create table Officina(
 );
 
 create table RiparazioniEffettuate(
-  numeroRip char(5) primary key,
+  numeroRip character(5) primary key,
   data date not null,
   motivazione text not null,
   costo decimal(5,2) not null,
@@ -194,7 +194,7 @@ create table RicambiVettura(
 );
 
 create table sostituzione(
-  numeroRiparazione char(5),
+  numeroRiparazione character(5),
   partiSostituite varchar(20),
   primary key(numeroRiparazione,partiSostituite),
   foreign key (numeroRiparazione) references RiparazioniEffettuate(numeroRip)
@@ -204,7 +204,7 @@ create table sostituzione(
 );
 
 create table riparazioneAutovetturaN(
-  riparazione char(5) primary key,
+  riparazione character(5) primary key,
   autovetturaN character(7) not null,
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip) on
   delete cascade,
@@ -213,7 +213,7 @@ create table riparazioneAutovetturaN(
 );
 
 create table riparazioneAutovetturaV(
-  riparazione char(5) primary key,
+  riparazione character(5) primary key,
   autovetturaV character(7) not null,
   foreign key (autovetturaV) references AutovetturaVendita(targa) on delete cascade,
   foreign key (riparazione) references RiparazioniEffettuate(numeroRip) on delete cascade
@@ -299,7 +299,10 @@ create table indirizzoAcquirente(
   foreign key (città, civico, via) references Indirizzo(città, civico, via) on delete cascade
 );
 
-create table tmpAutovetturaContratti
+create table tmpAutovetturaContratti(
+  numeroLettera varchar(6) primary key,
+  targa character(7) not null
+);
 
 
 -- --------------------------------TRIGGER--------------------------------------
@@ -364,10 +367,13 @@ create trigger vendiVetturaVecchia
       if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
                                                null, new.cargroup, new.casaAuto);
-
+        insert into noleggioAutovetturaVendita values (
+                          (select numeroLettera from tmpAutovetturaContratti),
+                          (select targa from tmpAutovetturaContratti));
+        delete from tmpAutovetturaContratti;
       end if;
   END //
-  delimiter ;
+DELIMITER ;
 
 
 
@@ -405,9 +411,11 @@ create trigger chiusuraContratto
                   where new.numeroLettera = na.contratto
                   and a.targa = na.autovetturaN);
     if(kmtot >= 150000) then
+      insert into tmpAutovetturaContratti values (new.numeroLettera, targaSelect);
       delete
       from AutovetturaNoleggiabile
       where AutovetturaNoleggiabile.targa = targaSelect;
+
     end if;
   END //
 DELIMITER ;

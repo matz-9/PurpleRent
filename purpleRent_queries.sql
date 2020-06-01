@@ -541,7 +541,7 @@ DELIMITER ;
 
 -- --------------------------- OPERAZIONE 22 -------------------------------
 
--- Inserisci una riparazione effettuata in una officina convenzionata
+-- Inserisci una riparazione effettuata in una officina già convenzionata
 
 DELIMITER //
 create procedure nuovaRiparazione(nomeOfficina varchar(15), nRip char(5), dataRip date,
