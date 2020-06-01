@@ -190,12 +190,12 @@ create table RiparazioniEffettuate(
 
 create table RicambiVettura(
   idRicambio character(5) primary key,
-  ricambio varchar(20)
+  ricambio varchar(20) not null
 );
 
 create table sostituzione(
   numeroRiparazione character(5),
-  partiSostituite varchar(20),
+  partiSostituite character(5),
   primary key(numeroRiparazione,partiSostituite),
   foreign key (numeroRiparazione) references RiparazioniEffettuate(numeroRip)
   on delete cascade,
@@ -367,10 +367,6 @@ create trigger vendiVetturaVecchia
       if(new.km > 150000) then
         insert into AutovetturaVendita values (new.targa, new.km, new.colore,
                                                null, new.cargroup, new.casaAuto);
-        insert into noleggioAutovetturaVendita values (
-                          (select numeroLettera from tmpAutovetturaContratti),
-                          (select targa from tmpAutovetturaContratti));
-        delete from tmpAutovetturaContratti;
       end if;
   END //
 DELIMITER ;
@@ -411,7 +407,7 @@ create trigger chiusuraContratto
                   where new.numeroLettera = na.contratto
                   and a.targa = na.autovetturaN);
     if(kmtot >= 150000) then
-      insert into tmpAutovetturaContratti values (new.numeroLettera, targaSelect);
+      insert into noleggioAutovetturaVendita values (new.numeroLettera, targaSelect);
       delete
       from AutovetturaNoleggiabile
       where AutovetturaNoleggiabile.targa = targaSelect;
