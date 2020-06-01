@@ -508,7 +508,7 @@ DELIMITER ;
 -- Inserisci una riparazione effettuata in una nuova officina convenzionata
 -- primi 5 attributi necessari all'officina nuova , in seguito per le riparazioni
 DELIMITER //
-create procedure nuovaRiparazione(nomeOfficina varchar(15), orarioAperturaOff time(1),
+create procedure nuovaRiparazioneOfficina(nomeOfficina varchar(15), orarioAperturaOff time(1),
                                   orarioChiusuraOff time(1), numTelOff character(10),
                                   emailOff varchar(30), nRip char(5), dataRip date,
                                   motiv text, prezzo decimal(5,2), macchina character(7))
@@ -539,6 +539,33 @@ DELIMITER ;
 
 
 
+-- --------------------------- OPERAZIONE 22 -------------------------------
+
+-- Inserisci una riparazione effettuata in una officina convenzionata
+
+DELIMITER //
+create procedure nuovaRiparazione(nomeOfficina varchar(15), nRip char(5), dataRip date,
+                                  motiv text, prezzo decimal(5,2), macchina character(7))
+BEGIN
+  declare numeroAuto int;
+
+  set numeroAuto = (select count(*)
+                    from AutovetturaNoleggiabile
+                    where AutovetturaNoleggiabile.targa=macchina);
+
+  insert into RiparazioniEffettuate values(nRip,dataRip,motiv,prezzo,nomeOfficina);
+
+  if (numeroAuto!=1) then
+    insert into riparazioneAutovetturaV values(nRip,macchina);
+  else
+    insert into riparazioneAutovetturaN values(nRip,macchina);
+  END if;
+
+END//
+DELIMITER ;
+
+
+
 -- ---------------------------- OPERAZIONI DI SERVIZIO ------------------------
 -- Queste operazioni non sono menzionate all'interno del documento, vengono
 -- utilizzate per il popolamento del database e per la verifica dei trigger
@@ -547,7 +574,7 @@ DELIMITER ;
 
 
 
--- --------------------------- OPERAZIONE 22 -------------------------------
+-- --------------------------- OPERAZIONE 23 -------------------------------
 -- Inserisci nuovo cliente con dati bancari associati
 DELIMITER //
 create procedure nuovoCliente(nDoc varchar(10), nome varchar(12), cognome varchar(12),
@@ -567,7 +594,7 @@ DELIMITER ;
 
 
 
--- --------------------------- OPERAZIONE 23 -------------------------------
+-- --------------------------- OPERAZIONE 24 -------------------------------
 -- chiusura di una lettera di noleggio conclusa
 DELIMITER //
 start transaction;
@@ -586,4 +613,4 @@ commit;
 
 
 
--- ---------------------------- OPERAZIONE 24 -------------------------------
+-- ---------------------------- OPERAZIONE 25 -------------------------------
