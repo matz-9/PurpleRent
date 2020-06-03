@@ -19,6 +19,7 @@ DELIMITER ;
 
 -- -------------------------- OPERAZIONE 2 -------------------------------
 -- effettua una prenotazione
+-- FUNCTION per vincolo 5
 
 DELIMITER //
 create FUNCTION calcolaPrezzo(gruppo char, inizio dateTime, fine dateTime)

@@ -307,8 +307,6 @@ create table tmpAutovetturaContratti(
 
 -- --------------------------------TRIGGER--------------------------------------
 
-
-
 -- TRIGGER per vincolo 6
 -- L’attributo attualmente disponibile dell’entità Autovettura Noleggiabile deve essere
 -- settato a false quando un’autovettura viene assegnata a un contratto di noleggio.
@@ -326,8 +324,9 @@ DELIMITER ;
 
 
 
--- TRIGGER per vincolo 6
---
+-- TRIGGER per vincolo 1
+-- Un cliente deve avere età maggiore di 21 anni.
+
 DELIMITER //
 create trigger cliente21anni
   before insert on ClienteNoleggio
@@ -342,7 +341,8 @@ DELIMITER ;
 
 
 
-
+-- TRIGGER per vincolo 3
+-- La data di inizio relativa alla prenotazione non può essere maggiore della data di fine prenotazione
 
 DELIMITER //
 create trigger dataPrenotazione
@@ -358,7 +358,9 @@ DELIMITER ;
 
 
 
--- TRIGGER per il vincolo
+-- TRIGGER per il vincolo 2
+-- Le vetture con oltre 150.000 km devono essere messe in vendita.
+
 DELIMITER //
 create trigger vendiVetturaVecchia
   after update on AutovetturaNoleggiabile
@@ -374,7 +376,8 @@ DELIMITER ;
 
 
 
--- TRIGGER vincoli 4-7
+-- TRIGGER vincoli 2-4-7
+-- Le vetture con oltre 150.000 km devono essere messe in vendita.
 
 -- Dopo la chiusura di un contratto il chilometraggio delle vetture deve essere aggiornato
 -- con i km percorsi dal cliente.

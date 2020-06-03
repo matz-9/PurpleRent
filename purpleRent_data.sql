@@ -237,7 +237,6 @@ insert into sostituzione(numeroRiparazione,partiSostituite) values
   ('R0009', 'RI002'),
   ('R0009', 'RI001');
 
--- vincolo data riparazione > data acquisto autovettura
 insert into riparazioneAutovetturaN(riparazione,autovetturaN) values
   ('R0001', 'FR249GG'),
   ('R0002', 'FP445PM'),
