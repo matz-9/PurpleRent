@@ -2,7 +2,7 @@
 -- visualizza, data una prenotazione, dati cliente e sedi associate
 
 DELIMITER //
-create procedure visualizzaPrenotazione(p varchar(5))
+create procedure visualizzaPrenotazione2(p varchar(6))
   BEGIN
     select nome, cognome, numDocumento, sedeRitiro, sedeRilascio
     from prenotazione, clienteNoleggio

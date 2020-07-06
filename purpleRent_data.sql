@@ -64,7 +64,7 @@ insert into DatiBancari(contoCorrente,circuito,nomeBanca) values
   ('6917392229', 'mastercard',       'Unicredit');
 
 insert into ClienteNoleggio(numDocumento,nome,cognome,età,datiBancari) values
-  ('AP1017Y890', 'Vittorio', 'Terzetti',     50, '1233958372'),
+  ('AP1017Y890', 'Luca',     'Terzetti',     50, '1233958372'),
   ('BO34590P70', 'Enzo',     'Pesce',        22, '3618304719'),
   ('T946510KP4', 'Marco',    'Marchi',       35, '4639281049'),
   ('78OPISL348', 'Guido',    'Piano',        63, '5930275641'),
