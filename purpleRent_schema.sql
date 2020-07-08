@@ -184,7 +184,6 @@ create table RiparazioniEffettuate(
   motivazione text not null,
   costo decimal(5,2) not null,
   officina varchar(15) not null,
-  partiSostituite varchar(20),
   foreign key (officina) references Officina(nome) on delete cascade
 );
 

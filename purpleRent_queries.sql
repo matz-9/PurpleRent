@@ -2,7 +2,7 @@
 -- visualizza, data una prenotazione, dati cliente e sedi associate
 
 DELIMITER //
-create procedure visualizzaPrenotazione2(p varchar(6))
+create procedure visualizzaPrenotazione(p varchar(6))
   BEGIN
     select nome, cognome, numDocumento, sedeRitiro, sedeRilascio
     from prenotazione, clienteNoleggio
@@ -44,6 +44,7 @@ create procedure creaPrenotazione(numeroP character(6), orarioIn dateTime, orari
         sedeRit, sedeRil, cliente, gruppo);
   END //
 DELIMITER ;
+-- call creaPrenotazione("P07013", "2020-05-22 09:00", "2020-06-28 09:00", "61031", "61031", "AP1017Y890", 'E');
 -- ----------------------------------------------------------------------
 
 
@@ -71,12 +72,8 @@ create procedure visualizzaContratto(l varchar(6))
   END//
 DELIMITER ;
 
--- call creaPrenotazione(7013 , '2020-04-05 09:11' , '2020-04-09 09:11' , '61040' ,
---  '41261' , 'RJ51230KL7' , 'L');//
+--
 -- ----------------------------------------------------------------------
-
-
-
 
 
 
@@ -428,7 +425,7 @@ DELIMITER ;
 DELIMITER //
 create procedure visualizzaRiparazioni(targ char(7))
   BEGIN
-    select numeroRip,officina,nome,orarioApertura,orarioChiusura
+    select numeroRip,officina,orarioApertura,orarioChiusura
     from riparazioneAutovetturaV,RiparazioniEffettuate,Officina
     where riparazioneAutovetturaV.autovetturaV = targ
       and officina.nome = RiparazioniEffettuate.officina
@@ -534,7 +531,7 @@ BEGIN
 END//
 DELIMITER ;
 
---  call nuovaRiparazione('wezzz srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0015' ,'2020-01-14' , ' ripar' , 18.00 , 'ER245GG');
+--  call nuovaRiparazioneOfficina('weez srl','08:00' ,'19:00' , '3356974196' , 'filippolos@filppo.it' , 'R0015' ,'2020-01-14' , 'convergenza' , 18.00 , 'ER245GG');
 -- -----------------------------------------------------------------------
 
 
@@ -565,6 +562,9 @@ BEGIN
 END//
 DELIMITER ;
 
+--  call nuovaRiparazione('Ncm carrozzeria', 'R0017' ,'2020-01-14' , 'convergenza' , 18.00 , 'ER245GG');
+-- -----------------------------------------------------------------------
+
 
 
 -- ---------------------------- OPERAZIONI DI SERVIZIO ------------------------
@@ -588,6 +588,7 @@ BEGIN
   insert into ClienteNoleggio values (nDoc,nome,cognome,età,contoCorr);
 END //
 DELIMITER ;
+-- call nuovoCliente('AP3015J820', 'Meo', 'Isano', 30, '4243358375', 'visa', 'Unicredit');
 -- -----------------------------------------------------------------------
 
 
